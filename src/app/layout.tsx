@@ -13,7 +13,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zt-TW">
-      <body>{children}</body>
+      <body>
+        <main>
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
