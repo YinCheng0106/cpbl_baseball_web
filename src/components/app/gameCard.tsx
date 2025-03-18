@@ -59,6 +59,25 @@ const GameStatus = (status: number) => {
   }
 }
 
+const TeamColor = (name: string) => {
+  switch (name) {
+    case "樂天桃猿":
+      return "text-red-900";
+    case "富邦悍將":
+      return "text-blue-800";
+    case "中信兄弟":
+      return "text-amber-300";
+    case "統一獅":
+      return "text-orange-500";
+    case "台鋼雄鷹":
+      return "text-emerald-900";
+    case "味全龍":
+      return "text-red-600";
+    default:
+      return "text-gray-500";
+  }
+}
+
 const TimeDecoder = (time: string) => {
   return new Date(time).toLocaleString();
 }
@@ -73,12 +92,14 @@ export function GameCard({
   location,
 }: Props) {
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[300px]">
       <CardHeader>
-        <p className="text-sm">{ GameStatus(status) }</p>
-        <p className="text-sm">{ GameType(type) }</p>
+        <div className="flex justify-between text-sm">
+          <p className="font-bold">{ GameStatus(status) }</p>
+          <p>{ GameType(type) }</p>
+        </div>
         <CardTitle className="text-2xl font-bold">
-          {away} vs. {home}
+          <span className={`${TeamColor(away)}`}>{away}</span> vs <span className={`${TeamColor(home)}`}>{home}</span>
         </CardTitle>
         <CardDescription>GAME {id}</CardDescription>
       </CardHeader>
