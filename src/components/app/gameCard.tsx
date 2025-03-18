@@ -15,6 +15,7 @@ import {
 type Props = Readonly<{
   id: number;
   type: string;
+  status: number;
   home: string;
   away: string;
   time: string;
@@ -40,9 +41,23 @@ const GameType = (type: string) => {
     case "H":
       return "未來之星邀請賽";
     default:
-      return "";
+      return "其他賽事";
   }
-};
+}
+
+const GameStatus = (status: number) => {
+  switch (status) {
+    case 1: return "如果必要才進行";
+    case 2: return "比賽中";
+    case 3: return "比賽結束";
+    case 4: return "先發打序";
+    case 5: return "取消比賽";
+    case 6: return "延賽";
+    case 7: return "保留比賽";
+    case 8: return "比賽暫停";
+    default: return "例外狀況";
+  }
+}
 
 const TimeDecoder = (time: string) => {
   return new Date(time).toLocaleString();
@@ -51,6 +66,7 @@ const TimeDecoder = (time: string) => {
 export function GameCard({
   id,
   type,
+  status,
   home,
   away,
   time,
@@ -59,6 +75,7 @@ export function GameCard({
   return (
     <Card className="w-[350px]">
       <CardHeader>
+        <p className="text-sm">{ GameStatus(status) }</p>
         <p className="text-sm">{ GameType(type) }</p>
         <CardTitle className="text-2xl font-bold">
           {away} vs. {home}
