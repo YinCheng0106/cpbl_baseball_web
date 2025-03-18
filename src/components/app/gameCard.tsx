@@ -75,6 +75,7 @@ export function GameCard({
             border rounded-sm p-2
             bg-gray-800 dark:bg-neutral-300
             text-white dark:text-black
+            font-bold
           `}
           href="/"
         >

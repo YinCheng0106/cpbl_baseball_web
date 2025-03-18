@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zt-TW" suppressContentEditableWarning>
+    <html lang="zt-TW" suppressHydrationWarning>
       <body
         className={`
           ${noto.className}
