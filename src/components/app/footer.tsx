@@ -6,7 +6,7 @@ export function AppFooter() {
   return (
     <footer
       className={`
-          border-t py-4 mx-2
+          border-t py-4 mx-4 mt-12
         `}
     >
       <div
