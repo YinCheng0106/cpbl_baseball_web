@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`
           ${noto.className}
           ${manrope.className}
-          antialiased
+          antialiased transition duration-150
         `}
       >
         <ThemeProvider

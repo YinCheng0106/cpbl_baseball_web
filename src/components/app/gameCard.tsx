@@ -92,14 +92,14 @@ export function GameCard({
   location,
 }: Props) {
   return (
-    <Card className="w-[300px]">
+    <Card className="w-[325px]">
       <CardHeader>
         <div className="flex justify-between text-sm">
           <p className="font-bold">{ GameStatus(status) }</p>
           <p>{ GameType(type) }</p>
         </div>
-        <CardTitle className="text-2xl font-bold">
-          <span className={`${TeamColor(away)}`}>{away}</span> vs <span className={`${TeamColor(home)}`}>{home}</span>
+        <CardTitle className="text-3xl font-bold">
+          <span className={`${TeamColor(away)}`}>{away}</span><span className="text-lg mx-0.5" > vs </span><span className={`${TeamColor(home)}`}>{home}</span>
         </CardTitle>
         <CardDescription>GAME {id}</CardDescription>
       </CardHeader>
@@ -107,7 +107,7 @@ export function GameCard({
         <span>{ TimeDecoder(time) }</span>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <p className="flex"><MapPin/> {location}</p>
+        <p className="flex items-center"><MapPin className="mr-2"/>{location}</p>
         <Link
           className={`
             border rounded-sm p-2
