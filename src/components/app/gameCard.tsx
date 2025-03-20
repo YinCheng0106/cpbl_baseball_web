@@ -121,7 +121,10 @@ export function GameCard({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <span>{ TimeDecoder(time) }</span>
+        <span className={`
+          ${status == 2 ? "hidden" : ""} 
+          ${status == 3 ? "hidden" : ""}
+          `}>{ TimeDecoder(time) }</span>
       </CardContent>
       <CardFooter className="flex justify-between">
         <p className="flex items-center"><MapPin className="mr-2"/>{location}</p>

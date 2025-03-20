@@ -1,6 +1,7 @@
 'use client';
 
 import { GameCard } from "@/components/app/gameCard";
+import { motion } from "motion/react"
 
 const games = [
   {
@@ -30,74 +31,84 @@ const games = [
     time: '2025-07-01T19:00:00',
     location: "新莊棒球場",
   },
-  {
-    id: 3,
-    type: "D",
-    status: 4,
-    home: "台鋼雄鷹",
-    away: "味全龍",
-    time: '2025-07-01T19:00:00',
-    location: "新莊棒球場",
-  },
-  {
-    id: 4,
-    type: "E",
-    status: 5,
-    home: "台鋼雄鷹",
-    away: "味全龍",
-    time: '2025-07-01T19:00:00',
-    location: "新莊棒球場",
-  },
-  {
-    id: 5,
-    type: "F",
-    status: 6,
-    home: "台鋼雄鷹",
-    away: "味全龍",
-    time: '2025-07-01T19:00:00',
-    location: "新莊棒球場",
-  },
-  {
-    id: 6,
-    type: "G",
-    status: 7,
-    home: "台鋼雄鷹",
-    away: "味全龍",
-    time: '2025-07-01T19:00:00',
-    location: "新莊棒球場",
-  },
-  {
-    id: 7,
-    type: "H",
-    status: 8,
-    home: "台鋼雄鷹",
-    away: "味全龍",
-    time: '2025-07-01T19:00:00',
-    location: "新莊棒球場",
-  },
-  {
-    id: 8,
-    type: "I",
-    status: 9,
-    home: "台鋼雄鷹",
-    away: "味全龍",
-    time: '2025-07-01T19:00:00',
-    location: "新莊棒球場",
-  },
+  // {
+  //   id: 3,
+  //   type: "D",
+  //   status: 4,
+  //   home: "台鋼雄鷹",
+  //   away: "味全龍",
+  //   time: '2025-07-01T19:00:00',
+  //   location: "新莊棒球場",
+  // },
+  // {
+  //   id: 4,
+  //   type: "E",
+  //   status: 5,
+  //   home: "台鋼雄鷹",
+  //   away: "味全龍",
+  //   time: '2025-07-01T19:00:00',
+  //   location: "新莊棒球場",
+  // },
+  // {
+  //   id: 5,
+  //   type: "F",
+  //   status: 6,
+  //   home: "台鋼雄鷹",
+  //   away: "味全龍",
+  //   time: '2025-07-01T19:00:00',
+  //   location: "新莊棒球場",
+  // },
+  // {
+  //   id: 6,
+  //   type: "G",
+  //   status: 7,
+  //   home: "台鋼雄鷹",
+  //   away: "味全龍",
+  //   time: '2025-07-01T19:00:00',
+  //   location: "新莊棒球場",
+  // },
+  // {
+  //   id: 7,
+  //   type: "H",
+  //   status: 8,
+  //   home: "台鋼雄鷹",
+  //   away: "味全龍",
+  //   time: '2025-07-01T19:00:00',
+  //   location: "新莊棒球場",
+  // },
+  // {
+  //   id: 8,
+  //   type: "I",
+  //   status: 9,
+  //   home: "台鋼雄鷹",
+  //   away: "味全龍",
+  //   time: '2025-07-01T19:00:00',
+  //   location: "新莊棒球場",
+  // },
 ]
 
 export default function Home() {
+  const transition = {
+    duration: 0.5,
+    delay: 0.3,
+    ease: [0, 0.71, 0.2, 1.01],
+  }
+
   return (
     <div>
       <main>
         <h2 className="text-2xl font-bold">本日賽事</h2>
-        <div className={`
+        <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={transition}
+        className={`
           grid grid-rows-1 lg:grid-cols-3 md:grid-cols-2 gap-3 mt-4
         `}>
           {games.map((games) => (
             <GameCard {...games} key={games.id} />
           ))}
-        </div>
+        </motion.div>
       </main>
     </div>
   );
