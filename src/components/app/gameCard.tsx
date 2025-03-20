@@ -59,6 +59,20 @@ const GameStatus = (status: number) => {
   }
 }
 
+const GameColor = (status: number) => {
+  switch (status) {
+    case 1: return 'bg-gray-200 text-gray-800';
+    case 2: return 'bg-green-200 text-green-800';
+    case 3: return 'bg-red-800 text-red-200';
+    case 4: return 'bg-blue-200 text-blue-800';
+    case 5: return 'bg-red-200 text-red-800';
+    case 6: return 'bg-yellow-200 text-yellow-800';
+    case 7: return 'bg-gray-200 text-gray-800';
+    case 8: return 'bg-gray-800 text-gray-200';
+    default: return "bg-gray-200 text-gray-800";
+  }
+}
+
 const TeamColor = (name: string) => {
   switch (name) {
     case "樂天桃猿":
@@ -94,14 +108,17 @@ export function GameCard({
   return (
     <Card className="w-[325px]">
       <CardHeader>
-        <div className="flex justify-between text-sm">
+        <div className="flex justify-between items-center text-sm mb-2">
+          <p className={`
+            border rounded-sm px-6 py-1 font-bold shadow-sm
+            ${GameColor(status)}
+            `}>{id}</p>
           <p className="font-bold">{ GameStatus(status) }</p>
           <p>{ GameType(type) }</p>
         </div>
         <CardTitle className="text-3xl font-bold">
           <span className={`${TeamColor(away)}`}>{away}</span><span className="text-lg mx-0.5" > vs </span><span className={`${TeamColor(home)}`}>{home}</span>
         </CardTitle>
-        <CardDescription>GAME {id}</CardDescription>
       </CardHeader>
       <CardContent>
         <span>{ TimeDecoder(time) }</span>
@@ -113,7 +130,9 @@ export function GameCard({
             border rounded-sm p-2
             bg-gray-800 dark:bg-neutral-300
             text-white dark:text-black
-            font-bold
+            hover:bg-gray-900 dark:hover:bg-neutral-200
+            translate duration-150 ease-in-out
+            hover:font-bold
           `}
           href="/"
         >
