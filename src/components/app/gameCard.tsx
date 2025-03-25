@@ -24,17 +24,24 @@ type Props = Readonly<{
 
   away: string;
   home: string;
+  awayStarter: string | null;
+  homeStarter: string | null;
   awayScore: number | null;
   homeScore: number | null;
   awayWLD: [number, number, number];
   homeWLD: [number, number, number];
+
+  winPitcher: string | null;
+  losePitcher: string | null;
+  savePitcher: string | null;
+  mvp: string | null;
 
   strike: number;
   ball: number;
   out: number;
   pitch: number;
   base: [boolean, boolean, boolean];
-  
+
   time: string;
   location: string;
 }>;
@@ -135,22 +142,47 @@ const TimeDecoder = (time: string) => {
   });
 };
 
-const BaseStatus = (base : [boolean, boolean, boolean]) => {
+const BaseStatus = (base: [boolean, boolean, boolean]) => {
   return (
     <svg
-      className="w-[150px] h-[60px] dark:stroke-white fill-gray-400 dark:fill-gray-800"
-      viewBox="0 0 100 100"
+      className="w-[180px] h-[100px] dark:stroke-white fill-gray-400 dark:fill-gray-800"
+      viewBox="0 -10 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* first base */}
-      <polygon points="70,50 80,40 70,30 60,40" fill={base[0] ? "#FFD700" : "white"} strokeWidth="2" className={base[0] ? "dark:fill-yellow-400 dark:stroke-yellow-400" : "dark:fill-gray-800 dark:stroke-white"} />
-      
+      <polygon
+      points="70,50 80,40 70,30 60,40"
+      fill={base[0] ? "#FFD700" : "white"}
+      strokeWidth="1.5"
+      className={
+        base[0]
+        ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
+        : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
+      }
+      />
       {/* second base */}
-      <polygon points="50,30 60,20 50,10 40,20" fill={base[1] ? "#FFD700" : "white"} strokeWidth="2" className={base[1] ? "dark:fill-yellow-400 dark:stroke-yellow-400" : "dark:fill-gray-800 dark:stroke-white"} />
-      
+      <polygon
+      points="50,30 60,20 50,10 40,20"
+      fill={base[1] ? "#FFD700" : "white"}
+      strokeWidth="1.5"
+      className={
+        base[1]
+        ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
+        : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
+      }
+      />
       {/* third base */}
-      <polygon points="30,50 40,40 30,30 20,40" fill={base[2] ? "#FFD700" : "white"} strokeWidth="2" className={base[2] ? "dark:fill-yellow-400 dark:stroke-yellow-400" : "dark:fill-gray-800 dark:stroke-white"} />
+      <polygon
+      points="30,50 40,40 30,30 20,40"
+      fill={base[2] ? "#FFD700" : "white"}
+      strokeWidth="1.5"
+      className={
+        base[2]
+        ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
+        : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
+      }
+      />
     </svg>
   );
 };
@@ -174,8 +206,9 @@ const TeamNameAbbreviation = (name: string) => {
   }
 };
 
+// dropdown content
 const inPlaying = (
-  base:[boolean, boolean, boolean],
+  base: [boolean, boolean, boolean],
   pitch: number,
   ball: number,
   strike: number,
@@ -185,25 +218,72 @@ const inPlaying = (
     <div className="grid grid-cols-2 gap-4">
       <div>
         <div className="space-y-2">
-          <div className="flex justify-between">
-            {BaseStatus(base)}
-          </div>
-          <div className="flex justify-between">
-            <span className="text-sm">投球數:</span>
-            <span className="text-sm font-medium">{pitch}</span>
-          </div>
+          <div className="flex justify-between items-center">{BaseStatus(base)}</div>
+          <div className="flex justify-between items-center"></div>
         </div>
       </div>
       <div>
         <div className="space-y-2">
-          <div className="flex justify-between">
-            <span className="text-sm">好壞球:</span>
-            <span className="text-sm font-medium">{ball} - {strike}</span>
+          <div className="flex justify-between items-center">
+            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">好壞球</span>
+            <span className="text-sm font-medium">
+              {ball} - {strike}
+            </span>
           </div>
-          <div className="flex justify-between">
-            <span className="text-sm">出局數:</span>
+          <div className="flex justify-between items-center">
+            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">出局數</span>
             <span className="text-sm font-medium">{out}</span>
           </div>
+          <div className="flex justify-between items-center">
+            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">投球數</span>
+            <span className="text-sm font-medium">{pitch}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+const readyPlay = (awayStarter: string | null, homeStarter: string | null) => {
+  return (
+    <div className="gird grid-cols-2 gap-4">
+      <div className="space-y-2">
+        <div className="flex justify-between items-center">
+          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">客隊先發</span>
+          <span className="text-sm font-medium">
+            {awayStarter === null ? "未公布" : awayStarter}
+          </span>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">主隊先發</span>
+          <span className="text-sm font-medium">
+            {homeStarter === null ? "未公布" : homeStarter}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+const gameSet = (winPitcher: string | null, losePitcher: string | null, savePitcher: string | null, mvp: string | null) => {
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      <div className="space-y-2">
+        <div className="flex justify-between items-center">
+          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">勝利投手</span>
+          <span className="text-sm font-medium">{winPitcher === null ? "無" : winPitcher}</span>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">救援成功</span>
+          <span className="text-sm font-medium">{savePitcher === null ? "無" : savePitcher}</span>
+        </div>
+      </div>
+      <div className="space-y-2">
+        <div className="flex justify-between items-center">
+          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">敗戰投手</span>
+          <span className="text-sm font-medium">{losePitcher === null ? "無" : losePitcher}</span>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">MVP</span>
+          <span className="text-sm font-medium">{mvp === null ? "無" : mvp}</span>
         </div>
       </div>
     </div>
@@ -218,10 +298,16 @@ export function GameCard({
   inningHalf,
   away,
   home,
+  awayStarter,
+  homeStarter,
   awayScore,
   homeScore,
   awayWLD,
   homeWLD,
+  winPitcher,
+  losePitcher,
+  savePitcher,
+  mvp,
   strike,
   ball,
   out,
@@ -328,7 +414,10 @@ export function GameCard({
         id={`expanded-content-${id}`}
       >
         <div className="px-6 pt-6 rounded-b-lg border-t">
+          {status === 1 ? readyPlay(awayStarter, homeStarter) : null}
+          {status === 4 ? readyPlay(awayStarter, homeStarter) : null}
           {status === 2 ? inPlaying(base, pitch, ball, strike, out) : null}
+          {status === 3 ? gameSet(winPitcher, losePitcher, savePitcher, mvp) : null}
         </div>
       </div>
     </Card>
