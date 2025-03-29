@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { MapPin } from "lucide-react";
 
 import {
@@ -12,7 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { TeamHoverCard } from "@/components/app/teamHoverCard";
 
 type Props = Readonly<{
   id: number;
@@ -115,7 +116,7 @@ const GameColor = (status: number) => {
   }
 };
 
-const TeamColor = (name: string) => {
+export function TeamColor (name: string) {
   switch (name) {
     case "樂天桃猿":
       return "text-red-900";
@@ -124,6 +125,8 @@ const TeamColor = (name: string) => {
     case "中信兄弟":
       return "text-amber-300";
     case "統一獅":
+      return "text-orange-500";
+    case "統一7-ELEVEn獅":
       return "text-orange-500";
     case "台鋼雄鷹":
       return "text-emerald-900";
@@ -339,7 +342,7 @@ export function GameCard({
         <CardTitle className="flex flex-col gap-0.5 text-2xl">
           <div className="flex justify-between items-center">
             <span className={`${TeamColor(away)} font-bold`}>
-              {away ? away : "TBD"}
+              {away ? <TeamHoverCard team={away}/> : "TBD"}
             </span>
             <span
               className={`px-2 py-1 text-lg ${
@@ -353,7 +356,7 @@ export function GameCard({
           </div>
           <div className="flex justify-between items-center">
             <span className={`${TeamColor(home)} font-bold`}>
-              {home ? home : "TBD"}
+              {home ? <TeamHoverCard team={home}/> : "TBD"}
             </span>
             <span
               className={`px-2 py-1 text-lg ${
