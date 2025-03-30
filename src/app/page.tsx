@@ -1,6 +1,7 @@
 'use client';
 
 import { GameCard } from "@/components/app/gameCard";
+import { Standing } from "@/components/app/standing";
 import { motion } from "motion/react"
 
 const games = [
@@ -144,10 +145,9 @@ export default function Home() {
     delay: 0.3,
     ease: [0, 0.71, 0.2, 1.01],
   }
-
   return (
-    <div>
-      <main>
+    <div className="flex flex-col gap-4">
+      <div>
         <h2 className="text-2xl font-bold">本日賽事</h2>
         <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
@@ -160,7 +160,13 @@ export default function Home() {
             <GameCard {...games} key={games.id} />
           ))}
         </motion.div>
-      </main>
+      </div>
+      <div>
+        <h2 className="text-2xl font-bold">球隊成績</h2>
+        <div className="mt-4">
+          <Standing />
+        </div>
+      </div>
     </div>
   );
 }
