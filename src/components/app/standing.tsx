@@ -63,7 +63,7 @@ const teamsStanding = [
 
 export function Standing({ teams = teamsStanding }: { teams?: typeof teamsStanding }) {
   return (
-    <div>
+    <div className="w-[360px] md:w-[480px] lg:w-[600px] max-w-2xl">
       <Table>
         <TableHeader>
           <TableRow>
