@@ -13,7 +13,7 @@ import {
 const teamsStanding = [
   { 
     id: 0,
-    rank: 1,
+    rank: 2,
     name: "中信兄弟",
     games: 2,
     win: 1,
@@ -25,7 +25,7 @@ const teamsStanding = [
   },
   {
     id: 1,
-    rank: 2,
+    rank: 1,
     name: "統一獅",
     games: 2,
     win: 2,
@@ -49,7 +49,7 @@ const teamsStanding = [
   },
   { 
     id: 3,
-    rank: 4,
+    rank: 3,
     name: "台鋼雄鷹",
     games: 1,
     win: 0,
@@ -63,17 +63,19 @@ const teamsStanding = [
 
 export function Standing({ teams = teamsStanding }: { teams?: typeof teamsStanding }) {
   return (
-    <div className="w-[360px] md:w-[480px] lg:w-[600px] max-w-2xl">
+    <div className={`
+      w-[360px] md:w-[400px] lg:w-[600px] max-w-2xl 
+    `}>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-center">排名</TableHead>
-            <TableHead className="text-center">球隊</TableHead>
-            <TableHead className="text-center">出賽數</TableHead>
-            <TableHead className="text-center">勝-敗-和</TableHead>
-            <TableHead className="text-center">勝率</TableHead>
-            <TableHead className="text-center">勝差</TableHead>
-            <TableHead className="text-center">連勝/連敗</TableHead>
+            <TableHead className="text-center font-black">排名</TableHead>
+            <TableHead className="text-center font-black">球隊</TableHead>
+            <TableHead className="text-center font-black">出賽數</TableHead>
+            <TableHead className="text-center font-black">勝-敗-和</TableHead>
+            <TableHead className="text-center font-black">勝率</TableHead>
+            <TableHead className="text-center font-black">勝差</TableHead>
+            <TableHead className="text-center font-black">連勝/連敗</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

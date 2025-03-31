@@ -147,23 +147,36 @@ export default function Home() {
   }
   return (
     <div className="flex flex-col items-center gap-4">
-      <div>
-          <h2 className="text-2xl font-bold">本日賽事</h2>
-          <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={transition}
-          className={`
-            grid grid-rows-1 lg:grid-cols-3 md:grid-cols-2 gap-3 mt-4 ml-2
-          `}>
-            {games.map((games) => (
-              <GameCard {...games} key={games.id} />
-            ))}
-          </motion.div>
+      <div className="w-full">
+        <h2 className="text-2xl font-bold">本日賽事</h2>
+        <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={transition} >
+          { games.length === 0 ? 
+          <div className="flex flex-col justify-center w-full h-48 mt-4">
+            <p className={`
+              text-center text-gray-500
+            `}>本日無賽事</p>
+          </div> : <div className={`
+          grid grid-rows-1 lg:grid-cols-3 md:grid-cols-2 gap-3 mt-4 ml-2
+        `}>
+          { games.map((games) => (
+            <GameCard {...games} key={games.id} />
+          ))}
+          </div> }
+        </motion.div>
       </div>
       <div>
         <h2 className="text-2xl font-bold">球隊成績</h2>
-        <Standing />
+        <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={transition}
+        className="mt-2"
+        >
+          <Standing />
+        </motion.div>
       </div>
     </div>
   );

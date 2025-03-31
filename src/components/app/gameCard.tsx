@@ -330,7 +330,7 @@ export function GameCard({
             ${GameColor(status)} text-center
             `}
           >
-            {id}
+            {id !== null ? id : "TBD"}
           </p>
           <p className="font-bold">
             {GameStatus(status) !== "比賽中"
