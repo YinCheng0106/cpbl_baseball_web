@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TeamHoverCard } from "@/components/app/teamHoverCard";
+import { BaseBallOut } from "@/components/app/baseBallOut";
 
 type Props = Readonly<{
   id: number;
@@ -339,34 +340,39 @@ export function GameCard({
           </p>
           <p>{GameType(type)}</p>
         </div>
-        <CardTitle className="flex flex-col gap-0.5 text-2xl">
-          <div className="flex justify-between items-center">
-            <span className={`${TeamColor(away)} font-bold`}>
-              {away ? <TeamHoverCard team={away}/> : "TBD"}
-            </span>
-            <span
-              className={`px-2 py-1 text-lg ${
-                awayScore !== null ? "" : "text-gray-500"
-              }`}
-            >
-              {awayScore !== null
-                ? awayScore
-                : `${awayWLD[0]}-${awayWLD[1]}-${awayWLD[2]}`}
-            </span>
+        <CardTitle className="flex flex-row gap-2 text-2xl justify-between">
+          <div className="flex flex-col gap-2 w-full">  
+            <div className="flex justify-between items-center">
+              <span className={`${TeamColor(away)} font-bold`}>
+                {away ? <TeamHoverCard team={away}/> : "TBD"}
+              </span>
+              <span
+                className={`px-2 py-1 text-lg ${
+                  awayScore !== null ? "" : "text-gray-500"
+                }`}
+              >
+                {awayScore !== null
+                  ? awayScore
+                  : `${awayWLD[0]}-${awayWLD[1]}-${awayWLD[2]}`}
+              </span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className={`${TeamColor(home)} font-bold`}>
+                {home ? <TeamHoverCard team={home}/> : "TBD"}
+              </span>
+              <span
+                className={`px-2 py-1 text-lg ${
+                  homeScore !== null ? "" : "text-gray-500"
+                }`}
+              >
+                {homeScore !== null
+                  ? homeScore
+                  : `${homeWLD[0]}-${homeWLD[1]}-${homeWLD[2]}`}
+              </span>
+            </div>
           </div>
-          <div className="flex justify-between items-center">
-            <span className={`${TeamColor(home)} font-bold`}>
-              {home ? <TeamHoverCard team={home}/> : "TBD"}
-            </span>
-            <span
-              className={`px-2 py-1 text-lg ${
-                homeScore !== null ? "" : "text-gray-500"
-              }`}
-            >
-              {homeScore !== null
-                ? homeScore
-                : `${homeWLD[0]}-${homeWLD[1]}-${homeWLD[2]}`}
-            </span>
+          <div className={`${GameStatus(status) !== "比賽中" ? "hidden" : "" }`}>
+            <BaseBallOut base={base} strike={strike} ball={ball} out={out} />
           </div>
         </CardTitle>
       </CardHeader>

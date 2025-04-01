@@ -10,6 +10,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import Skeleton, { SkeletonTheme }  from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 const teamsStanding = [
   { 
     id: 0,
@@ -59,12 +62,24 @@ const teamsStanding = [
     gameBehind: 1.5,
     streak: "敗1",
   },
+  { 
+    id: 4,
+    rank: 4,
+    name: "樂天桃猿",
+    games: 1,
+    win: 0,
+    lose: 1,
+    tie: 0,
+    winRate: 0,
+    gameBehind: 1.5,
+    streak: "敗1",
+  },
 ]
 
 export function Standing({ teams = teamsStanding }: { teams?: typeof teamsStanding }) {
   return (
     <div className={`
-      w-[360px] md:w-[400px] lg:w-[600px] max-w-2xl 
+      w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl 
     `}>
       <Table>
         <TableHeader>
@@ -78,19 +93,21 @@ export function Standing({ teams = teamsStanding }: { teams?: typeof teamsStandi
             <TableHead className="text-center font-black">連勝/連敗</TableHead>
           </TableRow>
         </TableHeader>
+        <SkeletonTheme baseColor="dark:#202020" highlightColor="#444">
         <TableBody>
             {teams.sort((a, b) => a.rank - b.rank).map((team: any) => (
             <TableRow key={team.id}>
-              <TableCell className="text-center font-bold">{team.rank}</TableCell>
-              <TableCell className="text-center font-bold">{team.name}</TableCell>
-              <TableCell className="text-center">{team.games}</TableCell>
-              <TableCell className="text-center">{`${team.win}-${team.lose}-${team.tie}`}</TableCell>
-              <TableCell className="text-center">{team.winRate}</TableCell>
-              <TableCell className="text-center">{team.gameBehind}</TableCell>
-              <TableCell className="text-center">{team.streak}</TableCell>
+              <TableCell className="text-center font-bold">{team.rank !== null ? team.rank : <Skeleton />}</TableCell>
+              <TableCell className="text-center font-bold">{team.name !== null ? team.name : <Skeleton />}</TableCell>
+              <TableCell className="text-center">{team.games !== null ? team.games : <Skeleton />}</TableCell>
+              <TableCell className="text-center">{ team.win !== null ? `${team.win}-${team.lose}-${team.tie}` : <Skeleton />}</TableCell>
+              <TableCell className="text-center">{team.winRate !== null ? team.winRate : <Skeleton />}</TableCell>
+              <TableCell className="text-center">{team.gameBehind !== null ? team.gameBehind : <Skeleton />}</TableCell>
+              <TableCell className="text-center">{team.streak !== null ? team.streak : <Skeleton />}</TableCell>
             </TableRow>
             ))}
         </TableBody>
+        </SkeletonTheme>
       </Table>
     </div>
   )
