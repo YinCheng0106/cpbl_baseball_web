@@ -382,8 +382,8 @@ export function GameCard({
           </p>
           <p>{GameType(type)}</p>
         </div>
-        <CardTitle className="flex flex-row gap-2 text-2xl justify-between">
-          <div className="flex flex-col gap-0.5 w-full justify-end">
+        <CardTitle className="flex flex-row text-2xl justify-between">
+          <div className="flex flex-col gap-1 w-full justify-end">
             <div className="flex justify-between items-center">
               <span className={`${TeamColor(away)} font-bold`}>
                 {away ? <TeamHoverCard team={away} /> : "TBD"}
@@ -405,22 +405,22 @@ export function GameCard({
                 <div className="mr-2">
                   <table>
                     <thead>
-                      <tr className="flex flex-row gap-2 items-center justify-around">
-                        <th className="text-sm">R</th>
-                        <th className="text-sm">H</th>
-                        <th className="text-sm">E</th>
+                      <tr className="flex flex-row gap-2 mb-1 items-center justify-around text-gray-500">
+                        <th className="text-sm w-5 text-center font-normal">R</th>
+                        <th className="text-sm w-5 text-center font-normal">H</th>
+                        <th className="text-sm w-5 text-center font-normal">E</th>
                       </tr>
                     </thead>
-                    <tbody className="flex flex-col gap-1 mt-1">
-                      <tr className="flex flex-row gap-2 items-center justify-around">
-                        <td>{awayScore}</td>
-                        <td>{awayHits}</td>
-                        <td>{awayErrors}</td>
+                    <tbody className="flex flex-col gap-1.5">
+                      <tr className="flex flex-row gap-2 items-center align-middle">
+                        <td className="w-5 text-lg text-center font-black">{awayScore}</td>
+                        <td className="w-5 text-lg text-center font-medium">{awayHits}</td>
+                        <td className="w-5 text-lg text-center font-medium">{awayErrors}</td>
                       </tr>
                       <tr className="flex flex-row gap-2 items-center justify-around">
-                        <td>{homeScore}</td>
-                        <td>{homeHits}</td>
-                        <td>{homeErrors}</td>
+                        <td className="w-5 text-lg text-center font-black">{homeScore}</td>
+                        <td className="w-5 text-lg text-center font-medium">{homeHits}</td>
+                        <td className="w-5 text-lg text-center font-medium">{homeErrors}</td>
                       </tr>
                     </tbody>
                   </table>
