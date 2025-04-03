@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { TeamHoverCard } from "@/components/app/teamHoverCard";
 import { BaseBallOut } from "@/components/app/baseBallOut";
+import { table } from "console";
 
 type Props = Readonly<{
   id: number;
@@ -30,6 +31,10 @@ type Props = Readonly<{
   homeStarter: string | null;
   awayScore: number | null;
   homeScore: number | null;
+  awayHits: number | null;
+  homeHits: number | null;
+  awayErrors: number | null;
+  homeErrors: number | null;
   awayWLD: [number, number, number];
   homeWLD: [number, number, number];
 
@@ -117,7 +122,7 @@ const GameColor = (status: number) => {
   }
 };
 
-export function TeamColor (name: string) {
+export function TeamColor(name: string) {
   switch (name) {
     case "樂天桃猿":
       return "text-red-900";
@@ -136,7 +141,7 @@ export function TeamColor (name: string) {
     default:
       return "text-gray-500";
   }
-};
+}
 
 const TimeDecoder = (time: string) => {
   return new Date(time).toLocaleString("zh-TW", {
@@ -156,36 +161,36 @@ const BaseStatus = (base: [boolean, boolean, boolean]) => {
     >
       {/* first base */}
       <polygon
-      points="70,50 80,40 70,30 60,40"
-      fill={base[0] ? "#FFD700" : "white"}
-      strokeWidth="1.5"
-      className={
-        base[0]
-        ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
-        : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
-      }
+        points="70,50 80,40 70,30 60,40"
+        fill={base[0] ? "#FFD700" : "white"}
+        strokeWidth="1.5"
+        className={
+          base[0]
+            ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
+            : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
+        }
       />
       {/* second base */}
       <polygon
-      points="50,30 60,20 50,10 40,20"
-      fill={base[1] ? "#FFD700" : "white"}
-      strokeWidth="1.5"
-      className={
-        base[1]
-        ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
-        : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
-      }
+        points="50,30 60,20 50,10 40,20"
+        fill={base[1] ? "#FFD700" : "white"}
+        strokeWidth="1.5"
+        className={
+          base[1]
+            ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
+            : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
+        }
       />
       {/* third base */}
       <polygon
-      points="30,50 40,40 30,30 20,40"
-      fill={base[2] ? "#FFD700" : "white"}
-      strokeWidth="1.5"
-      className={
-        base[2]
-        ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
-        : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
-      }
+        points="30,50 40,40 30,30 20,40"
+        fill={base[2] ? "#FFD700" : "white"}
+        strokeWidth="1.5"
+        className={
+          base[2]
+            ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
+            : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
+        }
       />
     </svg>
   );
@@ -222,24 +227,32 @@ const inPlaying = (
     <div className="grid grid-cols-2 gap-4">
       <div>
         <div className="space-y-2">
-          <div className="flex justify-between items-center">{BaseStatus(base)}</div>
+          <div className="flex justify-between items-center">
+            {BaseStatus(base)}
+          </div>
           <div className="flex justify-between items-center"></div>
         </div>
       </div>
       <div>
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">好壞球</span>
+            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+              好壞球
+            </span>
             <span className="text-sm font-medium">
               {ball} - {strike}
             </span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">出局數</span>
+            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+              出局數
+            </span>
             <span className="text-sm font-medium">{out}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">投球數</span>
+            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+              投球數
+            </span>
             <span className="text-sm font-medium">{pitch}</span>
           </div>
         </div>
@@ -252,13 +265,17 @@ const readyPlay = (awayStarter: string | null, homeStarter: string | null) => {
     <div className="gird grid-cols-2 gap-4">
       <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">客隊先發</span>
+          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+            客隊先發
+          </span>
           <span className="text-sm font-medium">
             {awayStarter === null ? "未公布" : awayStarter}
           </span>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">主隊先發</span>
+          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+            主隊先發
+          </span>
           <span className="text-sm font-medium">
             {homeStarter === null ? "未公布" : homeStarter}
           </span>
@@ -267,32 +284,53 @@ const readyPlay = (awayStarter: string | null, homeStarter: string | null) => {
     </div>
   );
 };
-const gameSet = (winPitcher: string | null, losePitcher: string | null, savePitcher: string | null, mvp: string | null) => {
+const gameSet = (
+  winPitcher: string | null,
+  losePitcher: string | null,
+  savePitcher: string | null,
+  mvp: string | null
+) => {
   return (
     <div className="grid grid-cols-2 gap-4">
       <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">勝利投手</span>
-          <span className="text-sm font-medium">{winPitcher === null ? "無" : winPitcher}</span>
+          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+            勝利投手
+          </span>
+          <span className="text-sm font-medium">
+            {winPitcher === null ? "無" : winPitcher}
+          </span>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">救援成功</span>
-          <span className="text-sm font-medium">{savePitcher === null ? "無" : savePitcher}</span>
+          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+            救援成功
+          </span>
+          <span className="text-sm font-medium">
+            {savePitcher === null ? "無" : savePitcher}
+          </span>
         </div>
       </div>
       <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">敗戰投手</span>
-          <span className="text-sm font-medium">{losePitcher === null ? "無" : losePitcher}</span>
+          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+            敗戰投手
+          </span>
+          <span className="text-sm font-medium">
+            {losePitcher === null ? "無" : losePitcher}
+          </span>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">MVP</span>
-          <span className="text-sm font-medium">{mvp === null ? "無" : mvp}</span>
+          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+            MVP
+          </span>
+          <span className="text-sm font-medium">
+            {mvp === null ? "無" : mvp}
+          </span>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export function GameCard({
   id,
@@ -306,6 +344,10 @@ export function GameCard({
   homeStarter,
   awayScore,
   homeScore,
+  awayHits,
+  homeHits,
+  awayErrors,
+  homeErrors,
   awayWLD,
   homeWLD,
   winPitcher,
@@ -322,7 +364,7 @@ export function GameCard({
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <Card className="w-[350px] lg:w-[325px] md:w-[300px] py-6 gap-0.5">
+    <Card className="w-[350px] lg:w-[325px] md:w-[320px] py-6 gap-0.5">
       <CardHeader>
         <div className="flex justify-between items-center text-sm mb-2">
           <p
@@ -341,37 +383,63 @@ export function GameCard({
           <p>{GameType(type)}</p>
         </div>
         <CardTitle className="flex flex-row gap-2 text-2xl justify-between">
-          <div className="flex flex-col gap-2 w-full">  
+          <div className="flex flex-col gap-0.5 w-full justify-end">
             <div className="flex justify-between items-center">
               <span className={`${TeamColor(away)} font-bold`}>
-                {away ? <TeamHoverCard team={away}/> : "TBD"}
-              </span>
-              <span
-                className={`px-2 py-1 text-lg ${
-                  awayScore !== null ? "" : "text-gray-500"
-                }`}
-              >
-                {awayScore !== null
-                  ? awayScore
-                  : `${awayWLD[0]}-${awayWLD[1]}-${awayWLD[2]}`}
+                {away ? <TeamHoverCard team={away} /> : "TBD"}
               </span>
             </div>
             <div className="flex justify-between items-center">
               <span className={`${TeamColor(home)} font-bold`}>
-                {home ? <TeamHoverCard team={home}/> : "TBD"}
-              </span>
-              <span
-                className={`px-2 py-1 text-lg ${
-                  homeScore !== null ? "" : "text-gray-500"
-                }`}
-              >
-                {homeScore !== null
-                  ? homeScore
-                  : `${homeWLD[0]}-${homeWLD[1]}-${homeWLD[2]}`}
+                {home ? <TeamHoverCard team={home} /> : "TBD"}
               </span>
             </div>
           </div>
-          <div className={`${GameStatus(status) !== "比賽中" ? "hidden" : "" }`}>
+          <div className="flex flex-col w-full items-end justify-center">
+            <span
+              className={`text-lg ${
+                awayScore !== null ? "" : "text-gray-500"
+              }`}
+            >
+              {awayScore !== null ? (
+                <div className="mr-2">
+                  <table>
+                    <thead>
+                      <tr className="flex flex-row gap-2 items-center justify-around">
+                        <th className="text-sm">R</th>
+                        <th className="text-sm">H</th>
+                        <th className="text-sm">E</th>
+                      </tr>
+                    </thead>
+                    <tbody className="flex flex-col gap-1 mt-1">
+                      <tr className="flex flex-row gap-2 items-center justify-around">
+                        <td>{awayScore}</td>
+                        <td>{awayHits}</td>
+                        <td>{awayErrors}</td>
+                      </tr>
+                      <tr className="flex flex-row gap-2 items-center justify-around">
+                        <td>{homeScore}</td>
+                        <td>{homeHits}</td>
+                        <td>{homeErrors}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <table>
+                  <tbody className="flex flex-col gap-3">
+                    <tr >
+                      <td>{awayWLD[0]}-{awayWLD[1]}-{awayWLD[2]}</td>
+                    </tr>
+                    <tr>
+                      <td>{homeWLD[0]}-{homeWLD[1]}-{homeWLD[2]}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              )}
+            </span>
+          </div>
+          <div className={`${GameStatus(status) !== "比賽中" ? "hidden" : ""} border-l pl-2`}>
             <BaseBallOut base={base} strike={strike} ball={ball} out={out} />
           </div>
         </CardTitle>
@@ -426,11 +494,11 @@ export function GameCard({
           {status === 1 ? readyPlay(awayStarter, homeStarter) : null}
           {status === 4 ? readyPlay(awayStarter, homeStarter) : null}
           {status === 2 ? inPlaying(base, pitch, ball, strike, out) : null}
-          {status === 3 ? gameSet(winPitcher, losePitcher, savePitcher, mvp) : null}
+          {status === 3
+            ? gameSet(winPitcher, losePitcher, savePitcher, mvp)
+            : null}
         </div>
       </div>
     </Card>
   );
 }
-
-// Add this at the top of your file, right after "use client"
