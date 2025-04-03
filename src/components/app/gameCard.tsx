@@ -15,7 +15,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { TeamHoverCard } from "@/components/app/teamHoverCard";
 import { BaseBallOut } from "@/components/app/baseBallOut";
-import { table } from "console";
 
 type Props = Readonly<{
   id: number;
@@ -199,9 +198,9 @@ const BaseStatus = (base: [boolean, boolean, boolean]) => {
 const TeamNameAbbreviation = (name: string) => {
   switch (name) {
     case "樂天桃猿":
-      return "桃猿";
+      return "猿";
     case "富邦悍將":
-      return "悍將";
+      return "悍";
     case "中信兄弟":
       return "象";
     case "統一獅":
@@ -382,69 +381,98 @@ export function GameCard({
           </p>
           <p>{GameType(type)}</p>
         </div>
-        <CardTitle className="flex flex-row text-2xl justify-between">
-          <div className="flex flex-col gap-1 w-full justify-end">
-            <div className="flex justify-between items-center">
-              <span className={`${TeamColor(away)} font-bold`}>
+        <CardTitle className="flex flex-row text-2xl justify-between select-none">
+          <div className="flex flex-col w-full h-[88px] justify-end">
+            <div className="flex items-center">
+              <span className={`
+                ${TeamColor(away)} font-bold
+                hover:scale-105 transition-transform duration-400 ease-in-out
+              `}>
                 {away ? <TeamHoverCard team={away} /> : "TBD"}
               </span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className={`${TeamColor(home)} font-bold`}>
+            <div className="flex items-center">
+              <span className={`
+                ${TeamColor(home)} font-bold
+                hover:scale-105 transition-transform duration-400 ease-in-out
+              `}>
                 {home ? <TeamHoverCard team={home} /> : "TBD"}
               </span>
             </div>
           </div>
           <div className="flex flex-col w-full items-end justify-center">
             <span
-              className={`text-lg ${
-                awayScore !== null ? "" : "text-gray-500"
-              }`}
+              className={`text-lg ${awayScore !== null ? "" : "text-gray-500"}`}
             >
               {awayScore !== null ? (
-                <div className="mr-2">
+                <div>
                   <table>
                     <thead>
-                      <tr className="flex flex-row gap-2 mb-1 items-center justify-around text-gray-500">
-                        <th className="text-sm w-5 text-center font-normal">R</th>
-                        <th className="text-sm w-5 text-center font-normal">H</th>
-                        <th className="text-sm w-5 text-center font-normal">E</th>
+                      <tr className="flex flex-row gap-2 mb-1 items-center text-gray-500">
+                        <th className="text-sm w-5 text-center font-normal">
+                          R
+                        </th>
+                        <th className="text-sm w-5 text-center font-normal">
+                          H
+                        </th>
+                        <th className="text-sm w-5 text-center font-normal">
+                          E
+                        </th>
                       </tr>
                     </thead>
-                    <tbody className="flex flex-col gap-1.5">
-                      <tr className="flex flex-row gap-2 items-center align-middle">
-                        <td className="w-5 text-lg text-center font-black">{awayScore}</td>
-                        <td className="w-5 text-lg text-center font-medium">{awayHits}</td>
-                        <td className="w-5 text-lg text-center font-medium">{awayErrors}</td>
+                    <tbody className="flex flex-col gap-1">
+                      <tr className="flex flex-row gap-2 items-center">
+                        <td className="w-5 text-lg text-center font-black">
+                          {awayScore}
+                        </td>
+                        <td className="w-5 text-lg text-center font-medium">
+                          {awayHits}
+                        </td>
+                        <td className="w-5 text-lg text-center font-medium">
+                          {awayErrors}
+                        </td>
                       </tr>
-                      <tr className="flex flex-row gap-2 items-center justify-around">
-                        <td className="w-5 text-lg text-center font-black">{homeScore}</td>
-                        <td className="w-5 text-lg text-center font-medium">{homeHits}</td>
-                        <td className="w-5 text-lg text-center font-medium">{homeErrors}</td>
+                      <tr className="flex flex-row gap-2 items-center">
+                        <td className="w-5 text-lg text-center font-black">
+                          {homeScore}
+                        </td>
+                        <td className="w-5 text-lg text-center font-medium">
+                          {homeHits}
+                        </td>
+                        <td className="w-5 text-lg text-center font-medium">
+                          {homeErrors}
+                        </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               ) : (
                 <table>
-                  <tbody className="flex flex-col gap-3">
-                    <tr >
-                      <td>{awayWLD[0]}-{awayWLD[1]}-{awayWLD[2]}</td>
+                  <tbody className="flex flex-col gap-1.5 h-[88px] justify-end">
+                    <tr>
+                      <td className="text-lg text-center">
+                        {awayWLD[0]}-{awayWLD[1]}-{awayWLD[2]}
+                      </td>
                     </tr>
                     <tr>
-                      <td>{homeWLD[0]}-{homeWLD[1]}-{homeWLD[2]}</td>
+                      <td className="text-lg text-center">
+                        {homeWLD[0]}-{homeWLD[1]}-{homeWLD[2]}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
               )}
             </span>
           </div>
-          <div className={`${GameStatus(status) !== "比賽中" ? "hidden" : ""} border-l pl-2`}>
+          <div
+            className={`${
+              GameStatus(status) !== "比賽中" ? "hidden" : ""
+            } border-l pl-2 ml-4`}
+          >
             <BaseBallOut base={base} strike={strike} ball={ball} out={out} />
           </div>
         </CardTitle>
       </CardHeader>
-      <CardContent></CardContent>
       <CardFooter className="flex justify-between mt-4">
         <p className="flex flex-row gap-2 items-center">
           <MapPin />
@@ -454,6 +482,7 @@ export function GameCard({
               ${status == 2 ? "hidden" : ""} 
               ${status == 3 ? "hidden" : ""}
               ${status == 8 ? "hidden" : ""}
+              font-medium border-l pl-2
             `}
           >
             {time ? TimeDecoder(time) : "TBD"}

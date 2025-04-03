@@ -27,7 +27,7 @@ const BaseBallOut = ({ base, strike, ball, out }: BaseBallOutProps) => {
     <div>
       <svg
         className="w-[45px] h-[80px] dark:stroke-white fill-gray-400 dark:fill-gray-800"
-        viewBox="0 0 100 100"
+        viewBox="0 10 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >

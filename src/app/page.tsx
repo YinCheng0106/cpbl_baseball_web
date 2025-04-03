@@ -49,7 +49,7 @@ const games = [
     awayScore: 1,
     homeHits: 10,
     awayHits: 0,
-    homeErrors: 0,
+    homeErrors: 10,
     awayErrors: 0,
     awayWLD: [0, 0, 0],
     homeWLD: [0, 0, 0],
