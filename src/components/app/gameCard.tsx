@@ -408,7 +408,7 @@ export function GameCard({
                 <div>
                   <table>
                     <thead>
-                      <tr className="flex flex-row gap-2 mb-1 items-center text-gray-500">
+                      <tr className="flex flex-row gap-1 mb-1 items-center text-gray-500">
                         <th className="text-sm w-5 text-center font-normal">
                           R
                         </th>
@@ -421,7 +421,7 @@ export function GameCard({
                       </tr>
                     </thead>
                     <tbody className="flex flex-col gap-1">
-                      <tr className="flex flex-row gap-2 items-center">
+                      <tr className="flex flex-row gap-1 items-center">
                         <td className="w-5 text-lg text-center font-black">
                           {awayScore}
                         </td>
@@ -432,7 +432,7 @@ export function GameCard({
                           {awayErrors}
                         </td>
                       </tr>
-                      <tr className="flex flex-row gap-2 items-center">
+                      <tr className="flex flex-row gap-1 items-center">
                         <td className="w-5 text-lg text-center font-black">
                           {homeScore}
                         </td>

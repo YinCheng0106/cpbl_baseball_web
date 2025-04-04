@@ -4,7 +4,7 @@ import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card"
+} from "@/components/ui/hover-card";
 import { TeamColor } from "@/components/app/gameCard";
 import Link from "next/link";
 
@@ -14,7 +14,7 @@ const teams = [
   {
     name: "中信兄弟",
     fullName: "中信兄弟",
-    word: 'B',
+    word: "B",
     description: "",
     founded: "兄弟象(1990-2013)-中信兄弟(2014-至今)",
     logo: "",
@@ -25,7 +25,7 @@ const teams = [
   {
     name: "統一獅",
     fullName: "統一7-ELEVEn獅",
-    word: 'L',
+    word: "L",
     description: "",
     founded: "統一獅(1990-2007)-統一7-ELEVEn獅(2008-至今)",
     logo: "",
@@ -36,9 +36,10 @@ const teams = [
   {
     name: "樂天桃猿",
     fullName: "樂天桃猿",
-    word: 'R',
+    word: "R",
     description: "",
-    founded: "第一金剛(2003)-La new熊(2004-2010)-Lamigo 桃猿(2011-2019)-樂天桃猿(2020-至今)",
+    founded:
+      "第一金剛(2003)-La new熊(2004-2010)-Lamigo 桃猿(2011-2019)-樂天桃猿(2020-至今)",
     logo: "",
     website: "https://monkeys.rakuten.com.tw/",
     mainStadium: "桃園國際棒球場",
@@ -47,9 +48,10 @@ const teams = [
   {
     name: "富邦悍將",
     fullName: "富邦悍將",
-    word: 'G',
+    word: "G",
     description: "",
-    founded: "俊國熊(1993-1995)-興農熊(1996上半季)-興農牛(1996下半季-2012)-義大犀牛(2013-2016)-富邦悍將(2017-至今)",
+    founded:
+      "俊國熊(1993-1995)-興農熊(1996上半季)-興農牛(1996下半季-2012)-義大犀牛(2013-2016)-富邦悍將(2017-至今)",
     logo: "",
     website: "https://www.fubonguardians.com/",
     mainStadium: "新莊棒球場",
@@ -58,7 +60,7 @@ const teams = [
   {
     name: "味全龍",
     fullName: "味全龍",
-    word: 'W',
+    word: "W",
     description: "",
     founded: "味全龍(1990-1999, 2019-至今)",
     logo: "",
@@ -69,7 +71,7 @@ const teams = [
   {
     name: "台鋼雄鷹",
     fullName: "台鋼雄鷹",
-    word: 'T',
+    word: "T",
     description: "",
     founded: "台鋼雄鷹(2023-至今)",
     logo: "",
@@ -77,19 +79,19 @@ const teams = [
     mainStadium: "高雄市立澄清湖棒球場",
     manager: "洪一中",
   },
-]
+];
 
 export function TeamHoverCard({ team }: { team: string }) {
-  const teamData = teams.find(t => t.name === team) || {
+  const teamData = teams.find((t) => t.name === team) || {
     name: team,
     fullName: team,
-    word: '',
-    description: '',
-    founded: '',
-    logo: '',
-    website: '',
-    mainStadium: '',
-    manager: '',
+    word: "",
+    description: "",
+    founded: "",
+    logo: "",
+    website: "",
+    mainStadium: "",
+    manager: "",
   };
   return (
     <HoverCard>
@@ -99,8 +101,17 @@ export function TeamHoverCard({ team }: { team: string }) {
       <HoverCardContent>
         <div className="p-2">
           <div className="flex items-center justify-between">
-            <h3 className={`text-xl font-bold ${TeamColor(teamData.fullName)}`}>{teamData.fullName}</h3>
-            <Link href={teamData.website} target="_blank" className="flex items-center justify-center text-sm transform hover:scale-110 transition-all duration-200">
+            <h3 className={`text-xl font-bold ${TeamColor(teamData.fullName)}`}>
+              {teamData.fullName}
+            </h3>
+            <Link
+              href={teamData.website}
+              target="_blank"
+              className={`
+              flex items-center justify-center text-sm transform hover:scale-110 transition-all duration-200
+              ${teamData.website === '' ? "hidden" : "" }
+              `}
+            >
               <Globe />
             </Link>
           </div>
@@ -117,5 +128,5 @@ export function TeamHoverCard({ team }: { team: string }) {
         </div>
       </HoverCardContent>
     </HoverCard>
-  )
+  );
 }

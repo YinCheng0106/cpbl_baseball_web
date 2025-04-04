@@ -9,9 +9,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { teamToWord } from "@/components/app/teamAvatar";
 
-import Skeleton, { SkeletonTheme }  from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton, { SkeletonTheme }  from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const teamsStanding = [
   { 
@@ -98,7 +99,7 @@ export function Standing({ teams = teamsStanding }: { teams?: typeof teamsStandi
             {teams.sort((a, b) => a.rank - b.rank).map((team: any) => (
             <TableRow key={team.id}>
               <TableCell className="text-center font-bold">{team.rank !== null ? team.rank : <Skeleton />}</TableCell>
-              <TableCell className="text-center font-bold">{team.name !== null ? team.name : <Skeleton />}</TableCell>
+              <TableCell className="text-center font-bold">{team.name !== null ? <img alt={team.name} height={20} width={20} src={teamToWord(team.name)}/> : <Skeleton />}</TableCell>
               <TableCell className="text-center">{team.games !== null ? team.games : <Skeleton />}</TableCell>
               <TableCell className="text-center">{ team.win !== null ? `${team.win}-${team.lose}-${team.tie}` : <Skeleton />}</TableCell>
               <TableCell className="text-center">{team.winRate !== null ? team.winRate : <Skeleton />}</TableCell>
