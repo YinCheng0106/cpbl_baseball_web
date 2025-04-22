@@ -72,8 +72,8 @@ const BaseBallOut = ({ base, strike, ball, out }: BaseBallOutProps) => {
           strokeWidth="2"
           className={
             outToArray(out)[0]
-              ? "dark:fill-white dark:stroke-white stroke-gray-400"
-              : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
+              ? "dark:fill-white dark:stroke-white fill-red-500 stroke-red-500"
+              : "dark:fill-gray-800 dark:stroke-white fill-white stroke-gray-400"
           }
         />
         <circle
@@ -84,8 +84,8 @@ const BaseBallOut = ({ base, strike, ball, out }: BaseBallOutProps) => {
           strokeWidth="2"
           className={
             outToArray(out)[1]
-              ? "dark:fill-white dark:stroke-white stroke-gray-400"
-              : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
+              ? "dark:fill-white dark:stroke-white fill-red-500 stroke-red-500"
+              : "dark:fill-gray-800 dark:stroke-white fill-white stroke-gray-400"
           }
         />
         <circle
@@ -96,8 +96,8 @@ const BaseBallOut = ({ base, strike, ball, out }: BaseBallOutProps) => {
           strokeWidth="2"
           className={
             outToArray(out)[2]
-              ? "dark:fill-white dark:stroke-white stroke-gray-400"
-              : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
+              ? "dark:fill-white dark:stroke-white fill-red-500 stroke-red-500"
+              : "dark:fill-gray-800 dark:stroke-white fill-white stroke-gray-400"
           }
         />
         <text
