@@ -447,20 +447,47 @@ export function GameCard({
                   </table>
                 </div>
               ) : (
-                <table>
-                  <tbody className="flex flex-col gap-1.5 h-[88px] justify-end">
-                    <tr>
-                      <td className="text-lg text-center">
-                        {awayWLD[0]}-{awayWLD[1]}-{awayWLD[2]}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="text-lg text-center">
-                        {homeWLD[0]}-{homeWLD[1]}-{homeWLD[2]}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div>
+                  <table>
+                    <thead>
+                      <tr className="flex flex-row gap-2 mb-1 items-center text-gray-500">
+                        <th className="text-sm w-5 text-center font-normal">
+                          W
+                        </th>
+                        <th className="text-sm w-5 text-center font-normal">
+                          L
+                        </th>
+                        <th className="text-sm w-5 text-center font-normal">
+                          D
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="flex flex-col gap-1">
+                      <tr className="flex flex-row gap-2 items-center text-gray-400">
+                        <td className="w-5 text-lg text-center font-medium">
+                          {awayWLD[0]}
+                        </td>
+                        <td className="w-5 text-lg text-center font-medium">
+                          {awayWLD[1]}
+                        </td>
+                        <td className="w-5 text-lg text-center font-medium">
+                          {awayWLD[2]}
+                        </td>
+                      </tr>
+                      <tr className="flex flex-row gap-2 items-center text-gray-400">
+                        <td className="w-5 text-lg text-center font-black">
+                          {homeWLD[0]}
+                        </td>
+                        <td className="w-5 text-lg text-center font-medium">
+                          {homeWLD[1]}
+                        </td>
+                        <td className="w-5 text-lg text-center font-medium">
+                          {homeWLD[2]}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               )}
             </span>
           </div>
@@ -474,19 +501,19 @@ export function GameCard({
         </CardTitle>
       </CardHeader>
       <CardFooter className="flex justify-between mt-4">
-        <p className="flex flex-row gap-2 items-center">
+        <p className="flex flex-row gap-2">
           <MapPin />
           {location ? location : "TBD"}
-          <span
-            className={`
-              ${status == 2 ? "hidden" : ""} 
-              ${status == 3 ? "hidden" : ""}
-              ${status == 8 ? "hidden" : ""}
-              font-medium border-l pl-2
-            `}
-          >
-            {time ? TimeDecoder(time) : "TBD"}
-          </span>
+        <span
+          className={`
+            ${status == 2 ? "hidden" : ""} 
+            ${status == 3 ? "hidden" : ""}
+            ${status == 8 ? "hidden" : ""}
+            font-medium border-l px-2
+          `}
+        >
+          {time ? TimeDecoder(time) : "TBD"}
+        </span>
         </p>
         <Button
           onClick={() => setIsOpen(!isOpen)}

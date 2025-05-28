@@ -6,6 +6,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { TeamColor } from "@/components/app/gameCard";
+import { teamToWord } from "@/components/app/teamAvatar";
 import Link from "next/link";
 
 import { Globe } from "lucide-react";
@@ -17,7 +18,7 @@ const teams = [
     word: "B",
     description: "",
     founded: "兄弟象(1990-2013)-中信兄弟(2014-至今)",
-    logo: "",
+    logo: teamToWord("中信兄弟"),
     website: "https://www.brothers.tw/",
     mainStadium: "台中洲際棒球場",
     manager: "平野惠一",
@@ -28,7 +29,7 @@ const teams = [
     word: "L",
     description: "",
     founded: "統一獅(1990-2007)-統一7-ELEVEn獅(2008-至今)",
-    logo: "",
+    logo: teamToWord("統一獅"),
     website: "https://www.uni-lions.com.tw/",
     mainStadium: "台南棒球場",
     manager: "林岳平",
@@ -40,7 +41,7 @@ const teams = [
     description: "",
     founded:
       "第一金剛(2003)-La new熊(2004-2010)-Lamigo 桃猿(2011-2019)-樂天桃猿(2020-至今)",
-    logo: "",
+    logo: teamToWord("樂天桃猿"),
     website: "https://monkeys.rakuten.com.tw/",
     mainStadium: "桃園國際棒球場",
     manager: "古久保健二",
@@ -49,10 +50,10 @@ const teams = [
     name: "富邦悍將",
     fullName: "富邦悍將",
     word: "G",
-    description: "",
+    description: teamToWord("富邦悍將"),
     founded:
       "俊國熊(1993-1995)-興農熊(1996上半季)-興農牛(1996下半季-2012)-義大犀牛(2013-2016)-富邦悍將(2017-至今)",
-    logo: "",
+    logo: teamToWord("富邦悍將"),
     website: "https://www.fubonguardians.com/",
     mainStadium: "新莊棒球場",
     manager: "陳金鋒",
@@ -63,7 +64,7 @@ const teams = [
     word: "W",
     description: "",
     founded: "味全龍(1990-1999, 2019-至今)",
-    logo: "",
+    logo: teamToWord("味全龍"),
     website: "https://www.wdragons.com",
     mainStadium: "天母棒球場",
     manager: "葉君璋",
@@ -74,7 +75,7 @@ const teams = [
     word: "T",
     description: "",
     founded: "台鋼雄鷹(2023-至今)",
-    logo: "",
+    logo: teamToWord("台鋼雄鷹"),
     website: "https://www.tsghawks.com/",
     mainStadium: "高雄市立澄清湖棒球場",
     manager: "洪一中",
@@ -101,9 +102,12 @@ export function TeamHoverCard({ team }: { team: string }) {
       <HoverCardContent>
         <div className="p-2">
           <div className="flex items-center justify-between">
-            <h3 className={`text-xl font-bold ${TeamColor(teamData.fullName)}`}>
-              {teamData.fullName}
-            </h3>
+            <div className="flex items-center gap-2">
+              <img alt={teamData.name} height={20} width={20} src={teamData.logo}/>
+              <h3 className={`text-xl font-bold ${TeamColor(teamData.fullName)}`}>
+                {teamData.fullName}
+              </h3>
+            </div>
             <Link
               href={teamData.website}
               target="_blank"
