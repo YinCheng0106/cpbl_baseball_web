@@ -124,21 +124,21 @@ const GameColor = (status: number) => {
 export function TeamColor(name: string) {
   switch (name) {
     case "樂天桃猿":
-      return "text-red-900";
+      return "text-[#671a32]";
     case "富邦悍將":
-      return "text-blue-800";
+      return "text-[#004f98]";
     case "中信兄弟":
-      return "text-amber-300";
+      return "text-[#f9cc01]";
     case "統一獅":
-      return "text-orange-500";
+      return "text-[#ec6c00]";
     case "統一7-ELEVEn獅":
-      return "text-orange-500";
+      return "text-[#004f98]";
     case "台鋼雄鷹":
-      return "text-emerald-900";
+      return "text-[#064738]";
     case "味全龍":
-      return "text-red-600";
+      return "text-[#cf152d]";
     default:
-      return "text-gray-500";
+      return "text-[#fff]";
   }
 }
 
