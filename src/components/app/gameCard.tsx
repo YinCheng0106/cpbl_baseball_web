@@ -37,6 +37,8 @@ type Props = Readonly<{
   awayWLD: [number, number, number];
   homeWLD: [number, number, number];
 
+  nowPitcher: string | null;
+  nowBatter: string | null;
   winPitcher: string | null;
   losePitcher: string | null;
   savePitcher: string | null;
@@ -220,16 +222,30 @@ const inPlaying = (
   pitch: number,
   ball: number,
   strike: number,
-  out: number
+  out: number,
+  nowBatter: string | null,
+  nowPitcher: string | null
 ) => {
   return (
     <div className="grid grid-cols-2 gap-4">
       <div>
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            {BaseStatus(base)}
+            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+              當前投手
+            </span>
+            <span className="text-sm font-medium">
+              {nowPitcher ? nowPitcher : "無"}
+            </span>
           </div>
-          <div className="flex justify-between items-center"></div>
+          <div className="flex justify-between items-center">
+            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+              當前打者
+            </span>
+            <span className="text-sm font-medium">
+              {nowBatter ? nowBatter : "無"}
+            </span>
+          </div>
         </div>
       </div>
       <div>
@@ -259,6 +275,7 @@ const inPlaying = (
     </div>
   );
 };
+
 const readyPlay = (awayStarter: string | null, homeStarter: string | null) => {
   return (
     <div className="gird grid-cols-2 gap-4">
@@ -283,6 +300,7 @@ const readyPlay = (awayStarter: string | null, homeStarter: string | null) => {
     </div>
   );
 };
+
 const gameSet = (
   winPitcher: string | null,
   losePitcher: string | null,
@@ -349,6 +367,8 @@ export function GameCard({
   homeErrors,
   awayWLD,
   homeWLD,
+  nowBatter,
+  nowPitcher,
   winPitcher,
   losePitcher,
   savePitcher,
@@ -475,7 +495,7 @@ export function GameCard({
                         </td>
                       </tr>
                       <tr className="flex flex-row gap-2 items-center text-gray-400">
-                        <td className="w-5 text-lg text-center font-black">
+                        <td className="w-5 text-lg text-center font-medium">
                           {homeWLD[0]}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
@@ -549,7 +569,7 @@ export function GameCard({
         <div className="px-6 pt-6 rounded-b-lg border-t">
           {status === 1 ? readyPlay(awayStarter, homeStarter) : null}
           {status === 4 ? readyPlay(awayStarter, homeStarter) : null}
-          {status === 2 ? inPlaying(base, pitch, ball, strike, out) : null}
+          {status === 2 ? inPlaying(base, pitch, ball, strike, out, nowBatter, nowPitcher) : null}
           {status === 3
             ? gameSet(winPitcher, losePitcher, savePitcher, mvp)
             : null}

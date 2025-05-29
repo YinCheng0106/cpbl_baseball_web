@@ -53,6 +53,8 @@ const games = [
     awayErrors: 0,
     awayWLD: [0, 0, 0],
     homeWLD: [0, 0, 0],
+    nowPitcher: "張奕",
+    nowBatter: "林泓育",
     winPitcher: "張奕",
     losePitcher: "陳禹勳",
     savePitcher: "張奕",
