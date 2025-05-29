@@ -41,7 +41,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="flex flex-col">
-            <div className="min-h-svh flex flex-col px-4 items-center">
+            <div className="min-h-svh flex flex-col px-0 items-center">
               <AppHeader />
               {children}
             </div>

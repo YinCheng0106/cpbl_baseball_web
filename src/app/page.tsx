@@ -173,7 +173,7 @@ export default function Home() {
               text-center text-gray-500
             `}>本日無賽事</p>
           </div> : <div className={`
-          grid grid-rows-1 lg:grid-cols-3 md:grid-cols-2 gap-3 mt-4 ml-2
+          grid gap-3 mt-4 ml-2
         `}>
           { games.map((games) => (
             <GameCard {...games} key={games.id} />

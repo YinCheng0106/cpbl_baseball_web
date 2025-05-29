@@ -134,7 +134,7 @@ export function TeamColor(name: string) {
     case "統一獅":
       return "text-[#ec6c00]";
     case "統一7-ELEVEn獅":
-      return "text-[#004f98]";
+      return "text-[#ec6c00]";
     case "台鋼雄鷹":
       return "text-[#064738]";
     case "味全龍":
@@ -383,7 +383,7 @@ export function GameCard({
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <Card className="w-[350px] lg:w-[325px] md:w-[320px] py-6 gap-0.5">
+    <Card className="w-[400px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] py-6 gap-0.5">
       <CardHeader>
         <div className="flex justify-between items-center text-sm mb-2">
           <p

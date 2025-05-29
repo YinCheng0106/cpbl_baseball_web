@@ -22,7 +22,9 @@ export function AppHeader() {
   if(!mounted) return null;
 
   return (
-    <header className="container flex w-full justify-between self-center py-4 px-2">
+    <header className={`
+    container flex w-full justify-between self-center 
+    py-4 px-4`}>
       <div className="flex">
         <Link href={"/"}>
           <Logo />
