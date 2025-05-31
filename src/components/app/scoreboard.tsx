@@ -88,9 +88,9 @@ export function Scoreboard({
                   <th
                     scope="col"
                     key={inning}
-                    className="px-1 py-1 text-center min-w-[24px]"
+                    className="px-1 py-1 text-center md:min-w-[24px] min-w-[16px]"
                   >
-                    <div className="w-6">{inning}</div>
+                    <div className="md:w-6 w-4">{inning}</div>
                   </th>
                 ))}
               </tr>
@@ -99,14 +99,14 @@ export function Scoreboard({
               <tr className="items-center">
                 {awayScores.map((runs, index) => (
                   <td key={index} className="px-1 py-1 text-center">
-                    <div className="w-6">{runs}</div>
+                    <div className="md:w-6 w-4">{runs}</div>
                   </td>
                 ))}
               </tr>
               <tr className="items-center">
                 {homeScores.map((runs, index) => (
                   <td key={index} className="px-1 py-1 text-center">
-                    <div className="w-6">{runs}</div>
+                    <div className="md:w-6 w-4">{runs}</div>
                   </td>
                 ))}
               </tr>
