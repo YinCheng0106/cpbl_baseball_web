@@ -38,7 +38,7 @@ export function Scoreboard({
     }
   }, []);
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row shadow-md rounded-lg dark:bg-zinc-800 bg-zinc-100 p-2">
       <div className="flex flex-row flex-1">
         <div className="flex-shrink-0">
           <table className="text-sm text-center">
