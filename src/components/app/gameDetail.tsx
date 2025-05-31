@@ -149,15 +149,18 @@ const gameSet = (
               勝利投手
             </span>
             <span className="text-sm font-medium">
-              {winPitcher === null ? "無" : winPitcher}
+              {winPitcher === "" ? "無" : winPitcher}
             </span>
           </div>
-          <div className="flex justify-between items-center">
+          <div className={`
+              flex justify-between items-center
+              ${savePitcher === "" ? "hidden" : ""}
+            `}>
             <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
               救援成功
             </span>
             <span className="text-sm font-medium">
-              {savePitcher === null ? "無" : savePitcher}
+              {savePitcher === "" ? "無" : savePitcher}
             </span>
           </div>
         </div>
@@ -167,15 +170,7 @@ const gameSet = (
               敗戰投手
             </span>
             <span className="text-sm font-medium">
-              {losePitcher === null ? "無" : losePitcher}
-            </span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-              MVP
-            </span>
-            <span className="text-sm font-medium">
-              {mvp === null ? "無" : mvp}
+              {losePitcher === "" ? "無" : losePitcher}
             </span>
           </div>
         </div>

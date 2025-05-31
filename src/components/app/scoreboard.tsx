@@ -41,7 +41,7 @@ export function Scoreboard({
     <div className="flex flex-row shadow-md rounded-lg dark:bg-zinc-800 bg-zinc-100 p-2">
       <div className="flex flex-row flex-1">
         <div className="flex-shrink-0">
-          <table className="text-sm text-center">
+          <table className="text-sm text-center select-none">
             <thead className="text-xs">
               <tr>
                 <th scope="row" className="py-1 w-12">
@@ -83,7 +83,7 @@ export function Scoreboard({
         >
           <table className="w-full text-sm text-center">
             <thead className="text-xs">
-              <tr className="items-center">
+              <tr className="items-center select-none">
                 {inning.map((inning) => (
                   <th
                     scope="col"
@@ -117,7 +117,7 @@ export function Scoreboard({
       {/* RHE table */}
       <div className="ml-1">
         <table className="text-sm text-center">
-          <thead className="text-xs">
+          <thead className="text-xs select-none">
             <tr>
               <th className="py-1 w-4">R</th>
               <th className="py-1 w-4">H</th>
