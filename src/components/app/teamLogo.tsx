@@ -19,4 +19,23 @@ const teamToWord = (team: string) => {
   }
 };
 
-export { teamToWord };
+const TeamNameAbbreviation = (name: string) => {
+  switch (name) {
+    case "樂天桃猿":
+      return "猿";
+    case "富邦悍將":
+      return "悍";
+    case "中信兄弟":
+      return "象";
+    case "統一獅":
+      return "獅";
+    case "台鋼雄鷹":
+      return "鷹";
+    case "味全龍":
+      return "龍";
+    default:
+      return name;
+  }
+};
+
+export { teamToWord, TeamNameAbbreviation };

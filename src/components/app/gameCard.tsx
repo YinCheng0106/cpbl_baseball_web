@@ -6,8 +6,6 @@ import { MapPin } from "lucide-react";
 
 import {
   Card,
-  CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -15,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { TeamHoverCard } from "@/components/app/teamHoverCard";
 import { BaseBallOut } from "@/components/app/baseBallOut";
+import { Scoreboard } from '@/components/app/scoreboard';
 
 type Props = Readonly<{
   id: number;
@@ -52,6 +51,20 @@ type Props = Readonly<{
 
   time: string;
   location: string;
+
+  scoreboard: {
+    inning: number[];
+    homeScores: number[];
+    awayScores: number[];
+    homeTeam: string;
+    awayTeam: string;
+    homeRuns: number;
+    awayRuns: number;
+    homeHits: number;
+    awayHits: number;
+    homeErrors: number;
+    awayErrors: number;
+  };
 }>;
 
 const GameType = (type: string) => {
@@ -152,123 +165,76 @@ const TimeDecoder = (time: string) => {
   });
 };
 
-const BaseStatus = (base: [boolean, boolean, boolean]) => {
-  return (
-    <svg
-      className="w-[180px] h-[100px] dark:stroke-white fill-gray-400 dark:fill-gray-800"
-      viewBox="0 -10 100 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/* first base */}
-      <polygon
-        points="70,50 80,40 70,30 60,40"
-        fill={base[0] ? "#FFD700" : "white"}
-        strokeWidth="1.5"
-        className={
-          base[0]
-            ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
-            : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
-        }
-      />
-      {/* second base */}
-      <polygon
-        points="50,30 60,20 50,10 40,20"
-        fill={base[1] ? "#FFD700" : "white"}
-        strokeWidth="1.5"
-        className={
-          base[1]
-            ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
-            : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
-        }
-      />
-      {/* third base */}
-      <polygon
-        points="30,50 40,40 30,30 20,40"
-        fill={base[2] ? "#FFD700" : "white"}
-        strokeWidth="1.5"
-        className={
-          base[2]
-            ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
-            : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
-        }
-      />
-    </svg>
-  );
-};
-
-const TeamNameAbbreviation = (name: string) => {
-  switch (name) {
-    case "樂天桃猿":
-      return "猿";
-    case "富邦悍將":
-      return "悍";
-    case "中信兄弟":
-      return "象";
-    case "統一獅":
-      return "獅";
-    case "台鋼雄鷹":
-      return "鷹";
-    case "味全龍":
-      return "龍";
-    default:
-      return name;
-  }
-};
-
 // dropdown content
 const inPlaying = (
-  base: [boolean, boolean, boolean],
   pitch: number,
   ball: number,
   strike: number,
   out: number,
   nowBatter: string | null,
-  nowPitcher: string | null
+  nowPitcher: string | null,
+  scoreboard: {
+    inning: number[];
+    homeScores: number[];
+    awayScores: number[];
+    homeTeam: string;
+    awayTeam: string;
+    homeRuns: number;
+    awayRuns: number;
+    homeHits: number;
+    awayHits: number;
+    homeErrors: number;
+    awayErrors: number;
+  }
 ) => {
   return (
-    <div className="grid grid-cols-2 gap-4">
-      <div>
-        <div className="space-y-2">
-          <div className="flex justify-between items-center">
-            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-              當前投手
-            </span>
-            <span className="text-sm font-medium">
-              {nowPitcher ? nowPitcher : "無"}
-            </span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-              當前打者
-            </span>
-            <span className="text-sm font-medium">
-              {nowBatter ? nowBatter : "無"}
-            </span>
+    <div>
+      <div className="pb-4">
+        { Scoreboard(scoreboard) }
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <div className="space-y-2">
+            <div className="flex justify-between items-center">
+              <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+                當前投手
+              </span>
+              <span className="text-sm font-medium">
+                {nowPitcher ? nowPitcher : "無"}
+              </span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+                當前打者
+              </span>
+              <span className="text-sm font-medium">
+                {nowBatter ? nowBatter : "無"}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        <div className="space-y-2">
-          <div className="flex justify-between items-center">
-            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-              好壞球
-            </span>
-            <span className="text-sm font-medium">
-              {ball} - {strike}
-            </span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-              出局數
-            </span>
-            <span className="text-sm font-medium">{out}</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-              投球數
-            </span>
-            <span className="text-sm font-medium">{pitch}</span>
+        <div>
+          <div className="space-y-2">
+            <div className="flex justify-between items-center">
+              <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+                好壞球
+              </span>
+              <span className="text-sm font-medium">
+                {ball} - {strike}
+              </span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+                出局數
+              </span>
+              <span className="text-sm font-medium">{out}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+                投球數
+              </span>
+              <span className="text-sm font-medium">{pitch}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -302,47 +268,65 @@ const readyPlay = (awayStarter: string | null, homeStarter: string | null) => {
 };
 
 const gameSet = (
+  scoreboard: {
+    inning: number[];
+    homeScores: number[];
+    awayScores: number[];
+    homeTeam: string;
+    awayTeam: string;
+    homeRuns: number;
+    awayRuns: number;
+    homeHits: number;
+    awayHits: number;
+    homeErrors: number;
+    awayErrors: number;
+  },
   winPitcher: string | null,
   losePitcher: string | null,
   savePitcher: string | null,
   mvp: string | null
 ) => {
   return (
-    <div className="grid grid-cols-2 gap-4">
-      <div className="space-y-2">
-        <div className="flex justify-between items-center">
-          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-            勝利投手
-          </span>
-          <span className="text-sm font-medium">
-            {winPitcher === null ? "無" : winPitcher}
-          </span>
-        </div>
-        <div className="flex justify-between items-center">
-          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-            救援成功
-          </span>
-          <span className="text-sm font-medium">
-            {savePitcher === null ? "無" : savePitcher}
-          </span>
-        </div>
+    <div>
+      <div className="pb-4">
+        { Scoreboard(scoreboard) }
       </div>
-      <div className="space-y-2">
-        <div className="flex justify-between items-center">
-          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-            敗戰投手
-          </span>
-          <span className="text-sm font-medium">
-            {losePitcher === null ? "無" : losePitcher}
-          </span>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <div className="flex justify-between items-center">
+            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+              勝利投手
+            </span>
+            <span className="text-sm font-medium">
+              {winPitcher === null ? "無" : winPitcher}
+            </span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+              救援成功
+            </span>
+            <span className="text-sm font-medium">
+              {savePitcher === null ? "無" : savePitcher}
+            </span>
+          </div>
         </div>
-        <div className="flex justify-between items-center">
-          <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-            MVP
-          </span>
-          <span className="text-sm font-medium">
-            {mvp === null ? "無" : mvp}
-          </span>
+        <div className="space-y-2">
+          <div className="flex justify-between items-center">
+            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+              敗戰投手
+            </span>
+            <span className="text-sm font-medium">
+              {losePitcher === null ? "無" : losePitcher}
+            </span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
+              MVP
+            </span>
+            <span className="text-sm font-medium">
+              {mvp === null ? "無" : mvp}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -380,6 +364,7 @@ export function GameCard({
   base,
   time,
   location,
+  scoreboard,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -421,9 +406,7 @@ export function GameCard({
             </div>
           </div>
           <div className="flex flex-col w-full items-end justify-center">
-            <span
-              className={`text-lg ${awayScore !== null ? "" : "text-gray-500"}`}
-            >
+            <span>
               {awayScore !== null ? (
                 <div>
                   <table>
@@ -483,7 +466,7 @@ export function GameCard({
                       </tr>
                     </thead>
                     <tbody className="flex flex-col gap-1">
-                      <tr className="flex flex-row gap-2 items-center text-gray-400">
+                      <tr className="flex flex-row gap-2 items-center dark:text-gray-400 text-gray-500">
                         <td className="w-5 text-lg text-center font-medium">
                           {awayWLD[0]}
                         </td>
@@ -494,7 +477,7 @@ export function GameCard({
                           {awayWLD[2]}
                         </td>
                       </tr>
-                      <tr className="flex flex-row gap-2 items-center text-gray-400">
+                      <tr className="flex flex-row gap-2 items-center dark:text-gray-400 text-gray-500">
                         <td className="w-5 text-lg text-center font-medium">
                           {homeWLD[0]}
                         </td>
@@ -537,7 +520,7 @@ export function GameCard({
         </p>
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-1"
+          className="flex items-center gap-1 bg-gray-800 dark:bg-gray-200"
           aria-expanded={isOpen}
           data-card-id={id}
         >
@@ -561,17 +544,17 @@ export function GameCard({
       </CardFooter>
       <div
         className={`
-          overflow-hidden transition-all duration-300 ease-in-out
-          ${isOpen ? "max-h-48 opacity-100 mt-2" : "max-h-0 opacity-0"}
+          overflow-x-auto transition-all duration-300 ease-in-out no-scrollbar
+          ${isOpen ? "max-h-56 opacity-100 mt-2" : "max-h-0 opacity-0"}
         `}
         id={`expanded-content-${id}`}
       >
         <div className="px-6 pt-6 rounded-b-lg border-t">
           {status === 1 ? readyPlay(awayStarter, homeStarter) : null}
           {status === 4 ? readyPlay(awayStarter, homeStarter) : null}
-          {status === 2 ? inPlaying(base, pitch, ball, strike, out, nowBatter, nowPitcher) : null}
+          {status === 2 ? inPlaying(pitch, ball, strike, out, nowBatter, nowPitcher, scoreboard) : null}
           {status === 3
-            ? gameSet(winPitcher, losePitcher, savePitcher, mvp)
+            ? gameSet(scoreboard, winPitcher, losePitcher, savePitcher, mvp)
             : null}
         </div>
       </div>

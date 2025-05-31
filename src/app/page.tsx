@@ -1,159 +1,21 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { GameCard } from "@/components/app/gameCard";
 import { Standing } from "@/components/app/standing";
 import { motion } from "motion/react"
 
-const games = [
-  {
-    id: 0,
-    type: "B",
-    status: 4,
-    inning: null,
-    inningHalf: null,
-    home: "台鋼雄鷹",
-    away: "味全龍",
-    awayStarter: "徐若熙",
-    homeStarter: "陳柏青",
-    homeScore: null,
-    awayScore: null,
-    homeHits: 0,
-    awayHits: 0,
-    homeErrors: 0,
-    awayErrors: 0,
-    awayWLD: [31, 45, 2],
-    homeWLD: [52, 12, 1],
-    winPitcher: "陳柏青",
-    losePitcher: "徐若熙",
-    savePitcher: "陳柏青",
-    mvp: "陳柏青",
-    strike: 2,
-    ball: 3,
-    out: 2,
-    pitch: 100,
-    base: [1, 0, 1],
-    time: '2025-02-01T19:00:00+08:00',
-    location: "新莊棒球場",
-  },
-  {
-    id: 1,
-    type: "A",
-    status: 2,
-    inning: 1,
-    inningHalf: 1,
-    home: "樂天桃猿",
-    away: "富邦悍將",
-    awayStarter: "陳禹勳",
-    homeStarter: "張奕",
-    homeScore: 0,
-    awayScore: 1,
-    homeHits: 10,
-    awayHits: 0,
-    homeErrors: 10,
-    awayErrors: 0,
-    awayWLD: [0, 0, 0],
-    homeWLD: [0, 0, 0],
-    nowPitcher: "張奕",
-    nowBatter: "林泓育",
-    winPitcher: "張奕",
-    losePitcher: "陳禹勳",
-    savePitcher: "張奕",
-    mvp: "張奕",
-    strike: 0,
-    ball: 0,
-    out: 0,
-    pitch: 70,
-    base: [0, 0, 0],
-    time: '2025-07-01T19:00:00+08:00',
-    location: "桃園國際棒球場",
-  },
-  {
-    id: 2,
-    type: "C",
-    status: 3,
-    inning: 1,
-    inningHalf: 1,
-    home: "中信兄弟",
-    away: "統一獅",
-    awayStater: "布雷克",
-    homeStarter: "德保拉",
-    homeScore: 0,
-    awayScore: 0,
-    homeHits: 0,
-    awayHits: 0,
-    homeErrors: 0,
-    awayErrors: 0,
-    awayWLD: [0, 0, 0],
-    homeWLD: [0, 0, 0],
-    winPitcher: "德保拉",
-    losePitcher: "布雷克",
-    savePitcher: "德保拉",
-    mvp: "德保拉",
-    strike: 2,
-    ball: 3,
-    out: 2,
-    pitch: 79,
-    base: [false, false, false],
-    time: '2025-02-01T19:00:00+08:00',
-    location: "台中洲際棒球場",
-  },
-  // {
-  //   id: 3,
-  //   type: "D",
-  //   status: 4,
-  //   home: "台鋼雄鷹",
-  //   away: "味全龍",
-  //   time: '2025-02-01T19:00:00+08:00',
-  //   location: "新莊棒球場",
-  // },
-  // {
-  //   id: 4,
-  //   type: "E",
-  //   status: 5,
-  //   home: "台鋼雄鷹",
-  //   away: "味全龍",
-  //   time: '2025-02-01T19:00:00+08:00',
-  //   location: "新莊棒球場",
-  // },
-  // {
-  //   id: 5,
-  //   type: "F",
-  //   status: 6,
-  //   home: "台鋼雄鷹",
-  //   away: "味全龍",
-  //   time: '2025-02-01T19:00:00+08:00',
-  //   location: "新莊棒球場",
-  // },
-  // {
-  //   id: 6,
-  //   type: "G",
-  //   status: 7,
-  //   home: "台鋼雄鷹",
-  //   away: "味全龍",
-  //   time: '2025-02-01T19:00:00+08:00',
-  //   location: "新莊棒球場",
-  // },
-  // {
-  //   id: 7,
-  //   type: "H",
-  //   status: 8,
-  //   home: "台鋼雄鷹",
-  //   away: "味全龍",
-  //   time: '2025-02-01T19:00:00+08:00',
-  //   location: "新莊棒球場",
-  // },
-  // {
-  //   id: 8,
-  //   type: "I",
-  //   status: 9,
-  //   home: "台鋼雄鷹",
-  //   away: "味全龍",
-  //   time: '2025-02-01T19:00:00+08:00',
-  //   location: "新莊棒球場",
-  // },
-]
-
 export default function Home() {
+  const [games, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('/json/game.json')
+      .then(response => response.json())
+      .then(json => setData(json))
+      .catch(error => console.error('讀取失敗:', error));
+  }, []);
+
   const transition = {
     duration: 0.5,
     delay: 0.3,
@@ -175,7 +37,7 @@ export default function Home() {
           </div> : <div className={`
           grid gap-3 mt-4 ml-2
         `}>
-          { games.map((games) => (
+          { games.map((games:any) => (
             <GameCard {...games} key={games.id} />
           ))}
           </div> }

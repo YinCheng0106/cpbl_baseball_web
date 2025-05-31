@@ -6,7 +6,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { TeamColor } from "@/components/app/gameCard";
-import { teamToWord } from "@/components/app/teamAvatar";
+import { teamToWord } from "@/components/app/teamLogo";
 import Link from "next/link";
 
 import { Globe } from "lucide-react";
@@ -103,8 +103,15 @@ export function TeamHoverCard({ team }: { team: string }) {
         <div className="p-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <img alt={teamData.name} height={20} width={20} src={teamData.logo}/>
-              <h3 className={`text-xl font-bold ${TeamColor(teamData.fullName)}`}>
+              <img
+                alt={teamData.name}
+                height={20}
+                width={20}
+                src={teamData.logo}
+              />
+              <h3
+                className={`text-xl font-bold ${TeamColor(teamData.fullName)}`}
+              >
                 {teamData.fullName}
               </h3>
             </div>
@@ -113,7 +120,7 @@ export function TeamHoverCard({ team }: { team: string }) {
               target="_blank"
               className={`
               flex items-center justify-center text-sm transform hover:scale-110 transition-all duration-200
-              ${teamData.website === '' ? "hidden" : "" }
+              ${teamData.website === "" ? "hidden" : ""}
               `}
             >
               <Globe />

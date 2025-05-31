@@ -9,13 +9,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { teamToWord } from "@/components/app/teamAvatar";
+import { teamToWord } from "@/components/app/teamLogo";
 
-import Skeleton, { SkeletonTheme }  from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const teamsStanding = [
-  { 
+  {
     id: 0,
     rank: 2,
     name: "中信兄弟",
@@ -39,7 +39,7 @@ const teamsStanding = [
     gameBehind: "-",
     streak: "勝2",
   },
-  { 
+  {
     id: 2,
     rank: 3,
     name: "富邦悍將",
@@ -51,7 +51,7 @@ const teamsStanding = [
     gameBehind: 1.5,
     streak: "敗1",
   },
-  { 
+  {
     id: 3,
     rank: 3,
     name: "台鋼雄鷹",
@@ -63,7 +63,7 @@ const teamsStanding = [
     gameBehind: 1.5,
     streak: "敗1",
   },
-  { 
+  {
     id: 4,
     rank: 4,
     name: "樂天桃猿",
@@ -75,13 +75,19 @@ const teamsStanding = [
     gameBehind: 1.5,
     streak: "敗1",
   },
-]
+];
 
-export function Standing({ teams = teamsStanding }: { teams?: typeof teamsStanding }) {
+export function Standing({
+  teams = teamsStanding,
+}: {
+  teams?: typeof teamsStanding;
+}) {
   return (
-    <div className={`
+    <div
+      className={`
       w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl
-    `}>
+    `}
+    >
       <Table>
         <TableHeader>
           <TableRow>
@@ -95,21 +101,52 @@ export function Standing({ teams = teamsStanding }: { teams?: typeof teamsStandi
           </TableRow>
         </TableHeader>
         <SkeletonTheme baseColor="dark:#202020" highlightColor="#444">
-        <TableBody>
-            {teams.sort((a, b) => a.rank - b.rank).map((team: any) => (
-            <TableRow key={team.id}>
-              <TableCell className="text-center font-bold">{team.rank !== null ? team.rank : <Skeleton />}</TableCell>
-              <TableCell className="text-center font-bold">{team.name !== null ? <img alt={team.name} height={20} width={20} src={teamToWord(team.name)}/> : <Skeleton />}</TableCell>
-              <TableCell className="text-center">{team.games !== null ? team.games : <Skeleton />}</TableCell>
-              <TableCell className="text-center">{ team.win !== null ? `${team.win}-${team.lose}-${team.tie}` : <Skeleton />}</TableCell>
-              <TableCell className="text-center">{team.winRate !== null ? team.winRate : <Skeleton />}</TableCell>
-              <TableCell className="text-center">{team.gameBehind !== null ? team.gameBehind : <Skeleton />}</TableCell>
-              <TableCell className="text-center">{team.streak !== null ? team.streak : <Skeleton />}</TableCell>
-            </TableRow>
-            ))}
-        </TableBody>
+          <TableBody>
+            {teams
+              .sort((a, b) => a.rank - b.rank)
+              .map((team: any) => (
+                <TableRow key={team.id}>
+                  <TableCell className="text-center font-bold">
+                    {team.rank !== null ? team.rank : <Skeleton />}
+                  </TableCell>
+                  <TableCell className="text-center font-bold">
+                    {team.name !== null ? (
+                      <div className="flex items-center justify-center">
+                        <img
+                          alt={team.name}
+                          height={20}
+                          width={20}
+                          src={teamToWord(team.name)}
+                        />
+                      </div>
+                    ) : (
+                      <Skeleton />
+                    )}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    {team.games !== null ? team.games : <Skeleton />}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    {team.win !== null ? (
+                      `${team.win}-${team.lose}-${team.tie}`
+                    ) : (
+                      <Skeleton />
+                    )}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    {team.winRate !== null ? team.winRate : <Skeleton />}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    {team.gameBehind !== null ? team.gameBehind : <Skeleton />}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    {team.streak !== null ? team.streak : <Skeleton />}
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
         </SkeletonTheme>
       </Table>
     </div>
-  )
+  );
 }
