@@ -121,13 +121,26 @@ const gameSet = (
   winPitcher: string | null,
   losePitcher: string | null,
   savePitcher: string | null,
-  mvp: string | null
+  mvp: string | null,
+  mvpData: {
+    team: string;
+    player: string;
+    playerType: "打者" | "投手";
+    mvpCnt: number;
+    hitCnt?: number;
+    runBattedInCnt?: number;
+    scoreCnt?: number;
+    homeRunCnt?: number;
+    inningPitchedCnt?: number;
+    strikeOutCnt?: number;
+    runCnt?: number;
+  },
 ) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="grid xl:grid-cols-2 xl:items-center gap-4">
-        <div>{Scoreboard(scoreboard)}</div>
-        <div>{MvpCard()}</div>
+        <div>{ Scoreboard(scoreboard) }</div>
+        <div>{ MvpCard(mvpData) }</div>
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">

@@ -15,58 +15,6 @@ import { TeamHoverCard } from "@/components/app/teamHoverCard";
 import { BaseBallOut } from "@/components/app/baseBallOut";
 import { readyPlay, inPlaying, gameSet } from "@/components/app/gameDetail";
 
-type Props = Readonly<{
-  id: number;
-  type: string;
-  status: number;
-
-  inning: number | null;
-  inningHalf: number | null;
-
-  away: string;
-  home: string;
-  awayStarter: string | null;
-  homeStarter: string | null;
-  awayScore: number | null;
-  homeScore: number | null;
-  awayHits: number | null;
-  homeHits: number | null;
-  awayErrors: number | null;
-  homeErrors: number | null;
-  awayWLD: [number, number, number];
-  homeWLD: [number, number, number];
-
-  nowPitcher: string | null;
-  nowBatter: string | null;
-  winPitcher: string | null;
-  losePitcher: string | null;
-  savePitcher: string | null;
-  mvp: string | null;
-
-  strike: number;
-  ball: number;
-  out: number;
-  pitch: number;
-  base: [boolean, boolean, boolean];
-
-  time: string;
-  location: string;
-
-  scoreboard: {
-    inning: number[];
-    homeScores: number[];
-    awayScores: number[];
-    homeTeam: string;
-    awayTeam: string;
-    homeRuns: number;
-    awayRuns: number;
-    homeHits: number;
-    awayHits: number;
-    homeErrors: number;
-    awayErrors: number;
-  };
-}>;
-
 const GameType = (type: string) => {
   switch (type) {
     case "A":
@@ -165,6 +113,74 @@ const TimeDecoder = (time: string) => {
   });
 };
 
+type Props = Readonly<{
+  id: number;
+  type: string;
+  status: number;
+
+  inning: number | null;
+  inningHalf: number | null;
+
+  away: string;
+  home: string;
+  awayStarter: string | null;
+  homeStarter: string | null;
+  awayScore: number | null;
+  homeScore: number | null;
+  awayHits: number | null;
+  homeHits: number | null;
+  awayErrors: number | null;
+  homeErrors: number | null;
+  awayWLD: [number, number, number];
+  homeWLD: [number, number, number];
+
+  nowPitcher: string | null;
+  nowBatter: string | null;
+  winPitcher: string | null;
+  losePitcher: string | null;
+  savePitcher: string | null;
+  mvp: string | null;
+
+  strike: number;
+  ball: number;
+  out: number;
+  pitch: number;
+  base: [boolean, boolean, boolean];
+
+  time: string;
+  location: string;
+
+  scoreboard: {
+    inning: number[];
+    homeScores: number[];
+    awayScores: number[];
+    homeTeam: string;
+    awayTeam: string;
+    homeRuns: number;
+    awayRuns: number;
+    homeHits: number;
+    awayHits: number;
+    homeErrors: number;
+    awayErrors: number;
+  };
+
+  mvpData: {
+    team: string;
+    player: string;
+    playerType: "打者" | "投手";
+    mvpCnt: number;
+
+    hitCnt?: number;
+    runBattedInCnt?: number;
+    scoreCnt?: number;
+    homeRunCnt?: number;
+
+    inningPitchedCnt?: number;
+    strikeOutCnt?: number;
+    runCnt?: number;
+  };
+}>;
+
 export function GameCard({
   id,
   type,
@@ -197,6 +213,7 @@ export function GameCard({
   time,
   location,
   scoreboard,
+  mvpData,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -386,7 +403,7 @@ export function GameCard({
           {status === 4 ? readyPlay(awayStarter, homeStarter) : null}
           {status === 2 ? inPlaying(pitch, ball, strike, out, nowBatter, nowPitcher, scoreboard) : null}
           {status === 3
-            ? gameSet(scoreboard, winPitcher, losePitcher, savePitcher, mvp)
+            ? gameSet(scoreboard, winPitcher, losePitcher, savePitcher, mvp, mvpData)
             : null}
         </div>
       </div>
