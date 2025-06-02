@@ -1,9 +1,11 @@
 "use client";
 
-import { Scoreboard } from "./scoreboard";
-import { MvpCard } from "./mvpCard";
+import { Scoreboard } from "@/components/app/scoreboard";
+import { MvpCard } from "@/components/app/mvpCard";
+import { PlayerCard } from "@/components/app/playerCard";
 
-import { ScoreboardType, MvpData, GameInfo, GameLive, GameEnd } from "@/types/gameData";
+
+import { ScoreboardType, GameInfo, GameLive, GameEnd } from "@/types/gameData";
 
 const readyPlay = (gameInfo : GameInfo) => {
   return (
@@ -105,7 +107,10 @@ const gameSet = (
               勝利投手
             </span>
             <span className="text-sm font-medium">
-              {gameEnd.winPitcher.player === "" ? "無" : gameEnd.winPitcher.player}
+              {gameEnd.winPitcher.player === "" 
+                ? "無" : 
+                gameEnd.winPitcher.id && <PlayerCard id={gameEnd.winPitcher.id} />
+              }
             </span>
           </div>
           <div className={`
@@ -116,7 +121,10 @@ const gameSet = (
               救援成功
             </span>
             <span className="text-sm font-medium">
-              {gameEnd.savePitcher.player === "" ? "無" : gameEnd.savePitcher.player}
+              {gameEnd.savePitcher.player === "" 
+                ? "無" : 
+                gameEnd.winPitcher.id && <PlayerCard id={gameEnd.savePitcher.id} />
+              }
             </span>
           </div>
         </div>
@@ -126,7 +134,10 @@ const gameSet = (
               敗戰投手
             </span>
             <span className="text-sm font-medium">
-              {gameEnd.losePitcher.player === "" ? "無" : gameEnd.losePitcher.player}
+              {gameEnd.losePitcher.player === ""
+                ? "無" : 
+                gameEnd.winPitcher.id && <PlayerCard id={gameEnd.savePitcher.id} />
+              }
             </span>
           </div>
         </div>
