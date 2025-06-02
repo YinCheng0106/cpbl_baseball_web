@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { MapPin } from "lucide-react";
 
@@ -14,208 +13,37 @@ import { Button } from "@/components/ui/button";
 import { TeamHoverCard } from "@/components/app/teamHoverCard";
 import { BaseBallOut } from "@/components/app/baseBallOut";
 import { readyPlay, inPlaying, gameSet } from "@/components/app/gameDetail";
-
-const GameType = (type: string) => {
-  switch (type) {
-    case "A":
-      return "一軍例行賽";
-    case "B":
-      return "明星賽";
-    case "C":
-      return "一軍總冠軍賽";
-    case "D":
-      return "二軍例行賽";
-    case "E":
-      return "一軍季後挑戰賽";
-    case "F":
-      return "二軍總冠軍賽";
-    case "G":
-      return "熱身賽";
-    case "H":
-      return "未來之星邀請賽";
-    default:
-      return "其他賽事";
-  }
-};
-
-const GameStatus = (status: number) => {
-  switch (status) {
-    case 1:
-      return "如果必要才進行";
-    case 2:
-      return "比賽中";
-    case 3:
-      return "比賽結束";
-    case 4:
-      return "先發打序";
-    case 5:
-      return "取消比賽";
-    case 6:
-      return "延賽";
-    case 7:
-      return "保留比賽";
-    case 8:
-      return "比賽暫停";
-    default:
-      return "例外狀況";
-  }
-};
-
-const GameColor = (status: number) => {
-  switch (status) {
-    case 1:
-      return "bg-gray-200 text-gray-800";
-    case 2:
-      return "bg-green-200 text-green-800";
-    case 3:
-      return "bg-red-800 text-red-200";
-    case 4:
-      return "bg-blue-200 text-blue-800";
-    case 5:
-      return "bg-red-200 text-red-800";
-    case 6:
-      return "bg-yellow-200 text-yellow-800";
-    case 7:
-      return "bg-gray-200 text-gray-800";
-    case 8:
-      return "bg-gray-800 text-gray-200";
-    default:
-      return "bg-gray-200 text-gray-800";
-  }
-};
-
-export function TeamColor(name: string) {
-  switch (name) {
-    case "樂天桃猿":
-      return "text-[#671a32]";
-    case "富邦悍將":
-      return "text-[#004f98]";
-    case "中信兄弟":
-      return "text-[#f9cc01]";
-    case "統一獅":
-      return "text-[#ec6c00]";
-    case "統一7-ELEVEn獅":
-      return "text-[#ec6c00]";
-    case "台鋼雄鷹":
-      return "text-[#064738]";
-    case "味全龍":
-      return "text-[#cf152d]";
-    default:
-      return "text-[#fff]";
-  }
-}
-
-const TimeDecoder = (time: string) => {
-  return new Date(time).toLocaleString("zh-TW", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
-};
+import { GameData } from "@/types/gameData";
+import { GameType, GameStatus, GameColor, TeamColor, TimeDecoder } from "@/utils/gameUtils";
 
 type Props = Readonly<{
-  id: number;
-  type: string;
-  status: number;
-
-  inning: number | null;
-  inningHalf: number | null;
-
-  away: string;
-  home: string;
-  awayStarter: string | null;
-  homeStarter: string | null;
-  awayScore: number | null;
-  homeScore: number | null;
-  awayHits: number | null;
-  homeHits: number | null;
-  awayErrors: number | null;
-  homeErrors: number | null;
-  awayWLD: [number, number, number];
-  homeWLD: [number, number, number];
-
-  nowPitcher: string | null;
-  nowBatter: string | null;
-  winPitcher: string | null;
-  losePitcher: string | null;
-  savePitcher: string | null;
-  mvp: string | null;
-
-  strike: number;
-  ball: number;
-  out: number;
-  pitch: number;
-  base: [boolean, boolean, boolean];
-
-  time: string;
-  location: string;
-
-  scoreboard: {
-    inning: number[];
-    homeScores: number[];
-    awayScores: number[];
-    homeTeam: string;
-    awayTeam: string;
-    homeRuns: number;
-    awayRuns: number;
-    homeHits: number;
-    awayHits: number;
-    homeErrors: number;
-    awayErrors: number;
-  };
-
-  mvpData: {
-    team: string;
-    player: string;
-    playerType: "打者" | "投手";
-    mvpCnt: number;
-
-    hitCnt?: number;
-    runBattedInCnt?: number;
-    scoreCnt?: number;
-    homeRunCnt?: number;
-
-    inningPitchedCnt?: number;
-    strikeOutCnt?: number;
-    runCnt?: number;
-  };
+  gameData?: GameData;
 }>;
 
-export function GameCard({
-  id,
-  type,
-  status,
-  inning,
-  inningHalf,
-  away,
-  home,
-  awayStarter,
-  homeStarter,
-  awayScore,
-  homeScore,
-  awayHits,
-  homeHits,
-  awayErrors,
-  homeErrors,
-  awayWLD,
-  homeWLD,
-  nowBatter,
-  nowPitcher,
-  winPitcher,
-  losePitcher,
-  savePitcher,
-  mvp,
-  strike,
-  ball,
-  out,
-  pitch,
-  base,
-  time,
-  location,
-  scoreboard,
-  mvpData,
-}: Props) {
+export function GameCard({ gameData }: Props) {
+  if (!gameData) {
+    return (
+      <Card className="w-[400px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] py-6">
+        <CardHeader>
+          <div className="text-center text-gray-500">載入中...</div>
+        </CardHeader>
+      </Card>
+    );
+  }
+
+  const { gameInfo, gameLive, gameEnd } = gameData;
   const [isOpen, setIsOpen] = useState(false);
+
+  if (!gameInfo || !gameLive) {
+    return (
+      <Card className="w-[400px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] py-6">
+        <CardHeader>
+          <div className="text-center text-gray-500">資料載入失敗</div>
+        </CardHeader>
+      </Card>
+    );
+  }
+
   return (
     <Card className="w-[400px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] py-6 gap-0.5">
       <CardHeader>
@@ -223,40 +51,40 @@ export function GameCard({
           <p
             className={`
             border rounded-sm w-[64px] py-1 font-bold shadow-sm
-            ${GameColor(status)} text-center
+            ${GameColor(gameLive.status)} text-center
             `}
           >
-            {id !== null ? id : "TBD"}
+            {gameInfo.id !== null ? gameInfo.id : "TBD"}
           </p>
           <p className="font-bold">
-            {GameStatus(status) !== "比賽中"
-              ? GameStatus(status)
-              : inning + " " + (inningHalf === 1 ? "上" : "下")}
+            {GameStatus(gameLive.status) !== "比賽中"
+              ? GameStatus(gameLive.status)
+              : gameLive.inning + " " + (gameLive.inningHalf === 1 ? "上" : "下")}
           </p>
-          <p>{GameType(type)}</p>
+          <p>{GameType(gameInfo.type)}</p>
         </div>
         <CardTitle className="flex flex-row text-2xl justify-between select-none">
           <div className="flex flex-col w-full h-[88px] justify-end">
             <div className="flex items-center">
               <span className={`
-                ${TeamColor(away)} font-bold
+                ${TeamColor(gameInfo.away)} font-bold
                 hover:scale-105 transition-transform duration-400 ease-in-out
               `}>
-                {away ? <TeamHoverCard team={away} /> : "TBD"}
+                {gameInfo.away ? <TeamHoverCard team={gameInfo.away} /> : "TBD"}
               </span>
             </div>
             <div className="flex items-center">
               <span className={`
-                ${TeamColor(home)} font-bold
+                ${TeamColor(gameInfo.home)} font-bold
                 hover:scale-105 transition-transform duration-400 ease-in-out
               `}>
-                {home ? <TeamHoverCard team={home} /> : "TBD"}
+                {gameInfo.home ? <TeamHoverCard team={gameInfo.home} /> : "TBD"}
               </span>
             </div>
           </div>
           <div className="flex flex-col w-full items-end justify-center">
             <span>
-              {awayScore !== null ? (
+              {gameLive.away.runs !== null ? (
                 <div>
                   <table>
                     <thead>
@@ -275,24 +103,24 @@ export function GameCard({
                     <tbody className="flex flex-col gap-1">
                       <tr className="flex flex-row gap-1 items-center">
                         <td className="w-5 text-lg text-center font-black">
-                          {awayScore}
+                          {gameLive.away.runs}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
-                          {awayHits}
+                          {gameLive.away.hits}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
-                          {awayErrors}
+                          {gameLive.away.errors}
                         </td>
                       </tr>
                       <tr className="flex flex-row gap-1 items-center">
                         <td className="w-5 text-lg text-center font-black">
-                          {homeScore}
+                          {gameLive.home.runs}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
-                          {homeHits}
+                          {gameLive.home.hits}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
-                          {homeErrors}
+                          {gameLive.home.errors}
                         </td>
                       </tr>
                     </tbody>
@@ -317,24 +145,24 @@ export function GameCard({
                     <tbody className="flex flex-col gap-1">
                       <tr className="flex flex-row gap-2 items-center dark:text-gray-400 text-gray-500">
                         <td className="w-5 text-lg text-center font-medium">
-                          {awayWLD[0]}
+                          {gameInfo.awayWLD.wins}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
-                          {awayWLD[1]}
+                          {gameInfo.awayWLD.losses}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
-                          {awayWLD[2]}
+                          {gameInfo.awayWLD.draws}
                         </td>
                       </tr>
                       <tr className="flex flex-row gap-2 items-center dark:text-gray-400 text-gray-500">
                         <td className="w-5 text-lg text-center font-medium">
-                          {homeWLD[0]}
+                          {gameInfo.homeWLD.wins}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
-                          {homeWLD[1]}
+                          {gameInfo.homeWLD.losses}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
-                          {homeWLD[2]}
+                          {gameInfo.homeWLD.draws}
                         </td>
                       </tr>
                     </tbody>
@@ -345,33 +173,33 @@ export function GameCard({
           </div>
           <div
             className={`${
-              GameStatus(status) !== "比賽中" ? "hidden" : ""
+              GameStatus(gameLive.status) !== "比賽中" ? "hidden" : ""
             } border-l pl-2 ml-4`}
           >
-            <BaseBallOut base={base} strike={strike} ball={ball} out={out} />
+            <BaseBallOut base={gameLive.base} strike={gameLive.balls.strike} ball={gameLive.balls.ball} out={gameLive.balls.out} />
           </div>
         </CardTitle>
       </CardHeader>
       <CardFooter className="flex justify-between mt-4">
         <p className="flex flex-row gap-2">
           <MapPin />
-          {location ? location : "TBD"}
+          {gameInfo.location ? gameInfo.location : "TBD"}
         <span
           className={`
-            ${status == 2 ? "hidden" : ""} 
-            ${status == 3 ? "hidden" : ""}
-            ${status == 8 ? "hidden" : ""}
+            ${gameLive.status == 2 ? "hidden" : ""} 
+            ${gameLive.status == 3 ? "hidden" : ""}
+            ${gameLive.status == 8 ? "hidden" : ""}
             font-medium border-l px-2
           `}
         >
-          {time ? TimeDecoder(time) : "TBD"}
+          {gameInfo.time ? TimeDecoder(gameInfo.time) : "TBD"}
         </span>
         </p>
         <Button
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center gap-1 bg-gray-800 dark:bg-gray-200"
           aria-expanded={isOpen}
-          data-card-id={id}
+          data-card-id={gameInfo.id}
         >
           {isOpen ? "收起" : "更多"}
           <svg
@@ -396,14 +224,14 @@ export function GameCard({
           overflow-x-auto transition-all duration-350 ease-in-out no-scrollbar
           ${isOpen ? "max-h-[512px] opacity-100 mt-2" : "max-h-0 opacity-0"}
         `}
-        id={`expanded-content-${id}`}
+        id={`expanded-content-${gameInfo.id}`}
       >
         <div className="px-6 pt-6 rounded-b-lg border-t">
-          {status === 1 ? readyPlay(awayStarter, homeStarter) : null}
-          {status === 4 ? readyPlay(awayStarter, homeStarter) : null}
-          {status === 2 ? inPlaying(pitch, ball, strike, out, nowBatter, nowPitcher, scoreboard) : null}
-          {status === 3
-            ? gameSet(scoreboard, winPitcher, losePitcher, savePitcher, mvp, mvpData)
+          {gameLive.status === 1 ? readyPlay(gameInfo) : null}
+          {gameLive.status === 4 ? readyPlay(gameInfo) : null}
+          {gameLive.status === 2 ? inPlaying(gameLive) : null}
+          {gameLive.status === 3
+            ? gameSet(gameLive.scoreboard, gameEnd)
             : null}
         </div>
       </div>

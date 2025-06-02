@@ -5,7 +5,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { TeamColor } from "@/components/app/gameCard";
+import { TeamColor } from "@/utils/gameUtils";
 import { teamToWord } from "@/components/app/teamLogo";
 import Link from "next/link";
 

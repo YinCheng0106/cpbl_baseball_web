@@ -2,34 +2,11 @@
 import { useEffect, useRef } from "react";
 
 import { teamToWord } from "@/components/app/teamLogo";
+import { ScoreboardType } from "@/types/gameData";
 
-type Props = Readonly<{
-  inning: number[];
-  homeScores: number[];
-  awayScores: number[];
-  homeTeam: string;
-  awayTeam: string;
-  homeRuns: number;
-  awayRuns: number;
-  homeHits: number;
-  awayHits: number;
-  homeErrors: number;
-  awayErrors: number;
-}>;
+type Props = Readonly<{ scoreboard: ScoreboardType; }>;
 
-export function Scoreboard({
-  inning,
-  homeScores,
-  awayScores,
-  homeTeam,
-  awayTeam,
-  homeRuns,
-  awayRuns,
-  homeHits,
-  awayHits,
-  homeErrors,
-  awayErrors,
-} : Props) {
+export function Scoreboard({ scoreboard } : Props) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (scrollContainerRef.current) {
@@ -54,7 +31,7 @@ export function Scoreboard({
                 <th scope="row">
                   <div className="flex items-center justify-center">
                     <img
-                      src={teamToWord(awayTeam)}
+                      src={teamToWord(scoreboard.team.away)}
                       width={30}
                       height={30}
                       alt="客隊"
@@ -66,7 +43,7 @@ export function Scoreboard({
                 <th scope="row">
                   <div className="flex items-center justify-center">
                     <img
-                      src={teamToWord(homeTeam)}
+                      src={teamToWord(scoreboard.team.home)}
                       width={30}
                       height={30}
                       alt="主隊"
@@ -84,7 +61,7 @@ export function Scoreboard({
           <table className="w-full text-sm text-center">
             <thead className="text-xs">
               <tr className="items-center select-none">
-                {inning.map((inning) => (
+                {scoreboard.inning.map((inning) => (
                   <th
                     scope="col"
                     key={inning}
@@ -97,14 +74,14 @@ export function Scoreboard({
             </thead>
             <tbody className="text-gray-500">
               <tr className="items-center">
-                {awayScores.map((runs, index) => (
+                {scoreboard.awayScores.map((runs, index) => (
                   <td key={index} className="px-1 py-1 text-center">
                     <div className="md:w-6 w-4">{runs}</div>
                   </td>
                 ))}
               </tr>
               <tr className="items-center">
-                {homeScores.map((runs, index) => (
+                {scoreboard.homeScores.map((runs, index) => (
                   <td key={index} className="px-1 py-1 text-center">
                     <div className="md:w-6 w-4">{runs}</div>
                   </td>
@@ -127,24 +104,24 @@ export function Scoreboard({
           <tbody>
             <tr>
               <td className="px-1 py-1">
-                <div className="w-4 font-bold">{awayRuns}</div>
+                <div className="w-4 font-bold">{scoreboard.away.runs}</div>
               </td>
               <td className="px-1 py-1">
-                <div className="w-4">{awayHits}</div>
+                <div className="w-4">{scoreboard.away.hits}</div>
               </td>
               <td className="px-1 py-1">
-                <div className="w-4">{awayErrors}</div>
+                <div className="w-4">{scoreboard.away.errors}</div>
               </td>
             </tr>
             <tr>
               <td className="px-1 py-1">
-                <div className="w-4 font-bold">{homeRuns}</div>
+                <div className="w-4 font-bold">{scoreboard.home.runs}</div>
               </td>
               <td className="px-1 py-1">
-                <div className="w-4">{homeHits}</div>
+                <div className="w-4">{scoreboard.home.runs}</div>
               </td>
               <td className="px-1 py-1">
-                <div className="w-4">{homeErrors}</div>
+                <div className="w-4">{scoreboard.home.runs}</div>
               </td>
             </tr>
           </tbody>
