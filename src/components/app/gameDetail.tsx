@@ -103,8 +103,10 @@ const gameSet = (
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-              勝利投手
+            <span className={`
+              text-sm border rounded p-0.5 sm:py-0.5 w-[44px] 
+              flex items-center justify-center 
+              before:content-['勝'] sm:before:content-['勝投']`}>
             </span>
             <span className="text-sm font-medium">
               {gameEnd.winPitcher.player === "" 
@@ -115,28 +117,30 @@ const gameSet = (
           </div>
           <div className={`
               flex justify-between items-center
-              ${gameEnd.savePitcher.player === "" ? "hidden" : ""}
+              ${gameEnd.savePitcher.id === null ? "hidden" : ""}
             `}>
-            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-              救援成功
+            <span className="text-sm border rounded py-0.5 w-[44px] flex items-center justify-center">
+              救援
             </span>
             <span className="text-sm font-medium">
               {gameEnd.savePitcher.player === "" 
                 ? "無" : 
-                gameEnd.winPitcher.id && <PlayerCard id={gameEnd.savePitcher.id} />
+                gameEnd.savePitcher.id && <PlayerCard id={gameEnd.savePitcher.id} />
               }
             </span>
           </div>
         </div>
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm border rounded py-0.5 w-[64px] flex items-center justify-center">
-              敗戰投手
+            <span className={`
+              text-sm border rounded p-0.5 sm:py-0.5 w-[44px]
+              flex items-center justify-center 
+              before:content-['敗'] sm:before:content-['敗投']`}>
             </span>
             <span className="text-sm font-medium">
               {gameEnd.losePitcher.player === ""
                 ? "無" : 
-                gameEnd.winPitcher.id && <PlayerCard id={gameEnd.savePitcher.id} />
+                gameEnd.losePitcher.id && <PlayerCard id={gameEnd.losePitcher.id} />
               }
             </span>
           </div>
