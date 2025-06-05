@@ -67,6 +67,110 @@ export const GameColor = (status: number) => {
   }
 };
 
+export const GameLocation = (location: string) => {
+  switch (location) {
+    case "INT":
+      return {
+        zh_tw: "洲際",
+        en: "Intercontinental", 
+      }
+    case "TNN":
+      return {
+        zh_tw: "台南",
+        en: "Tainan",
+      }
+    case "TYN":
+      return {
+        zh_tw: "桃園",
+        en: "Taoyuan",
+      }
+    case "XZG":
+      return {
+        zh_tw: "新莊",
+        en: "Xinzhuang",
+      }
+    case "HLN":
+      return {
+        zh_tw: "花蓮",
+        en: "Hualien",
+      }
+    case "CCL":
+      return {
+        zh_tw: "澄清湖",
+        en: "Cheng Ching Lake",
+      }
+    case "DLU":
+      return {
+        zh_tw: "斗六",
+        en: "Douliu",
+      }
+    case "TMU":
+      return {
+        zh_tw: "天母"
+      }
+    case "CYI":
+      return {
+        zh_tw: "嘉義",
+        en: "Chiayi",
+      }
+    case "CYC":
+      return {
+        zh_tw: "嘉義市",
+        en: "Chiayi City",
+      }
+    case "HCU":
+      return {
+        zh_tw: "新竹",
+        en: "Hsinchu",
+      }
+    case "PTG":
+      return {
+        zh_tw: "屏東",
+        en: "Pingtung",
+      }
+    case "TCG":
+      return {
+        zh_tw: "台中",
+        en: "Taichung",
+      }
+    case "TTG":
+      return {
+        zh_tw: "台東",
+        en: "Taitung",
+      }
+    case "KLD":
+      return {
+        zh_tw: "高雄立德",
+        en: "Kaohsiung Li De"
+      }
+    case "CTP":
+      return {
+        zh_tw: "中信園區",
+        en: "CTBC Park"
+      }
+    case "LDG":
+      return {
+        zh_tw: "羅東",
+        en: "Loudong",
+      }
+    case "TPE":
+      return {
+        zh_tw: "台北",
+        en: "Taipei",
+      }
+    case "TPD":
+      return {
+        zh_tw: "大巨蛋",
+        en: "Taipei Dome",
+      }
+    default:
+      return {
+        zh_tw: "待定",
+        en: "TBD",
+      }
+  }
+}
+
 export const TeamColor = (name: string) => {
   switch (name) {
     case "樂天桃猿":
