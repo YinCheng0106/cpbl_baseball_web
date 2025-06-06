@@ -21,7 +21,7 @@ export default function Home() {
         setLoading(false);
       })
       .catch(error => {
-        console.error('讀取失敗:', error);
+        console.error('[讀取失敗] game: ', error);
         setLoading(false);
       });
 
@@ -32,7 +32,7 @@ export default function Home() {
         setLoading(false);
       })
       .catch(error => {
-        console.error('讀取失敗:', error);
+        console.error('[讀取失敗] player: ', error);
         setLoading(false);
       });
   }, []);

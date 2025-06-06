@@ -1,32 +1,28 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-
-const playerData = [
-  {
-    id: "0000006006",
-    avatar: "https://www.cpbl.com.tw/files/atts/0L088842980599450491/46德保拉.jpg",
-    name: "德寶拉",
-    number: 46,
-    position: "投手",
-    habits: "左投",
-    team: "中信兄弟",
-    stats: {
-      games: 8,
-      era: 2.15,
-      wins: 5,
-      losses: 2,
-      strikeouts: 200,
-      whip: 0.95,
-    }
-  }
-];
+import { PlayerData } from "@/types/playerData";
 
 type Props = { id: string | null; }
 
 export function PlayerCard({ id }: Props) {
-  const player = playerData.find(p => p.id === id);
-  if (!player) {
+  const [player, setPlayer] = useState<PlayerData[]>([]);
+
+  useEffect(() => {
+    fetch('/json/player.json')
+      .then(response => response.json())
+      .then((json: PlayerData[]) => {
+        setPlayer(json);
+      })
+      .catch(error => {
+        console.error('[讀取失敗] player: ', error);
+      });
+  });
+
+  const players = player.find(p => p.id === id);
+  const year = new Date().getFullYear().toString();
+  if (!players) {
     return (
       <div className="flex flex-row gap-2 p-4 items-center">
         <div>
@@ -47,16 +43,21 @@ export function PlayerCard({ id }: Props) {
     <div className="flex flex-row gap-2 p-4 items-center">
       <div>
         <Avatar>
-          <AvatarImage src={player.avatar} />
-          <AvatarFallback>{player.name.charAt(0)}</AvatarFallback>
+          <AvatarImage src={players.avatar} />
+          <AvatarFallback>{players.name["zh-tw"].charAt(0)}</AvatarFallback>
         </Avatar>
       </div>
       <div className="text-sm">
-        <h2 className="font-bold">{player.name}</h2>
-        <div className="flex flex-row text-sm gap-1 text-gray-500 items-center justify-between">
-          <span className="">{player.stats.wins}-{player.stats.losses}</span>
+        <h2 className="font-bold">{players.name["zh-tw"]}</h2>
+        <div className="flex flex-row text-xs sm:text-sm gap-1 text-gray-500 items-center justify-between">
+          <span className="">{players.stats[year].pitching.wins}-{players.stats[year].pitching.losses}</span>
           <span>|</span>
-          <span className="">{player.stats.era} ERA</span>
+          <span className="flex items-center gap-0.5">
+            <span>
+              {players.stats[year].pitching.era}
+            </span>
+            <span>ERA</span>
+          </span>
         </div>
       </div>
     </div>
