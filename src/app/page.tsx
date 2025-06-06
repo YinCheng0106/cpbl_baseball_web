@@ -6,9 +6,11 @@ import { GameCard } from "@/components/app/gameCard";
 import { Standing } from "@/components/app/standing";
 import { motion } from "motion/react"
 import { GameData } from "@/types/gameData";
+import { PlayerData } from "@/types/playerData";
 
 export default function Home() {
   const [games, setData] = useState<GameData[]>([]);
+  const [players, setPlayers] = useState<PlayerData[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,6 +18,17 @@ export default function Home() {
       .then(response => response.json())
       .then((json: GameData[]) => {
         setData(json);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('讀取失敗:', error);
+        setLoading(false);
+      });
+
+    fetch('/json/player.json')
+      .then(response => response.json())
+      .then((json: PlayerData[]) => {
+        setPlayers(json);
         setLoading(false);
       })
       .catch(error => {
