@@ -14,7 +14,7 @@ import { TeamHoverCard } from "@/components/app/teamHoverCard";
 import { BaseBallOut } from "@/components/app/baseBallOut";
 import { readyPlay, inPlaying, gameSet } from "@/components/app/gameDetail";
 import { GameData } from "@/types/gameData";
-import { GameType, GameStatus, GameColor, TeamColor, TimeDecoder } from "@/utils/gameUtils";
+import { GameType, GameStatus, GameColor, GameLocation, TeamColor, TimeDecoder } from "@/utils/gameUtils";
 
 type Props = Readonly<{
   gameData?: GameData;
@@ -183,7 +183,7 @@ export function GameCard({ gameData }: Props) {
       <CardFooter className="flex justify-between mt-4">
         <p className="flex flex-row gap-2">
           <MapPin />
-          {gameInfo.location ? gameInfo.location : "TBD"}
+          {gameInfo.location ? GameLocation(gameInfo.location)["zh-tw"]: "TBD"}
         <span
           className={`
             ${gameLive.status == 2 ? "hidden" : ""} 

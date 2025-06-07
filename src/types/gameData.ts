@@ -93,7 +93,7 @@ export interface MvpData {
   id: string;
   team: string;
   player: string;
-  playerType: "打者" | "投手";
+  playerType: "Pitcher" | "Batter";
   mvpCnt: number;
   gameStatus: GameStatus;
 }
