@@ -8,7 +8,7 @@ import Link from "next/link";
 
 function Logo() {
   return (
-    <div>
+    <div className="select-none">
       <h1 className="text-3xl font-bold">CPBL</h1>
     </div>
   );
