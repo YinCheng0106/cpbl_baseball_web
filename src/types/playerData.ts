@@ -100,7 +100,7 @@ export interface PlayerData {
   debutDate: string;
   birthday: string;
   nationality: string;
-  position: "Pitcher" | "Catcher" | "Infielder" | "Outfielder";
+  position: "Pitcher" | "Catcher" | "Infielder" | "Outfielder" | "Coach";
   pitchingHabits: "L" | "R";
   battingHabits: "L" | "R";
   stats: PlayerStats;
