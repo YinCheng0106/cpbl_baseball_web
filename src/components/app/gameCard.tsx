@@ -84,7 +84,7 @@ export function GameCard({ gameData }: Props) {
           </div>
           <div className="flex flex-col w-full items-end justify-center">
             <span>
-              {gameLive.away.runs !== null ? (
+              {gameLive.status !== 1 ? (
                 <div>
                   <table>
                     <thead>
