@@ -171,7 +171,7 @@
       }
     },
     "gameLive": {
-      "status": 2,
+      "status": 3,
       "inning": 1,
       "inningHalf": 1,
       "home" : {

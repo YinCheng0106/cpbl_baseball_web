@@ -39,7 +39,7 @@ export function AppHeader() {
             <Image src={"/teamWord/word_brothers.png"} alt="象" width={30} height={30} />
           </Link>
           <Link href={"/teams/2"} className="logo-scale">
-            <Image src={"/teamWord/word_unilion.png"} alt="獅" width={30} height={30} />
+            <Image src={"/teamWord/word_unilions.png"} alt="獅" width={30} height={30} />
           </Link>
           <Link href={"/teams/3"} className="logo-scale">
             <Image src={"/teamWord/word_rakuten.png"} alt="猿" width={30} height={30} />
