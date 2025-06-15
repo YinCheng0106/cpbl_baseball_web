@@ -11,7 +11,7 @@ export function AppFooter() {
     >
       <div
         className={`
-          gap-3 flex justify-center items-center
+          gap-3 flex justify-center items-center flex-col
         `}
       >
         <div className="flex items-center gap-4">
