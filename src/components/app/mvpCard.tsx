@@ -20,7 +20,7 @@ export function MvpCard( props: Props | null ) {
         <h2>{mvp.player}</h2>
       </div>
       <div >
-        { mvp.playerType === "打者" ? (
+        { mvp.playerType === "Batter" ? (
           <div className="flex flex-col gap-1">
             <div className="flex justify-between border-b pb-1">
               <span className="text-sm font-medium">當年度獲選MVP次數</span>
