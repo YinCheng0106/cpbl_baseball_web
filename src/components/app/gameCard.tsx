@@ -45,7 +45,10 @@ export function GameCard({ gameData }: Props) {
   }
 
   return (
-    <Card className="w-[400px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] py-6 gap-0.5">
+    <Card className={`
+      w-[400px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] 
+      py-6 gap-0.5
+    `}>
       <CardHeader>
         <div className="flex justify-between items-center text-sm mb-2">
           <p
