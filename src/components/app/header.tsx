@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { ModeToggle } from "@/components/app/themeSwitch";
 
-import Image from "next/image";
 import Link from "next/link";
 
 import { Tv } from "lucide-react";
@@ -35,23 +34,10 @@ export function AppHeader() {
       <div className={`
         flex items-center justify-end select-none gap-4`}>
         <div className="flex items-center gap-4">
-          <Link href={"/teams/1"} className="logo-scale">
-            <Image src={"/teamWord/word_brothers.png"} alt="象" width={30} height={30} />
-          </Link>
-          <Link href={"/teams/2"} className="logo-scale">
-            <Image src={"/teamWord/word_unilions.png"} alt="獅" width={30} height={30} />
-          </Link>
-          <Link href={"/teams/3"} className="logo-scale">
-            <Image src={"/teamWord/word_rakuten.png"} alt="猿" width={30} height={30} />
-          </Link>
-          <Link href={"/teams/4"} className="logo-scale">
-            <Image src={"/teamWord/word_fubon.png"} alt="悍" width={30} height={30} />
-          </Link>
-          <Link href={"/teams/5"} className="logo-scale">
-            <Image src={"/teamWord/word_dragon.png"} alt="龍" width={30} height={30} />
-          </Link>
-          <Link href={"/teams/6"} className="logo-scale">
-            <Image src={"/teamWord/word_tsg.png"} alt="鷹" width={30} height={30} />
+          <Link href={"/teams"} className={`
+            hover:text-accent/100 transition-all ease-in-out
+            `}>
+            <p className="font-medium">球隊</p>
           </Link>
         </div>
         <div className="text-zinc-400 dark:text-zinc-200 font-bold">|</div>
