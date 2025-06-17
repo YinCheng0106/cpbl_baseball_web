@@ -105,8 +105,13 @@ export interface GameEnd {
   mvpData: MvpData;
 }
 
-export interface GameData {
+export interface Game {
   gameInfo: GameInfo;
   gameLive: GameLive;
   gameEnd: GameEnd;
+}
+
+export interface GameData {
+  date: string;
+  games: Game[] | null;
 }

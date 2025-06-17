@@ -1,442 +1,447 @@
 [ 
   {
-    "gameInfo" : {
-      "id": 1,
-      "type": "A",
-      "time": "2025-02-01T18:00:00+08:00",
-      "location": "XZG",
-      "home": "富邦悍將",
-      "away": "味全龍",
-      "awayStarter": {
-        "id": "0000006497",
-        "player": "鋼龍"
-      },
-      "homeStarter": {
-        "id": "0000005592",
-        "player": "富藍戈"
-      },
-      "awayWLD": {
-        "wins": 31,
-        "losses": 45,
-        "draws": 2
-      },
-      "homeWLD": {
-        "wins": 2,
-        "losses": 40,
-        "draws": 1
-      }
-    },
-    "gameLive": {
-      "status": 2,
-      "inning": 1,
-      "inningHalf": 1,
-      "home" : {
-        "runs": 0,
-        "hits": 0,
-        "errors": 0
-      },
-      "away" : {
-        "runs": 0,
-        "hits": 0,
-        "errors": 0
-      },
-      "balls": {
-        "strike": 0,
-        "ball": 0,
-        "out": 0,
-        "pitch": 0
-      },
-      "base": [
-        false,
-        false,
-        false
-      ],
-      "onField": {
-        "nowPitcher": {
-          "id": "0000005592",
-          "player": "富藍戈"
+    "date": "2025-06-17",
+    "games": [
+      {
+        "gameInfo" : {
+          "id": 1,
+          "type": "A",
+          "time": "2025-02-01T18:00:00+08:00",
+          "location": "XZG",
+          "home": "富邦悍將",
+          "away": "味全龍",
+          "awayStarter": {
+            "id": "0000006497",
+            "player": "鋼龍"
+          },
+          "homeStarter": {
+            "id": "0000005592",
+            "player": "富藍戈"
+          },
+          "awayWLD": {
+            "wins": 31,
+            "losses": 45,
+            "draws": 2
+          },
+          "homeWLD": {
+            "wins": 2,
+            "losses": 40,
+            "draws": 1
+          }
         },
-        "nowBatter": {
-          "id": "0000005549",
-          "player": "郭天信"
+        "gameLive": {
+          "status": 2,
+          "inning": 1,
+          "inningHalf": 1,
+          "home" : {
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
+          },
+          "away" : {
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
+          },
+          "balls": {
+            "strike": 0,
+            "ball": 0,
+            "out": 0,
+            "pitch": 0
+          },
+          "base": [
+            false,
+            false,
+            false
+          ],
+          "onField": {
+            "nowPitcher": {
+              "id": "0000005592",
+              "player": "富藍戈"
+            },
+            "nowBatter": {
+              "id": "0000005549",
+              "player": "郭天信"
+            }
+          },
+          "scoreboard": {
+            "inning": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "homeScores": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "awayScores": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "team": {
+              "away": "統一獅",
+              "home": "中信兄弟"
+            },
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          }
+        },
+        "gameEnd": {
+          "winPitcher": {
+            "id": null,
+            "player": null
+          },
+          "losePitcher": {
+            "id": null,
+            "player": null
+          },
+          "savePitcher": {
+            "id": null,
+            "player": null
+          },
+          "mvpData": {
+            "id": null,
+            "team": null,
+            "player": null,
+            "playerType": null,
+            "mvpCnt": null,
+            "gameStatus": {
+              "pitch": {
+                "inningPitchedCnt": null,
+                "strikeOutCnt": null,
+                "runCnt": null
+              },
+              "defense": {
+                "assistCnt": null,
+                "putOutCnt": null,
+                "errorCnt": null
+              },
+              "hit": {
+                "hitCnt": null,
+                "runBattedInCnt": null,
+                "scoreCnt": null,
+                "homeRunCnt": null
+              }
+            }
+          }
         }
       },
-      "scoreboard": {
-        "inning": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9
-        ],
-        "homeScores": [
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "awayScores": [
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "team": {
+      {
+        "gameInfo" : {
+          "id": 2,
+          "type": "A",
+          "time": "2025-02-01T19:00:00+08:00",
+          "location": "INT",
+          "home": "中信兄弟",
           "away": "統一獅",
-          "home": "中信兄弟"
+          "awayStarter": {
+            "id": "0000005731",
+            "player": "布雷克"
+          },
+          "homeStarter": {
+            "id": "0000006006",
+            "player": "德寶拉"
+          },
+          "awayWLD": {
+            "wins": 31,
+            "losses": 45,
+            "draws": 2
+          },
+          "homeWLD": {
+            "wins": 52,
+            "losses": 12,
+            "draws": 1
+          }
         },
-        "away": {
-          "runs": 0,
-          "hits": 0,
-          "errors": 0
+        "gameLive": {
+          "status": 3,
+          "inning": 1,
+          "inningHalf": 1,
+          "home" : {
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
+          },
+          "away" : {
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
+          },
+          "balls": {
+            "strike": 2,
+            "ball": 3,
+            "out": 2,
+            "pitch": 79
+          },
+          "base": [
+            false,
+            false,
+            false
+          ],
+          "onField": {
+            "nowPitcher": {
+              "id": "0000006006",
+              "player": "德寶拉"
+            },
+            "nowBatter": {
+              "id": "0000002297",
+              "player": "詹子賢"
+            }
+          },
+          "scoreboard": {
+            "inning": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "homeScores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "awayScores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "team": {
+              "away": "統一獅",
+              "home": "中信兄弟"
+            },
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          }
         },
-        "home": {
-          "runs": 0,
-          "hits": 0,
-          "errors": 0
+        "gameEnd": {
+          "winPitcher": {
+            "id": "0000006006",
+            "player": "德寶拉"
+          },
+          "losePitcher": {
+            "id": "0000005731",
+            "player": "布雷克"
+          },
+          "savePitcher": {
+            "id": "0000002271",
+            "player": "黃恩賜"
+          },
+          "mvpData": {
+            "id": "0000006006",
+            "team": "中信兄弟",
+            "player": "德寶拉",
+            "playerType": "投手",
+            "mvpCnt": 3,
+            "gameStatus": {
+              "pitch": {
+                "inningPitchedCnt": 10,
+                "strikeOutCnt": 5,
+                "runCnt": 2
+              },
+              "defense": {
+                "assistCnt": 0,
+                "putOutCnt": 0,
+                "errorCnt": 0
+              },
+              "hit": {
+                "hitCnt": null,
+                "runBattedInCnt": null,
+                "scoreCnt": null,
+                "homeRunCnt": null
+              }
+            }
+          }
         }
-      }
-    },
-    "gameEnd": {
-      "winPitcher": {
-        "id": null,
-        "player": null
       },
-      "losePitcher": {
-        "id": null,
-        "player": null
-      },
-      "savePitcher": {
-        "id": null,
-        "player": null
-      },
-      "mvpData": {
-        "id": null,
-        "team": null,
-        "player": null,
-        "playerType": null,
-        "mvpCnt": null,
-        "gameStatus": {
-          "pitch": {
-            "inningPitchedCnt": null,
-            "strikeOutCnt": null,
-            "runCnt": null
+      {
+        "gameInfo" : {
+          "id": 3,
+          "type": "A",
+          "time": "2025-02-01T18:00:00+08:00",
+          "location": "XZG",
+          "home": "樂天桃猿",
+          "away": "台鋼雄鷹",
+          "awayStarter": {
+            "id": "0000006832",
+            "player": ""
           },
-          "defense": {
-            "assistCnt": null,
-            "putOutCnt": null,
-            "errorCnt": null
+          "homeStarter": {
+            "id": "0000000941",
+            "player": "陳冠宇"
           },
-          "hit": {
-            "hitCnt": null,
-            "runBattedInCnt": null,
-            "scoreCnt": null,
-            "homeRunCnt": null
+          "awayWLD": {
+            "wins": 31,
+            "losses": 45,
+            "draws": 2
+          },
+          "homeWLD": {
+            "wins": 2,
+            "losses": 40,
+            "draws": 1
+          }
+        },
+        "gameLive": {
+          "status": 1,
+          "inning": 1,
+          "inningHalf": 1,
+          "home" : {
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
+          },
+          "away" : {
+            "runs": 0,
+            "hits": 0,
+            "errors": 0
+          },
+          "balls": {
+            "strike": 0,
+            "ball": 0,
+            "out": 0,
+            "pitch": 0
+          },
+          "base": [
+            false,
+            false,
+            false
+          ],
+          "onField": {
+            "nowPitcher": {
+              "id": null,
+              "player": null
+            },
+            "nowBatter": {
+              "id": null,
+              "player": null
+            }
+          },
+          "scoreboard": {
+            "inning": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "homeScores": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "awayScores": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "team": {
+              "away": "統一獅",
+              "home": "中信兄弟"
+            },
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          }
+        },
+        "gameEnd": {
+          "winPitcher": {
+            "id": "0000006006",
+            "player": "德寶拉"
+          },
+          "losePitcher": {
+            "id": "0000005731",
+            "player": "布雷克"
+          },
+          "savePitcher": {
+            "id": null,
+            "player": null
+          },
+          "mvpData": {
+            "id": "0000006006",
+            "team": "中信兄弟",
+            "player": "德寶拉",
+            "playerType": "Pitcher",
+            "mvpCnt": 3,
+            "gameStatus": {
+              "pitch": {
+                "inningPitchedCnt": 10,
+                "strikeOutCnt": 5,
+                "runCnt": 2
+              },
+              "defense": {
+                "assistCnt": 0,
+                "putOutCnt": 0,
+                "errorCnt": 0
+              },
+              "hit": {
+                "hitCnt": null,
+                "runBattedInCnt": null,
+                "scoreCnt": null,
+                "homeRunCnt": null
+              }
+            }
           }
         }
       }
-    }
-  },
-  {
-    "gameInfo" : {
-      "id": 2,
-      "type": "A",
-      "time": "2025-02-01T19:00:00+08:00",
-      "location": "INT",
-      "home": "中信兄弟",
-      "away": "統一獅",
-      "awayStarter": {
-        "id": "0000005731",
-        "player": "布雷克"
-      },
-      "homeStarter": {
-        "id": "0000006006",
-        "player": "德寶拉"
-      },
-      "awayWLD": {
-        "wins": 31,
-        "losses": 45,
-        "draws": 2
-      },
-      "homeWLD": {
-        "wins": 52,
-        "losses": 12,
-        "draws": 1
-      }
-    },
-    "gameLive": {
-      "status": 3,
-      "inning": 1,
-      "inningHalf": 1,
-      "home" : {
-        "runs": 0,
-        "hits": 0,
-        "errors": 0
-      },
-      "away" : {
-        "runs": 0,
-        "hits": 0,
-        "errors": 0
-      },
-      "balls": {
-        "strike": 2,
-        "ball": 3,
-        "out": 2,
-        "pitch": 79
-      },
-      "base": [
-        false,
-        false,
-        false
-      ],
-      "onField": {
-        "nowPitcher": {
-          "id": "0000006006",
-          "player": "德寶拉"
-        },
-        "nowBatter": {
-          "id": "0000002297",
-          "player": "詹子賢"
-        }
-      },
-      "scoreboard": {
-        "inning": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9
-        ],
-        "homeScores": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "awayScores": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "team": {
-          "away": "統一獅",
-          "home": "中信兄弟"
-        },
-        "away": {
-          "runs": 0,
-          "hits": 0,
-          "errors": 0
-        },
-        "home": {
-          "runs": 0,
-          "hits": 0,
-          "errors": 0
-        }
-      }
-    },
-    "gameEnd": {
-      "winPitcher": {
-        "id": "0000006006",
-        "player": "德寶拉"
-      },
-      "losePitcher": {
-        "id": "0000005731",
-        "player": "布雷克"
-      },
-      "savePitcher": {
-        "id": "0000002271",
-        "player": "黃恩賜"
-      },
-      "mvpData": {
-        "id": "0000006006",
-        "team": "中信兄弟",
-        "player": "德寶拉",
-        "playerType": "投手",
-        "mvpCnt": 3,
-        "gameStatus": {
-          "pitch": {
-            "inningPitchedCnt": 10,
-            "strikeOutCnt": 5,
-            "runCnt": 2
-          },
-          "defense": {
-            "assistCnt": 0,
-            "putOutCnt": 0,
-            "errorCnt": 0
-          },
-          "hit": {
-            "hitCnt": null,
-            "runBattedInCnt": null,
-            "scoreCnt": null,
-            "homeRunCnt": null
-          }
-        }
-      }
-    }
-  },
-  {
-    "gameInfo" : {
-      "id": 3,
-      "type": "A",
-      "time": "2025-02-01T18:00:00+08:00",
-      "location": "XZG",
-      "home": "樂天桃猿",
-      "away": "台鋼雄鷹",
-      "awayStarter": {
-        "id": "0000006832",
-        "player": ""
-      },
-      "homeStarter": {
-        "id": "0000000941",
-        "player": "陳冠宇"
-      },
-      "awayWLD": {
-        "wins": 31,
-        "losses": 45,
-        "draws": 2
-      },
-      "homeWLD": {
-        "wins": 2,
-        "losses": 40,
-        "draws": 1
-      }
-    },
-    "gameLive": {
-      "status": 1,
-      "inning": 1,
-      "inningHalf": 1,
-      "home" : {
-        "runs": 0,
-        "hits": 0,
-        "errors": 0
-      },
-      "away" : {
-        "runs": 0,
-        "hits": 0,
-        "errors": 0
-      },
-      "balls": {
-        "strike": 0,
-        "ball": 0,
-        "out": 0,
-        "pitch": 0
-      },
-      "base": [
-        false,
-        false,
-        false
-      ],
-      "onField": {
-        "nowPitcher": {
-          "id": null,
-          "player": null
-        },
-        "nowBatter": {
-          "id": null,
-          "player": null
-        }
-      },
-      "scoreboard": {
-        "inning": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9
-        ],
-        "homeScores": [
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "awayScores": [
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "team": {
-          "away": "統一獅",
-          "home": "中信兄弟"
-        },
-        "away": {
-          "runs": 0,
-          "hits": 0,
-          "errors": 0
-        },
-        "home": {
-          "runs": 0,
-          "hits": 0,
-          "errors": 0
-        }
-      }
-    },
-    "gameEnd": {
-      "winPitcher": {
-        "id": "0000006006",
-        "player": "德寶拉"
-      },
-      "losePitcher": {
-        "id": "0000005731",
-        "player": "布雷克"
-      },
-      "savePitcher": {
-        "id": null,
-        "player": null
-      },
-      "mvpData": {
-        "id": "0000006006",
-        "team": "中信兄弟",
-        "player": "德寶拉",
-        "playerType": "Pitcher",
-        "mvpCnt": 3,
-        "gameStatus": {
-          "pitch": {
-            "inningPitchedCnt": 10,
-            "strikeOutCnt": 5,
-            "runCnt": 2
-          },
-          "defense": {
-            "assistCnt": 0,
-            "putOutCnt": 0,
-            "errorCnt": 0
-          },
-          "hit": {
-            "hitCnt": null,
-            "runBattedInCnt": null,
-            "scoreCnt": null,
-            "homeRunCnt": null
-          }
-        }
-      }
-    }
+    ]
   }
 ]
