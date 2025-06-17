@@ -98,9 +98,12 @@ const gameSet = (
 ) => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid xl:grid-cols-2 xl:items-center gap-4">
+      <div className={`
+        grid ${gameEnd.mvpData.id === null ? "xl:grid-cols-1" : "xl:grid-cols-2"}
+        xl:items-center gap-4
+      `}>
         <div><Scoreboard scoreboard={scoreboard}/></div>
-        <div><MvpCard mvp={ gameEnd.mvpData }/></div>
+        <div className={`${gameEnd.mvpData.id === null ? "hidden" : ""}`}><MvpCard mvp={ gameEnd.mvpData }/></div>
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">

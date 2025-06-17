@@ -13,11 +13,11 @@ import { Button } from "@/components/ui/button";
 import { TeamHoverCard } from "@/components/app/teamHoverCard";
 import { BaseBallOut } from "@/components/app/baseBallOut";
 import { readyPlay, inPlaying, gameSet } from "@/components/app/gameDetail";
-import { Game } from "@/types/gameData";
+import { GameStruct } from "@/types/gameData";
 import { GameType, GameStatus, GameColor, GameLocation, TeamColor, TimeDecoder } from "@/utils/gameUtils";
 
 type Props = Readonly<{
-  gameData: Game;
+  gameData: GameStruct;
 }>;
 
 export function GameCard({ gameData }: Props) {
