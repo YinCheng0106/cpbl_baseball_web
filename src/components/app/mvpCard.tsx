@@ -1,6 +1,6 @@
 "use client";
 
-import { teamToWord } from "@/components/app/teamLogo";
+import { teamToWord } from "@/utils/teamUtils";
 
 import { MvpData } from "@/types/gameData";
 

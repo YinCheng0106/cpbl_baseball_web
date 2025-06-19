@@ -17,11 +17,6 @@ export interface Manager {
   name: PersonName;
 }
 
-export interface Stadium {
-  code: string;
-  name: TeamName;
-}
-
 export interface Address {
   "zh-tw": string;
   en: string;
@@ -61,7 +56,7 @@ export interface TeamData {
   name: TeamName;
   generalManager: GeneralManager;
   manager: Manager;
-  stadium: Stadium;
+  stadium: string;
   website: string;
   contact: Contact;
   status: TeamStatus;

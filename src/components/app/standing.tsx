@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { teamToWord } from "@/components/app/teamLogo";
+import { teamToWord } from "@/utils/teamUtils";
 import { TeamData } from "@/types/teamData";
 import { supabase } from "@/utils/supabase";
 

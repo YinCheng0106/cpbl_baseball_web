@@ -6,7 +6,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { TeamColor } from "@/utils/gameUtils";
-import { teamToWord } from "@/components/app/teamLogo";
+import { teamToWord } from "@/utils/teamUtils";
 import Link from "next/link";
 
 import { Globe } from "lucide-react";

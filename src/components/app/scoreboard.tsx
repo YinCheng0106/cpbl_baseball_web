@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-import { teamToWord } from "@/components/app/teamLogo";
+import { teamToWord } from "@/utils/teamUtils";
 import { ScoreboardType } from "@/types/gameData";
 
 type Props = Readonly<{ scoreboard: ScoreboardType; }>;

@@ -1,6 +1,4 @@
-"use client";
-
-const teamToWord = (team: string) => {
+export const teamToWord = (team: string) => {
   switch (team) {
     case "中信兄弟":
       return "/teamWord/word_brothers.png";
@@ -21,7 +19,28 @@ const teamToWord = (team: string) => {
   }
 };
 
-const TeamNameAbbreviation = (name: string) => {
+export const teamToLogo = (team: string) => {
+  switch (team) {
+    case "中信兄弟":
+      return "/teamLogo/logo_brothers.png";
+    case "統一獅":
+      return "/teamLogo/logo_unilions.png";
+    case "統一7-ELEVEn獅":
+      return "/teamLogo/logo_unilions.png";
+    case "富邦悍將":
+      return "/teamLogo/logo_fubon.png";
+    case "味全龍":
+      return "/teamLogo/logo_dragon.png";
+    case "樂天桃猿":
+      return "/teamLogo/logo_rakuten.png";
+    case "台鋼雄鷹":
+      return "/teamLogo/logo_tsg.png";
+    default:
+      return "";
+  }
+};
+
+export const TeamNameAbbreviation = (name: string) => {
   switch (name) {
     case "樂天桃猿":
       return "猿";
@@ -39,5 +58,3 @@ const TeamNameAbbreviation = (name: string) => {
       return name;
   }
 };
-
-export { teamToWord, TeamNameAbbreviation };

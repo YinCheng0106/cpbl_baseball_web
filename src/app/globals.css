@@ -137,4 +137,8 @@
   .logo-scale {
     @apply transition-all duration-300 ease-in-out hover:scale-110 hover:opacity-80
   }
+
+  .link {
+    @apply text-primary hover:text-blue-500 transition-colors duration-200;
+  }
 }
