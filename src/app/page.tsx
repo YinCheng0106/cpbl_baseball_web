@@ -14,6 +14,8 @@ import { GameStruct, Game, GameData } from "@/types/gameData";
 import { PlayerData } from "@/types/playerData";
 import { NewsData } from "@/types/newsData";
 
+import { supabase } from "@/utils/supabase";
+
 export default function Home() {
   const [gamesData, setGameData] = useState<GameData[]>([]);
   const [news, setNews] = useState<NewsData[]>([]);
@@ -22,39 +24,36 @@ export default function Home() {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
-    fetch("/json/game.json")
-      .then((response) => response.json())
-      .then((json: GameData[]) => {
-        setGameData(json);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("[讀取失敗] game: ", error);
-        setLoading(false);
-      });
+    async function fetchData() {
+      setLoading(true);
+      
+      try {
+        const [gameResponse, playerResponse, newsResponse] = await Promise.all([
+          fetch("/json/game.json"),
+          fetch("/json/player.json"),
+          fetch("/json/news.json")
+        ]);
 
-    fetch("/json/player.json")
-      .then((response) => response.json())
-      .then((json: PlayerData[]) => {
-        setPlayers(json);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("[讀取失敗] player: ", error);
-        setLoading(false);
-      });
+        const [gameData, playerData, newsData] = await Promise.all([
+          gameResponse.json(),
+          playerResponse.json(),
+          newsResponse.json()
+        ]);
 
-    fetch("/json/news.json")
-      .then((response) => response.json())
-      .then((json: NewsData[]) => {
-        setNews(json);
+        setGameData(gameData);
+        setPlayers(playerData);
+        setNews(newsData);
+      } catch (error) {
+        console.error("[讀取失敗]", error);
+      } finally {
         setLoading(false);
-      })
-      .catch((error) => {
-        console.error("[讀取失敗] news: ", error);
-        setLoading(false);
-      });
+      }
+    }
+
+    fetchData();
   }, []);
+
+  const year = new Date().getFullYear().toString();
 
   const transition = {
     duration: 0.5,
@@ -200,14 +199,27 @@ export default function Home() {
           </Tabs>
         </div>
         <div>
-          <h2 className="text-2xl font-bold">球隊成績</h2>
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={transition}
-            className="mt-2"
+            className="mt-2 h-80"
           >
-            <Standing />
+            <Tabs defaultValue="firstHalf" className="w-full">
+              <div className="flex flex-row items-start justify-between gap-2 mb-4">
+                <h2 className="text-2xl font-bold">球隊成績</h2>
+                <TabsList>
+                  <TabsTrigger value="firstHalf">上半季</TabsTrigger>
+                  <TabsTrigger value="secondHalf">下半季</TabsTrigger>
+                </TabsList>
+              </div>
+              <TabsContent value="firstHalf">
+                <Standing year={year} season="firstHalf" />
+              </TabsContent>
+              <TabsContent value="secondHalf">
+                <Standing year={year} season="secondHalf" />
+              </TabsContent>
+            </Tabs>
           </motion.div>
         </div>
       </div>

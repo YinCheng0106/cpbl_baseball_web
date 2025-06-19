@@ -34,13 +34,35 @@ export interface Contact {
   address: Address;
 }
 
+export interface homeAwayWLD {
+  home: number;
+  away: number;
+}
+
+export interface halfSeasonData {
+  games: number;
+  wins: homeAwayWLD;
+  losses: homeAwayWLD;
+  draws: homeAwayWLD;
+}
+
+export interface yearStatus {
+  firstHalf: halfSeasonData;
+  secondHalf: halfSeasonData;
+}
+
+export interface TeamStatus {
+  [year: string]: yearStatus;
+}
+
 export interface TeamData {
   id: number;
   logo: string;
   name: TeamName;
   generalManager: GeneralManager;
-  Manager: Manager;
+  manager: Manager;
   stadium: Stadium;
   website: string;
   contact: Contact;
+  status: TeamStatus;
 }

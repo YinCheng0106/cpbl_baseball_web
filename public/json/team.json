@@ -12,20 +12,14 @@
         "en": "Liu Zhi Wei"
       }
     },
-    "Manager": {
+    "manager": {
       "id": "0000000000",
       "name": {
         "zh-tw": "平野惠一",
         "en": "HIRANO Keiichi"
       }
     },
-    "stadium": {
-      "code": "INT",
-      "name": {
-        "zh-tw": "臺中洲際棒球場",
-        "en": "Taichung Intercontinental Baseball Stadium"
-      }
-    },
+    "stadium": "INT",
     "website": "https://www.brothers.tw",
     "contact": {
       "email": "admin@brothers.tw",
@@ -34,6 +28,72 @@
       "address": {
         "zh-tw": "台北市南港區經貿二路188號5樓",
         "en": "5F., No. 188, Jingmao 2nd Rd., Nangang Dist., Taipei City"
+      }
+    },
+    "status": {
+      "2025": {
+        "firstHalf": {
+          "games": 52,
+          "wins": {
+            "home": 15,
+            "away": 14
+          },
+          "losses": {
+            "home": 11,
+            "away": 13
+          },
+          "draws": {
+            "home": 0,
+            "away": 0
+          }
+        },
+        "secondHalf": {
+          "games": 0,
+          "wins": {
+            "home": 0,
+            "away": 0
+          },
+          "losses": {
+            "home": 0,
+            "away": 0
+          },
+          "draws": {
+            "home": 0,
+            "away": 0
+          }
+        }
+      },
+      "2024": {
+        "firstHalf": {
+          "games": 60,
+          "wins": {
+            "home": 14,
+            "away": 18
+          },
+          "losses": {
+            "home": 16,
+            "away": 12
+          },
+          "draws": {
+            "home": 0,
+            "away": 0
+          }
+        },
+        "secondHalf": {
+          "games": 60,
+          "wins": {
+            "home": 19,
+            "away": 19
+          },
+          "losses": {
+            "home": 11,
+            "away": 11
+          },
+          "draws": {
+            "home": 0,
+            "away": 0
+          }
+        }
       }
     }
   },
@@ -57,13 +117,7 @@
         "en": "Lin Yue Ping"
       }
     },
-    "stadium": {
-      "code": "TNN",
-      "name": {
-        "zh-tw": "台南棒球場",
-        "en": "Tainan Municipal Baseball Stadium"
-      }
-    },
+    "stadium": "TNN",
     "website": "https://www.uni-lions.com.tw/",
     "contact": {
       "email": "service@uni-lions.com.tw",
@@ -72,6 +126,72 @@
       "address": {
         "zh-tw": "台南市南區健康路一段257號",
         "en": "No. 257, Sec. 1, Jiankang Rd., South Dist., Tainan City"
+      }
+    },
+    "status": {
+      "2025": {
+        "firstHalf": {
+          "games": 52,
+          "wins": {
+            "home": 15,
+            "away": 14
+          },
+          "losses": {
+            "home": 11,
+            "away": 13
+          },
+          "draws": {
+            "home": 0,
+            "away": 0
+          }
+        },
+        "secondHalf": {
+          "games": 0,
+          "wins": {
+            "home": 0,
+            "away": 0
+          },
+          "losses": {
+            "home": 0,
+            "away": 0
+          },
+          "draws": {
+            "home": 0,
+            "away": 0
+          }
+        }
+      },
+      "2024": {
+        "firstHalf": {
+          "games": 60,
+          "wins": {
+            "home": 14,
+            "away": 18
+          },
+          "losses": {
+            "home": 16,
+            "away": 12
+          },
+          "draws": {
+            "home": 0,
+            "away": 0
+          }
+        },
+        "secondHalf": {
+          "games": 60,
+          "wins": {
+            "home": 19,
+            "away": 19
+          },
+          "losses": {
+            "home": 11,
+            "away": 11
+          },
+          "draws": {
+            "home": 0,
+            "away": 0
+          }
+        }
       }
     }
   },
@@ -95,13 +215,7 @@
         "en": "Furukubo Kenji"
       }
     },
-    "stadium": {
-      "code": "TYN",
-      "name": {
-        "zh-tw": "桃園國際棒球場",
-        "en": ""
-      }
-    },
+    "stadium": "TYN",
     "website": "https://monkeys.rakuten.com.tw/",
     "contact": {
       "email": "mky-RS_monkeyscs@rakuten.com",
@@ -118,7 +232,7 @@
     "logo": "https://www.cpbl.com.tw/files/atts/0L021495963248506263/logo_fubon_large.png",
     "name": {
       "zh-tw": "富邦悍將",
-      "en": ""
+      "en": "Guardians"
     },
     "generalManager": {
       "name": {
@@ -133,13 +247,7 @@
         "en": "Chen Chin Feng"
       }
     },
-    "stadium": {
-      "code": "XZG",
-      "name": {
-        "zh-tw": "新莊棒球場",
-        "en": "XinZhuang Baseball Stadium"
-      }
-    },
+    "stadium": "XZG",
     "website": "https://www.fubonguardians.com/",
     "contact": {
       "email": "fubonguardians@gmail.com",
@@ -171,13 +279,7 @@
         "en": "Ye Jun Zhang"
       }
     },
-    "stadium": {
-      "code": "TMU",
-      "name": {
-        "zh-tw": "天母棒球場",
-        "en": "Taipei Tianmu Baseball Stadium"
-      }
-    },
+    "stadium": "TMU",
     "website": "https://www.wdragons.com/CWS",
     "contact": {
       "email": "service@wdragons.com",
@@ -209,13 +311,7 @@
         "en": "Hong Yi Zhong"
       }
     },
-    "stadium": {
-      "code": "CCL",
-      "name": {
-        "zh-tw": "高雄市立澄清湖棒球場",
-        "en": "Kaohsiung Chengching Lake Baseball Field"
-      }
-    },
+    "stadium": "CCL",
     "website": "https://www.tsghawks.com/",
     "contact": {
       "email": "gm@TSGhawks.com",

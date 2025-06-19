@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -10,82 +11,103 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { teamToWord } from "@/components/app/teamLogo";
+import { TeamData } from "@/types/teamData";
+import { supabase } from "@/utils/supabase";
 
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const teamsStanding = [
-  {
-    id: 0,
-    rank: 2,
-    name: "中信兄弟",
-    games: 2,
-    win: 1,
-    lose: 1,
-    tie: 0,
-    winRate: 0.5,
-    gameBehind: "1",
-    streak: "勝1",
-  },
-  {
-    id: 1,
-    rank: 1,
-    name: "統一獅",
-    games: 2,
-    win: 2,
-    lose: 0,
-    tie: 0,
-    winRate: 1,
-    gameBehind: "-",
-    streak: "勝2",
-  },
-  {
-    id: 2,
-    rank: 3,
-    name: "富邦悍將",
-    games: 1,
-    win: 0,
-    lose: 1,
-    tie: 0,
-    winRate: 0,
-    gameBehind: 1.5,
-    streak: "敗1",
-  },
-  {
-    id: 3,
-    rank: 3,
-    name: "台鋼雄鷹",
-    games: 1,
-    win: 0,
-    lose: 1,
-    tie: 0,
-    winRate: 0,
-    gameBehind: 1.5,
-    streak: "敗1",
-  },
-  {
-    id: 4,
-    rank: 4,
-    name: "樂天桃猿",
-    games: 1,
-    win: 0,
-    lose: 1,
-    tie: 0,
-    winRate: 0,
-    gameBehind: 1.5,
-    streak: "敗1",
-  },
-];
+const winRate = (wins: number, loses: number, draws: number = 0) => {
+  const totalGames = wins + loses + draws;
+  if (totalGames === 0) return 0;
+  return parseFloat((wins / (wins + loses + draws)).toFixed(3));
+}
 
-export function Standing({
-  teams = teamsStanding,
-}: {
-  teams?: typeof teamsStanding;
-}) {
+const calculateGamesBehind = (firstPlaceWins: number, firstPlaceLosses: number, teamWins: number, teamLosses: number) => {
+  const diff = (firstPlaceWins - teamWins + teamLosses - firstPlaceLosses) / 2;
+  return diff === 0 ? "-" : diff.toFixed(1);
+}
+
+const completedRank = (teamsData: TeamData[], season: string, year: string) => {
+  if (teamsData.length === 0) return [];
+
+  const teamsWithStats = teamsData.map(team => {
+    const seasonData = team.status?.[year as keyof typeof team.status]?.[season as keyof typeof team.status[typeof year]];
+    
+    if (!seasonData) {
+      return {
+        ...team,
+        games: 0,
+        win: 0,
+        lose: 0,
+        tie: 0,
+        winRate: 0,
+        rank: 0,
+        gameBehind: "-",
+        streak: "-"
+      };
+    }
+
+    const totalWins = seasonData.wins.home + seasonData.wins.away;
+    const totalLosses = seasonData.losses.home + seasonData.losses.away;
+    const totalTies = seasonData.draws.home + seasonData.draws.away;
+    const totalGames = seasonData.games;
+    const calculatedWinRate = winRate(totalWins, totalLosses, totalTies);
+
+    return {
+      ...team,
+      games: totalGames,
+      win: totalWins,
+      lose: totalLosses,
+      tie: totalTies,
+      winRate: calculatedWinRate,
+      rank: 0,
+      gameBehind: "-",
+      streak: "-"
+    };
+  });
+
+  const sortedTeams = teamsWithStats.sort((a, b) => {
+    if (b.winRate !== a.winRate) {
+      return b.winRate - a.winRate;
+    }
+    return b.win - a.win;
+  });
+
+  const firstPlace = sortedTeams[0];
+  return sortedTeams.map((team, index) => ({
+    ...team,
+    rank: index + 1,
+    gameBehind: index === 0 ? "-" : calculateGamesBehind(firstPlace.win, firstPlace.lose, team.win, team.lose)
+  }));
+}
+
+type Props = {
+  year: string;
+  season: string;
+}
+
+export function Standing({ year, season }: Props) {
+  const [loading, setLoading] = useState(true);
+  const [teams, setTeams] = useState<TeamData[]>([])
+
+  useEffect(() => {
+    setLoading(true);
+    async function fetchStanding() {
+      const { data: teams } = await supabase.from("teams").select();
+      if (teams && teams.length > 0) {
+        setTeams(completedRank(teams, season, year));
+      }
+      setLoading(false);
+    }
+    fetchStanding();
+  }, [year]);
+
+
   return (
     <div
       className={`
-      w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl
+      w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl h-80
     `}
     >
       <Table>
@@ -103,7 +125,6 @@ export function Standing({
         <SkeletonTheme baseColor="dark:#202020" highlightColor="#444">
           <TableBody>
             {teams
-              .sort((a, b) => a.rank - b.rank)
               .map((team: any) => (
                 <TableRow key={team.id}>
                   <TableCell className="text-center font-bold">
@@ -113,10 +134,10 @@ export function Standing({
                     {team.name !== null ? (
                       <div className="flex items-center justify-center">
                         <img
-                          alt={team.name}
+                          alt={team.name["zh-tw"]}
                           height={20}
                           width={20}
-                          src={teamToWord(team.name)}
+                          src={teamToWord(team.name["zh-tw"])}
                         />
                       </div>
                     ) : (
@@ -124,7 +145,7 @@ export function Standing({
                     )}
                   </TableCell>
                   <TableCell className="text-center">
-                    {team.games !== null ? team.games : <Skeleton />}
+                    {team.status[year][season].games !== null ? team.status[year][season].games : <Skeleton />}
                   </TableCell>
                   <TableCell className="text-center">
                     {team.win !== null ? (

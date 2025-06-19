@@ -6,6 +6,8 @@ const teamToWord = (team: string) => {
       return "/teamWord/word_brothers.png";
     case "統一獅":
       return "/teamWord/word_unilions.png";
+    case "統一7-ELEVEn獅":
+      return "/teamWord/word_unilions.png";
     case "富邦悍將":
       return "/teamWord/word_fubon.png";
     case "味全龍":
