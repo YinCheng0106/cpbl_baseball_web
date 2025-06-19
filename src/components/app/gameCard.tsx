@@ -3,18 +3,20 @@
 import { useState } from "react";
 import { MapPin } from "lucide-react";
 
-import {
-  Card,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TeamHoverCard } from "@/components/app/teamHoverCard";
 import { BaseBallOut } from "@/components/app/baseBallOut";
 import { readyPlay, inPlaying, gameSet } from "@/components/app/gameDetail";
 import { GameStruct } from "@/types/gameData";
-import { GameType, GameStatus, GameColor, GameLocation, TeamColor, TimeDecoder } from "@/utils/gameUtils";
+import {
+  GameType,
+  GameStatus,
+  GameColor,
+  Stadium,
+  TeamColor,
+  TimeDecoder,
+} from "@/utils/gameUtils";
 
 type Props = Readonly<{
   gameData: GameStruct;
@@ -45,10 +47,12 @@ export function GameCard({ gameData }: Props) {
   }
 
   return (
-    <Card className={`
+    <Card
+      className={`
       w-[400px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] 
       py-6 gap-0.5
-    `}>
+    `}
+    >
       <CardHeader>
         <div className="flex justify-between items-center text-sm mb-2">
           <p
@@ -62,25 +66,31 @@ export function GameCard({ gameData }: Props) {
           <p className="font-bold">
             {GameStatus(gameLive.status) !== "比賽中"
               ? GameStatus(gameLive.status)
-              : gameLive.inning + " " + (gameLive.inningHalf === 1 ? "上" : "下")}
+              : gameLive.inning +
+                " " +
+                (gameLive.inningHalf === 1 ? "上" : "下")}
           </p>
           <p>{GameType(gameInfo.type)}</p>
         </div>
         <CardTitle className="flex flex-row text-2xl justify-between select-none">
           <div className="flex flex-col w-full h-[88px] justify-end">
             <div className="flex items-center">
-              <span className={`
+              <span
+                className={`
                 ${TeamColor(gameInfo.away)} font-bold
                 hover:scale-105 transition-transform duration-400 ease-in-out
-              `}>
+              `}
+              >
                 {gameInfo.away ? <TeamHoverCard team={gameInfo.away} /> : "TBD"}
               </span>
             </div>
             <div className="flex items-center">
-              <span className={`
+              <span
+                className={`
                 ${TeamColor(gameInfo.home)} font-bold
                 hover:scale-105 transition-transform duration-400 ease-in-out
-              `}>
+              `}
+              >
                 {gameInfo.home ? <TeamHoverCard team={gameInfo.home} /> : "TBD"}
               </span>
             </div>
@@ -179,24 +189,29 @@ export function GameCard({ gameData }: Props) {
               GameStatus(gameLive.status) !== "比賽中" ? "hidden" : ""
             } border-l pl-2 ml-4`}
           >
-            <BaseBallOut base={gameLive.base} strike={gameLive.balls.strike} ball={gameLive.balls.ball} out={gameLive.balls.out} />
+            <BaseBallOut
+              base={gameLive.base}
+              strike={gameLive.balls.strike}
+              ball={gameLive.balls.ball}
+              out={gameLive.balls.out}
+            />
           </div>
         </CardTitle>
       </CardHeader>
       <CardFooter className="flex justify-between mt-4">
         <p className="flex flex-row gap-2">
           <MapPin />
-          {gameInfo.location ? GameLocation(gameInfo.location)["zh-tw"]: "TBD"}
-        <span
-          className={`
+          {gameInfo.location ? Stadium(gameInfo.location).shortName["zh-tw"] : "TBD"}
+          <span
+            className={`
             ${gameLive.status == 2 ? "hidden" : ""} 
             ${gameLive.status == 3 ? "hidden" : ""}
             ${gameLive.status == 8 ? "hidden" : ""}
             font-medium border-l px-2
           `}
-        >
-          {gameInfo.time ? TimeDecoder(gameInfo.time) : "TBD"}
-        </span>
+          >
+            {gameInfo.time ? TimeDecoder(gameInfo.time) : "TBD"}
+          </span>
         </p>
         <Button
           onClick={() => setIsOpen(!isOpen)}
@@ -233,9 +248,7 @@ export function GameCard({ gameData }: Props) {
           {gameLive.status === 1 ? readyPlay(gameInfo) : null}
           {gameLive.status === 4 ? readyPlay(gameInfo) : null}
           {gameLive.status === 2 ? inPlaying(gameLive) : null}
-          {gameLive.status === 3
-            ? gameSet(gameLive.scoreboard, gameEnd)
-            : null}
+          {gameLive.status === 3 ? gameSet(gameLive.scoreboard, gameEnd) : null}
         </div>
       </div>
     </Card>

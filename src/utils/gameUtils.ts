@@ -67,106 +67,227 @@ export const GameColor = (status: number) => {
   }
 };
 
-export const GameLocation = (location: string) => {
+export const Stadium = (location: string) => {
   switch (location) {
     case "INT":
       return {
-        "zh-tw": "洲際",
-        en: "Intercontinental",
+        shortName: {
+          "zh-tw": "洲際",
+          en: "Intercontinental",
+        },
+        fullName: {
+          "zh-tw": "台中洲際棒球場",
+          en: "Taichung Intercontinental Baseball Stadium",
+        }
       };
     case "TNN":
       return {
-        "zh-tw": "台南",
-        en: "Tainan",
+        shortName: {
+          "zh-tw": "台南",
+          en: "Tainan",
+        },
+        fullName: {
+          "zh-tw": "台南市立棒球場",
+          en: "Tainan Municipal Baseball Stadium",
+        }
       };
     case "TYN":
       return {
-        "zh-tw": "桃園",
-        en: "Taoyuan",
+        shortName: {
+          "zh-tw": "桃園",
+          en: "Taoyuan",
+        },
+        fullName: {
+          "zh-tw": "樂天桃園棒球場",
+          en: "Rakuten Taoyuan Baseball Stadium",
+        }
       };
     case "XZG":
       return {
-        "zh-tw": "新莊",
-        en: "Xinzhuang",
+        shortName: {
+          "zh-tw": "新莊",
+          en: "Xinzhuang",
+        },
+        fullName: {
+          "zh-tw": "新北市立新莊棒球場",
+          en: "New Taipei City Xinzhuang Baseball Stadium",
+        }
       };
     case "HLN":
       return {
-        "zh-tw": "花蓮",
-        en: "Hualien",
+        shortName: {
+          "zh-tw": "花蓮",
+          en: "Hualien",
+        },
+        fullName: {
+          "zh-tw": "花蓮縣立德興棒球場",
+          en: "Hualien Baseball Stadium",
+        }
       };
     case "CCL":
       return {
-        "zh-tw": "澄清湖",
-        en: "Cheng Ching Lake",
+        shortName: {
+          "zh-tw": "澄清湖",
+          en: "Cheng Ching Lake",
+        },
+        fullName: {
+          "zh-tw": "高雄市立澄清湖棒球場",
+          en: "Kaohsiung Chengching Lake Baseball Stadium",
+        }
       };
     case "DLU":
       return {
-        "zh-tw": "斗六",
-        en: "Douliu",
+        shortName: {
+          "zh-tw": "斗六",
+          en: "Douliu",
+        },
+        fullName: {
+          "zh-tw": "斗六棒球場",
+          en: "Douliu Baseball Stadium",
+        }
       };
     case "TMU":
       return {
-        "zh-tw": "天母",
+        shortName: {
+          "zh-tw": "天母",
+          en: "Tianmu",
+        },
+        fullName: {
+          "zh-tw": "臺北市天母棒球場",
+          en: "Taipei City Tianmu Baseball Stadium",
+        }
       };
     case "CYI":
       return {
-        "zh-tw": "嘉義",
-        en: "Chiayi",
+        shortName: {
+          "zh-tw": "嘉義",
+          en: "Chiayi",
+        },
+        fullName: {
+          "zh-tw": "嘉義縣立棒球場",
+          en: "Chiayi County Baseball Stadium",
+        }
       };
     case "CYC":
       return {
-        "zh-tw": "嘉義市",
-        en: "Chiayi City",
+        shortName: {
+          "zh-tw": "嘉義市",
+          en: "Chiayi City",
+        },
+        fullName: {
+          "zh-tw": "嘉義市立棒球場",
+          en: "Chiayi City Baseball Stadium",
+        }
       };
     case "HCU":
       return {
-        "zh-tw": "新竹",
-        en: "Hsinchu",
+        shortName: {
+          "zh-tw": "新竹",
+          en: "Hsinchu",
+        },
+        fullName: {
+          "zh-tw": "新竹市立棒球場",
+          en: "Hsinchu Municipal Baseball Stadium",
+        }
       };
     case "PTG":
       return {
-        "zh-tw": "屏東",
-        en: "Pingtung",
+        shortName: {
+          "zh-tw": "屏東",
+          en: "Pingtung",
+        },
+        fullName: {
+          "zh-tw": "屏東縣立棒球場",
+          en: "Pingtung County Baseball Stadium",
+        }
       };
     case "TCG":
       return {
-        "zh-tw": "台中",
-        en: "Taichung",
+        shortName: {
+          "zh-tw": "台中",
+          en: "Taichung",
+        },
+        fullName: {
+          "zh-tw": "教育部體育署臺中棒球場",
+          en: "Taichung Municipal Baseball Stadium",
+        }
       };
     case "TTG":
       return {
-        "zh-tw": "台東",
-        en: "Taitung",
+        shortName: {
+          "zh-tw": "台東",
+          en: "Taitung",
+        },
+        fullName: {
+          "zh-tw": "臺東棒球村第一棒球場",
+          en: "Taitung Baseball Village No. 1 Stadium",
+        }
       };
     case "KLD":
       return {
-        "zh-tw": "高雄立德",
-        en: "Kaohsiung Li De",
+        shortName: {
+          "zh-tw": "高雄立德",
+          en: "Kaohsiung Li De",
+        },
+        fullName: {
+          "zh-tw": "高雄市立立德棒球場",
+          en: "Kaohsiung City Li De Baseball Stadium",
+        }
       };
     case "CTP":
       return {
-        "zh-tw": "中信園區",
-        en: "CTBC Park",
+        shortName: {
+          "zh-tw": "園區",
+          en: "CTBC Park",
+        },
+        fullName: {
+          "zh-tw": "中國信託公益園區",
+          en: "CTBC Park",
+        }
       };
     case "LDG":
       return {
-        "zh-tw": "羅東",
-        en: "Loudong",
+        shortName: {
+          "zh-tw": "羅東",
+          en: "Loudong",
+        },
+        fullName: {
+          "zh-tw": "宜蘭縣立羅東棒球場",
+          en: "Loudong Baseball Stadium",
+        }
       };
     case "TPE":
       return {
-        "zh-tw": "台北",
-        en: "Taipei",
+        shortName: {
+          "zh-tw": "台北",
+          en: "Taipei",
+        },
+        fullName: {
+          "zh-tw": "台北市立棒球場(小巨蛋)",
+          en: "Taipei City Baseball Stadium",
+        }
       };
     case "TPD":
       return {
-        "zh-tw": "大巨蛋",
-        en: "Taipei Dome",
+        shortName: {
+          "zh-tw": "大巨蛋",
+          en: "Taipei Dome",
+        },
+        fullName: {
+          "zh-tw": "臺北大巨蛋",
+          en: "Taipei Dome",
+        }
       };
     default:
       return {
-        "zh-tw": "待定",
-        en: "TBD",
+        shortName: {
+          "zh-tw": "待定",
+          en: "TBD",
+        },
+        fullName: {
+          "zh-tw": "待定",
+          en: "TBD",
+        }
       };
   }
 };
