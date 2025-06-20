@@ -21,19 +21,27 @@ const winRate = (wins: number, loses: number, draws: number = 0) => {
   const totalGames = wins + loses + draws;
   if (totalGames === 0) return 0;
   return parseFloat((wins / (wins + loses + draws)).toFixed(3));
-}
+};
 
-const calculateGamesBehind = (firstPlaceWins: number, firstPlaceLosses: number, teamWins: number, teamLosses: number) => {
+const calculateGamesBehind = (
+  firstPlaceWins: number,
+  firstPlaceLosses: number,
+  teamWins: number,
+  teamLosses: number
+) => {
   const diff = (firstPlaceWins - teamWins + teamLosses - firstPlaceLosses) / 2;
   return diff === 0 ? "-" : diff.toFixed(1);
-}
+};
 
 const completedRank = (teamsData: TeamData[], season: string, year: string) => {
   if (teamsData.length === 0) return [];
 
-  const teamsWithStats = teamsData.map(team => {
-    const seasonData = team.status?.[year as keyof typeof team.status]?.[season as keyof typeof team.status[typeof year]];
-    
+  const teamsWithStats = teamsData.map((team) => {
+    const seasonData =
+      team.stats?.[year as keyof typeof team.stats]?.[
+        season as keyof (typeof team.stats)[typeof year]
+      ];
+
     if (!seasonData) {
       return {
         ...team,
@@ -44,7 +52,7 @@ const completedRank = (teamsData: TeamData[], season: string, year: string) => {
         winRate: 0,
         rank: 0,
         gameBehind: "-",
-        streak: "-"
+        streak: "-",
       };
     }
 
@@ -63,7 +71,7 @@ const completedRank = (teamsData: TeamData[], season: string, year: string) => {
       winRate: calculatedWinRate,
       rank: 0,
       gameBehind: "-",
-      streak: "-"
+      streak: "-",
     };
   });
 
@@ -78,18 +86,26 @@ const completedRank = (teamsData: TeamData[], season: string, year: string) => {
   return sortedTeams.map((team, index) => ({
     ...team,
     rank: index + 1,
-    gameBehind: index === 0 ? "-" : calculateGamesBehind(firstPlace.win, firstPlace.lose, team.win, team.lose)
+    gameBehind:
+      index === 0
+        ? "-"
+        : calculateGamesBehind(
+            firstPlace.win,
+            firstPlace.lose,
+            team.win,
+            team.lose
+          ),
   }));
-}
+};
 
 type Props = {
   year: string;
   season: string;
-}
+};
 
 export function Standing({ year, season }: Props) {
   const [loading, setLoading] = useState(true);
-  const [teams, setTeams] = useState<TeamData[]>([])
+  const [teams, setTeams] = useState<TeamData[]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -103,29 +119,83 @@ export function Standing({ year, season }: Props) {
     fetchStanding();
   }, [year]);
 
-
-  return (
-    <div
-      className={`
+  if (loading) {
+    return (
+      <div
+        className={`
+        w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl h-80
+      `}
+      >
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-center font-black">排名</TableHead>
+              <TableHead className="text-center font-black">球隊</TableHead>
+              <TableHead className="text-center font-black">出賽數</TableHead>
+              <TableHead className="text-center font-black">勝-敗-和</TableHead>
+              <TableHead className="text-center font-black">勝率</TableHead>
+              <TableHead className="text-center font-black">勝差</TableHead>
+              <TableHead className="text-center font-black">
+                連勝/連敗
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <SkeletonTheme baseColor="#202020" highlightColor="#444">
+            <TableBody>
+              {Array.from({ length: 6 }, (_, index) => (
+                <TableRow key={index}>
+                  <TableCell className="text-center font-bold">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell className="text-center font-bold">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <Skeleton />
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <Skeleton />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </SkeletonTheme>
+        </Table>
+      </div>
+    );
+  } else
+    return (
+      <div
+        className={`
       w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl h-80
     `}
-    >
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="text-center font-black">排名</TableHead>
-            <TableHead className="text-center font-black">球隊</TableHead>
-            <TableHead className="text-center font-black">出賽數</TableHead>
-            <TableHead className="text-center font-black">勝-敗-和</TableHead>
-            <TableHead className="text-center font-black">勝率</TableHead>
-            <TableHead className="text-center font-black">勝差</TableHead>
-            <TableHead className="text-center font-black">連勝/連敗</TableHead>
-          </TableRow>
-        </TableHeader>
-        <SkeletonTheme baseColor="dark:#202020" highlightColor="#444">
-          <TableBody>
-            {teams
-              .map((team: any) => (
+      >
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-center font-black">排名</TableHead>
+              <TableHead className="text-center font-black">球隊</TableHead>
+              <TableHead className="text-center font-black">出賽數</TableHead>
+              <TableHead className="text-center font-black">勝-敗-和</TableHead>
+              <TableHead className="text-center font-black">勝率</TableHead>
+              <TableHead className="text-center font-black">勝差</TableHead>
+              <TableHead className="text-center font-black">
+                連勝/連敗
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <SkeletonTheme baseColor="dark:#202020" highlightColor="#444">
+            <TableBody>
+              {teams.map((team: any) => (
                 <TableRow key={team.id}>
                   <TableCell className="text-center font-bold">
                     {team.rank !== null ? team.rank : <Skeleton />}
@@ -145,7 +215,11 @@ export function Standing({ year, season }: Props) {
                     )}
                   </TableCell>
                   <TableCell className="text-center">
-                    {team.status[year][season].games !== null ? team.status[year][season].games : <Skeleton />}
+                    {team.stats[year][season].games !== null ? (
+                      team.stats[year][season].games
+                    ) : (
+                      <Skeleton />
+                    )}
                   </TableCell>
                   <TableCell className="text-center">
                     {team.win !== null ? (
@@ -165,9 +239,9 @@ export function Standing({ year, season }: Props) {
                   </TableCell>
                 </TableRow>
               ))}
-          </TableBody>
-        </SkeletonTheme>
-      </Table>
-    </div>
-  );
+            </TableBody>
+          </SkeletonTheme>
+        </Table>
+      </div>
+    );
 }

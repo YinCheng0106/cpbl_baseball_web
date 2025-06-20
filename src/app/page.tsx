@@ -206,7 +206,10 @@ export default function Home() {
             className="mt-2 h-80"
           >
             <Tabs defaultValue="firstHalf" className="w-full">
-              <div className="flex flex-row items-start justify-between gap-2 mb-4">
+              <div className={`
+                flex flex-row items-start justify-between gap-2 mb-4
+                w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl
+              `}>
                 <h2 className="text-2xl font-bold">球隊成績</h2>
                 <TabsList>
                   <TabsTrigger value="firstHalf">上半季</TabsTrigger>

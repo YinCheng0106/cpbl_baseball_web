@@ -41,13 +41,13 @@ export interface halfSeasonData {
   draws: homeAwayWLD;
 }
 
-export interface yearStatus {
+export interface yearstats {
   firstHalf: halfSeasonData;
   secondHalf: halfSeasonData;
 }
 
-export interface TeamStatus {
-  [year: string]: yearStatus;
+export interface Teamstats {
+  [year: string]: yearstats;
 }
 
 export interface TeamData {
@@ -59,5 +59,5 @@ export interface TeamData {
   stadium: string;
   website: string;
   contact: Contact;
-  status: TeamStatus;
+  stats: Teamstats;
 }

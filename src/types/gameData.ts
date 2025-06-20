@@ -60,7 +60,7 @@ export interface GameLive {
   onField: {
     nowPitcher: Player;
     nowBatter: Player;
-  }
+  };
   scoreboard: ScoreboardType;
 }
 
@@ -83,7 +83,7 @@ export interface HitStats {
   homeRunCnt: number | null;
 }
 
-export interface GameStatus {
+export interface Gamestats {
   pitch: PitchStats;
   defense: DefenseStats;
   hit: HitStats;
@@ -95,7 +95,7 @@ export interface MvpData {
   player: string;
   playerType: "Pitcher" | "Batter";
   mvpCnt: number;
-  gameStatus: GameStatus;
+  gamestats: Gamestats;
 }
 
 export interface GameEnd {

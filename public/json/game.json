@@ -1,10 +1,10 @@
-[ 
+[
   {
     "date": "2025-06-17",
     "games": {
       "major": [
         {
-          "gameInfo" : {
+          "gameInfo": {
             "id": 1,
             "type": "A",
             "time": "2025-02-01T18:00:00+08:00",
@@ -34,12 +34,12 @@
             "status": 2,
             "inning": 1,
             "inningHalf": 1,
-            "home" : {
+            "home": {
               "runs": 0,
               "hits": 0,
               "errors": 0
             },
-            "away" : {
+            "away": {
               "runs": 0,
               "hits": 0,
               "errors": 0
@@ -126,7 +126,7 @@
               "player": null,
               "playerType": null,
               "mvpCnt": null,
-              "gameStatus": {
+              "gamestats": {
                 "pitch": {
                   "inningPitchedCnt": null,
                   "strikeOutCnt": null,
@@ -148,7 +148,7 @@
           }
         },
         {
-          "gameInfo" : {
+          "gameInfo": {
             "id": 2,
             "type": "A",
             "time": "2025-02-01T19:00:00+08:00",
@@ -178,12 +178,12 @@
             "status": 3,
             "inning": 1,
             "inningHalf": 1,
-            "home" : {
+            "home": {
               "runs": 0,
               "hits": 0,
               "errors": 0
             },
-            "away" : {
+            "away": {
               "runs": 0,
               "hits": 0,
               "errors": 0
@@ -278,7 +278,7 @@
               "player": "德寶拉",
               "playerType": "投手",
               "mvpCnt": 3,
-              "gameStatus": {
+              "gamestats": {
                 "pitch": {
                   "inningPitchedCnt": 10,
                   "strikeOutCnt": 5,
@@ -300,7 +300,7 @@
           }
         },
         {
-          "gameInfo" : {
+          "gameInfo": {
             "id": 3,
             "type": "A",
             "time": "2025-02-01T18:00:00+08:00",
@@ -330,12 +330,12 @@
             "status": 1,
             "inning": 1,
             "inningHalf": 1,
-            "home" : {
+            "home": {
               "runs": 0,
               "hits": 0,
               "errors": 0
             },
-            "away" : {
+            "away": {
               "runs": 0,
               "hits": 0,
               "errors": 0
@@ -422,7 +422,7 @@
               "player": "德寶拉",
               "playerType": "Pitcher",
               "mvpCnt": 3,
-              "gameStatus": {
+              "gamestats": {
                 "pitch": {
                   "inningPitchedCnt": 10,
                   "strikeOutCnt": 5,
@@ -446,7 +446,7 @@
       ],
       "minor": [
         {
-          "gameInfo" : {
+          "gameInfo": {
             "id": 1,
             "type": "D",
             "time": "2025-06-17T14:05:00+08:00",
@@ -476,12 +476,12 @@
             "status": 3,
             "inning": 9,
             "inningHalf": 2,
-            "away" : {
+            "away": {
               "runs": 5,
               "hits": 11,
               "errors": 1
             },
-            "home" : {
+            "home": {
               "runs": 3,
               "hits": 7,
               "errors": 0
@@ -520,10 +520,26 @@
                 9
               ],
               "awayScores": [
-                0, 2, 0, 0, 0, 0, 0, 3, 0
+                0,
+                2,
+                0,
+                0,
+                0,
+                0,
+                0,
+                3,
+                0
               ],
               "homeScores": [
-                0, 1, 0, 1, 0, 1, 0, 0, 0
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
               ],
               "team": {
                 "away": "台鋼雄鷹",
@@ -560,7 +576,7 @@
               "player": null,
               "playerType": null,
               "mvpCnt": null,
-              "gameStatus": {
+              "gamestats": {
                 "pitch": {
                   "inningPitchedCnt": null,
                   "strikeOutCnt": null,
@@ -588,138 +604,138 @@
     "date": "2025-06-18",
     "games": {
       "major": [
-      {
-        "gameInfo" : {
-          "id": 157,
-          "type": "A",
-          "time": "2025-06-18T18:35:00+08:00",
-          "location": "INT",
-          "away": "樂天桃猿",
-          "home": "中信兄弟",
-          "awayStarter": {
-            "id": "0000007555",
-            "player": "霸鉧德"
-          },
-          "homeStarter": {
-            "id": "0000007558",
-            "player": "黃博多"
-          },
-          "awayWLD": {
-            "wins": 25,
-            "losses": 23,
-            "draws": 0
-          },
-          "homeWLD": {
-            "wins": 29,
-            "losses": 22,
-            "draws": 0
-          }
-        },
-        "gameLive": {
-          "status": 1,
-          "inning": 1,
-          "inningHalf": 1,
-          "home" : {
-            "runs": 0,
-            "hits": 0,
-            "errors": 0
-          },
-          "away" : {
-            "runs": 0,
-            "hits": 0,
-            "errors": 0
-          },
-          "balls": {
-            "strike": 0,
-            "ball": 0,
-            "out": 0,
-            "pitch": 0
-          },
-          "base": [
-            false,
-            false,
-            false
-          ],
-          "onField": {
-            "nowPitcher": {
-              "id": null,
-              "player": null
+        {
+          "gameInfo": {
+            "id": 157,
+            "type": "A",
+            "time": "2025-06-18T18:35:00+08:00",
+            "location": "INT",
+            "away": "樂天桃猿",
+            "home": "中信兄弟",
+            "awayStarter": {
+              "id": "0000007555",
+              "player": "霸鉧德"
             },
-            "nowBatter": {
-              "id": null,
-              "player": null
+            "homeStarter": {
+              "id": "0000007558",
+              "player": "黃博多"
+            },
+            "awayWLD": {
+              "wins": 25,
+              "losses": 23,
+              "draws": 0
+            },
+            "homeWLD": {
+              "wins": 29,
+              "losses": 22,
+              "draws": 0
             }
           },
-          "scoreboard": {
-            "inning": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9
-            ],
-            "homeScores": [],
-            "awayScores": [],
-            "team": {
-              "away": "樂天桃猿",
-              "home": "中信兄弟"
+          "gameLive": {
+            "status": 1,
+            "inning": 1,
+            "inningHalf": 1,
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
             },
             "away": {
               "runs": 0,
               "hits": 0,
               "errors": 0
             },
-            "home": {
-              "runs": 0,
-              "hits": 0,
-              "errors": 0
+            "balls": {
+              "strike": 0,
+              "ball": 0,
+              "out": 0,
+              "pitch": 0
+            },
+            "base": [
+              false,
+              false,
+              false
+            ],
+            "onField": {
+              "nowPitcher": {
+                "id": null,
+                "player": null
+              },
+              "nowBatter": {
+                "id": null,
+                "player": null
+              }
+            },
+            "scoreboard": {
+              "inning": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "homeScores": [],
+              "awayScores": [],
+              "team": {
+                "away": "樂天桃猿",
+                "home": "中信兄弟"
+              },
+              "away": {
+                "runs": 0,
+                "hits": 0,
+                "errors": 0
+              },
+              "home": {
+                "runs": 0,
+                "hits": 0,
+                "errors": 0
+              }
             }
-          }
-        },
-        "gameEnd": {
-          "winPitcher": {
-            "id": null,
-            "player": null
           },
-          "losePitcher": {
-            "id": null,
-            "player": null
-          },
-          "savePitcher": {
-            "id": null,
-            "player": null
-          },
-          "mvpData": {
-            "id": null,
-            "team": null,
-            "player": null,
-            "playerType": null,
-            "mvpCnt": null,
-            "gameStatus": {
-              "pitch": {
-                "inningPitchedCnt": null,
-                "strikeOutCnt": null,
-                "runCnt": null
-              },
-              "defense": {
-                "assistCnt": null,
-                "putOutCnt": null,
-                "errorCnt": null
-              },
-              "hit": {
-                "hitCnt": null,
-                "runBattedInCnt": null,
-                "scoreCnt": null,
-                "homeRunCnt": null
+          "gameEnd": {
+            "winPitcher": {
+              "id": null,
+              "player": null
+            },
+            "losePitcher": {
+              "id": null,
+              "player": null
+            },
+            "savePitcher": {
+              "id": null,
+              "player": null
+            },
+            "mvpData": {
+              "id": null,
+              "team": null,
+              "player": null,
+              "playerType": null,
+              "mvpCnt": null,
+              "gamestats": {
+                "pitch": {
+                  "inningPitchedCnt": null,
+                  "strikeOutCnt": null,
+                  "runCnt": null
+                },
+                "defense": {
+                  "assistCnt": null,
+                  "putOutCnt": null,
+                  "errorCnt": null
+                },
+                "hit": {
+                  "hitCnt": null,
+                  "runBattedInCnt": null,
+                  "scoreCnt": null,
+                  "homeRunCnt": null
+                }
               }
             }
           }
         }
-      }
       ],
       "minor": []
     }
