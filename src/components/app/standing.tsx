@@ -123,7 +123,7 @@ export function Standing({ year, season }: Props) {
     return (
       <div
         className={`
-        w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl h-80
+        w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl h-70
       `}
       >
         <Table>
@@ -176,7 +176,7 @@ export function Standing({ year, season }: Props) {
     return (
       <div
         className={`
-      w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl h-80
+      w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl h-70
     `}
       >
         <Table>
