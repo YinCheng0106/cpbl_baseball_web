@@ -195,8 +195,8 @@ export default function Page({ params }: Props) {
         </div>
       </div>
       <div>
-        <h3 className="text-3xl font-bold">球員列表</h3>
-        <div className="flex flex-col items-center justify-center mt-2">
+        <h3 className="flex flex-col gap-2 text-3xl font-bold">球員列表</h3>
+        <div className="flex flex-col items-center justify-center">
           <h4 className="py-4 text-2xl font-bold">教練</h4>
             <div className={`
               grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8
@@ -204,6 +204,50 @@ export default function Page({ params }: Props) {
             `}>
             {data.coach["major"].map((coach) => (
               <TeamPlayersCard key={coach} playerId={coach} />
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <h4 className="py-4 text-2xl font-bold">投手</h4>
+            <div className={`
+              grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8
+              gap-4 justify-items-center
+            `}>
+            {data.pitcher["major"].map((pitcher) => (
+              <TeamPlayersCard key={pitcher} playerId={pitcher} />
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <h4 className="py-4 text-2xl font-bold">捕手</h4>
+            <div className={`
+              grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8
+              gap-4 justify-items-center
+            `}>
+            {data.catcher["major"].map((catcher) => (
+              <TeamPlayersCard key={catcher} playerId={catcher} />
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <h4 className="py-4 text-2xl font-bold">內野手</h4>
+            <div className={`
+              grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8
+              gap-4 justify-items-center
+            `}>
+            {data.infielder["major"].map((infielder) => (
+              <TeamPlayersCard key={infielder} playerId={infielder} />
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <h4 className="py-4 text-2xl font-bold">外野手</h4>
+            <div className={`
+              grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8
+              gap-4 justify-items-center
+            `}>
+            {data.outfielder["major"].map((outfielder) => (
+              <TeamPlayersCard key={outfielder} playerId={outfielder} />
             ))}
           </div>
         </div>
