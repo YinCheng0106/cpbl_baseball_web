@@ -41,13 +41,18 @@ export interface halfSeasonData {
   draws: homeAwayWLD;
 }
 
-export interface yearstats {
+export interface yearStats {
   firstHalf: halfSeasonData;
   secondHalf: halfSeasonData;
 }
 
-export interface Teamstats {
-  [year: string]: yearstats;
+export interface TeamStats {
+  [year: string]: yearStats;
+}
+
+export interface TeamPlayer {
+  major: string[];
+  minor: string[];
 }
 
 export interface TeamData {
@@ -59,5 +64,10 @@ export interface TeamData {
   stadium: string;
   website: string;
   contact: Contact;
-  stats: Teamstats;
+  stats: TeamStats;
+  coach: TeamPlayer;
+  pitcher: TeamPlayer;
+  catcher: TeamPlayer;
+  infielder: TeamPlayer;
+  outfielder: TeamPlayer;
 }
