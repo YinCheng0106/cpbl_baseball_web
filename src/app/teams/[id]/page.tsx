@@ -9,14 +9,16 @@ import { Stadium } from "@/utils/gameUtils";
 
 import { TeamData } from "@/types/teamData";
 
+import { TeamPlayersCard } from "@/components/app/teamPlayersCard";
+
 type Props = Readonly<{
-  params: Promise<{ id: number }>;
+  params: Promise<{ id: number; }>;
 }>;
 
 export default function Page({ params }: Props) {
+  const [loading, setLoading] = useState(true);
   const [teamData, setTeams] = useState<TeamData[]>([]);
   const [teamId, setTeamId] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     params.then((resolvedParams) => {
@@ -190,6 +192,20 @@ export default function Page({ params }: Props) {
               "無"
             )}
           </p>
+        </div>
+      </div>
+      <div>
+        <h3 className="text-3xl font-bold">球員列表</h3>
+        <div className="flex flex-col items-center justify-center mt-2">
+          <h4 className="py-4 text-2xl font-bold">教練</h4>
+            <div className={`
+              grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8
+              gap-4 justify-items-center
+            `}>
+            {data.coach["major"].map((coach) => (
+              <TeamPlayersCard key={coach} playerId={coach} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
