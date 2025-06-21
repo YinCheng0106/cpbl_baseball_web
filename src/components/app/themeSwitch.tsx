@@ -32,7 +32,7 @@ export function ModeToggle() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost">
           {ThemeIcons[theme ?? 'system']}
-          {ThemeNames[theme ?? 'system']}
+          <p className="hidden sm:block">{ThemeNames[theme ?? 'system']}</p>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

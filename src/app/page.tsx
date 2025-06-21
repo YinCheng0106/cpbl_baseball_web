@@ -93,7 +93,7 @@ export default function Home() {
       w-full h-full gap-8
     `}
     >
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center justify-center gap-4">
         <div className="w-full">
           <Tabs defaultValue="major" className="w-full">
             <div className="flex flex-row items-center justify-between">
@@ -106,7 +106,7 @@ export default function Home() {
                 >
                   <ChevronLeft />
                 </button>
-                <h2 className="text-xl">{formatDate(selectedDate)}</h2>
+                <h2 className="sm:text-xl">{formatDate(selectedDate)}</h2>
                 <button
                   className="hover:cursor-pointer hover:text-accent/100 transition-all ease-in-out"
                   type="button"
@@ -130,7 +130,7 @@ export default function Home() {
                   <div
                     className={`
                     flex flex-col justify-center 
-                    w-[400px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] 
+                    w-[350px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] 
                     py-6 h-48 mt-4
                   `}
                   >
@@ -140,14 +140,14 @@ export default function Home() {
                   <div
                     className={`
                     flex flex-col justify-center 
-                    w-[400px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] 
+                    w-[350px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] 
                     py-6 h-48 mt-4
                   `}
                   >
                     <p className="text-center text-gray-500">本日無賽事</p>
                   </div>
                 ) : (
-                  <div className="grid gap-3 mt-4">
+                  <div className="flex flex-col justify-center items-center gap-2 mt-4">
                     { getGames().major.map((gameData: GameStruct) => (
                       <GameCard
                         gameData={gameData}
