@@ -44,10 +44,15 @@ export function TeamPlayersCard({ playerId }: Props) {
           border p-4 rounded-lg shadow-md w-[150px]
         `}>
           <Skeleton width={100} height={125} className="mb-2 rounded-lg" />
+          <p className="border-b mb-1">
+            <Skeleton width={65} />
+          </p>
           <h3 className="text-xl">
             <Skeleton width={85} />
           </h3>
-          <p><Skeleton width={65} /></p>
+          <h3 className="text-xl">
+            <Skeleton width={85} />
+          </h3>
         </div>
       </SkeletonTheme>
     );
@@ -66,8 +71,9 @@ export function TeamPlayersCard({ playerId }: Props) {
           height={125}
           className="mb-2 rounded-lg"
         />
+        <p className="text-gray-500 dark:text-gray-600 border-b mb-1">TBD</p>
+        <h3 className="text-xl font-bold">00</h3>
         <h3 className="text-xl font-semibold">TBD</h3>
-        <p className="text-gray-500 dark:text-gray-600">Position</p>
       </div>
     )
   } else {
@@ -83,10 +89,11 @@ export function TeamPlayersCard({ playerId }: Props) {
           height={125}
           className="mb-2 rounded-lg"
         />
+        <p className="text-gray-500 dark:text-gray-600 border-b mb-1">{player.position}</p>
         <Link href={`/players/${player.id}`} className="link">
+          <h3 className="text-xl font-bold">{player.number}</h3>
           <h3 className="text-xl font-semibold">{player.name["zh-tw"]}</h3>
         </Link>
-        <p className="text-gray-500 dark:text-gray-600">{player.position}</p>
       </div>
     )
   }
