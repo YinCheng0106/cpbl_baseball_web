@@ -135,7 +135,7 @@ export interface GameScore {
 export interface GameStruct {
   gameInfo: GameInfo;
   gameLive: GameLive;
-  gameEnd: GameEnd;
+  gameEnd: GameResult;
 }
 
 export interface Game {
