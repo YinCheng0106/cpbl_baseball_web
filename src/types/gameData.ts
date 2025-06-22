@@ -15,19 +15,6 @@ export interface TeamStats {
   errors: number;
 }
 
-export interface GameInfo {
-  id: number;
-  type: string;
-  time: string;
-  location: string;
-  home: string;
-  away: string;
-  awayStarter: Player;
-  homeStarter: Player;
-  awayWLD: TeamRecord;
-  homeWLD: TeamRecord;
-}
-
 export interface Balls {
   strike: number;
   ball: number;
@@ -49,21 +36,6 @@ export interface ScoreboardType {
   home: TeamStats;
 }
 
-export interface GameLive {
-  status: number;
-  inning: number;
-  inningHalf: number;
-  home: TeamStats;
-  away: TeamStats;
-  balls: Balls;
-  base: [boolean, boolean, boolean];
-  onField: {
-    nowPitcher: Player;
-    nowBatter: Player;
-  };
-  scoreboard: ScoreboardType;
-}
-
 export interface PitchStats {
   inningPitchedCnt: number;
   strikeOutCnt: number;
@@ -83,7 +55,7 @@ export interface HitStats {
   homeRunCnt: number | null;
 }
 
-export interface Gamestats {
+export interface GameStats {
   pitch: PitchStats;
   defense: DefenseStats;
   hit: HitStats;
@@ -95,14 +67,69 @@ export interface MvpData {
   player: string;
   playerType: "Pitcher" | "Batter";
   mvpCnt: number;
-  gamestats: Gamestats;
+  gameStats: GameStats;
 }
 
-export interface GameEnd {
-  winPitcher: Player;
-  losePitcher: Player;
-  savePitcher: Player;
-  mvpData: MvpData;
+export interface GameInfo {
+  id: number;
+  year: string;
+  game_id: string;
+  date: string;
+  time: string;
+  type: string;
+  location: string;
+  awayTeamId: number;
+  homeTeamId: number;
+  awayStarterId: number | null;
+  homeStarterId: number | null;
+}
+
+export interface GameLive {
+  gameId: number;
+  status: number;
+  inning: number;
+  inningHalf: number;
+  strike: number;
+  ball: number;
+  out: number;
+  pitch: number;
+  base1: boolean;
+  base2: boolean;
+  base3: boolean;
+  nowPitcherId: number | null;
+  nowBatterId: number | null;
+  homeRuns: number;
+  homeHits: number;
+  homeErrors: number;
+  awayRuns: number;
+  awayHits: number;
+  awayErrors: number;
+}
+
+export interface GameResult {
+  winPitcherId: number | null;
+  losePitcherId: number | null;
+  savePitcherId: number | null;
+  mvpId: number | null;
+  mvpType: "Pitcher" | "Batter" | null;
+  mvpCnt: number | null;
+  pitchInning: number | null;
+  pitchStrikeout: number | null;
+  pitchRuns: number | null;
+  defAssist: number | null;
+  defPutout: number | null;
+  defError: number | null;
+  hitCnt: number | null;
+  hitRbi: number | null;
+  hitScore: number | null;
+  hitHomerun: number | null;
+}
+
+export interface GameScore {
+  gameId: number;
+  inning: number;
+  awayScore: number;
+  homeScore: number;
 }
 
 export interface GameStruct {
