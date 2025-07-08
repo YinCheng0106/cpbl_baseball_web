@@ -72,11 +72,11 @@ export interface MvpData {
 
 export interface GameInfo {
   id: number;
+  gameId: string;
+  type: string;
   year: string;
-  game_id: string;
   date: string;
   time: string;
-  type: string;
   location: string;
   awayTeamId: number;
   homeTeamId: number;
