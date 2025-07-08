@@ -110,7 +110,12 @@ export function Standing({ year, season }: Props) {
   useEffect(() => {
     setLoading(true);
     async function fetchStanding() {
-      const { data: teams } = await supabase.from("teams").select();
+      const { data: teams, error } = await supabase.from("teams").select();
+      if (error) {
+        console.error("Error fetching teams:", error);
+        setLoading(false);
+        return;
+      }
       if (teams && teams.length > 0) {
         setTeams(completedRank(teams, season, year));
       }
