@@ -1,8 +1,3 @@
-export interface PlayerName {
-  "zh-tw": string;
-  en: string;
-}
-
 export interface PitchingStats {
   games: number;
   gamesStarted: number;
@@ -91,8 +86,11 @@ export interface PlayerStats {
 
 export interface PlayerData {
   id: string;
+  slug: string;
   avatar: string;
-  name: PlayerName;
+  banner: string;
+  name: string;
+  en_name: string;
   number: number;
   height: number;
   weight: number;
