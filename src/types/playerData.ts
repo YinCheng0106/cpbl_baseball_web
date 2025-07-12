@@ -94,12 +94,17 @@ export interface PlayerData {
   number: number;
   height: number;
   weight: number;
-  team: string;
+  team: number;
   debutDate: string;
   birthday: string;
   nationality: string;
+  education: string;
+  draftTeam: number;
+  draftYear: number;
+  draftRound: number;
   position: "Pitcher" | "Catcher" | "Infielder" | "Outfielder" | "Coach";
   pitchingHabits: "L" | "R";
   battingHabits: "L" | "R";
+  followers: number;
   stats: PlayerStats;
 }
