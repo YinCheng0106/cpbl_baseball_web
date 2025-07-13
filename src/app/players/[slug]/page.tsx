@@ -17,6 +17,10 @@ import {
   TabsList,
   TabsTrigger
 } from "@/components/ui/tabs";
+import { DataTable } from "@/app/players/[slug]/data-table";
+import { battingColumns } from "@/app/players/[slug]/battingColumns";
+import { pitchingColumns } from "@/app/players/[slug]/pitchingColumns";
+import { fieldingColumns } from "@/app/players/[slug]/fieldingColumns";
 
 
 import { PlayerData } from "@/types/playerData";
@@ -180,24 +184,33 @@ export default function PlayerPage({ params }: Props) {
         <div className="container flex mx-auto px-4 mt-4">
           <Tabs defaultValue="individualStats" className="w-full">
             <div className="flex flex-row items-center justify-between mb-4">
-              <h3 className="text-xl font-bold">球員數據</h3>
+              <h3 className="text-2xl font-bold">球員數據</h3>
               <TabsList>
                 <TabsTrigger value="individualStats">個人成績表</TabsTrigger>
                 <TabsTrigger value="homerunLogs">全壘打明細</TabsTrigger>
               </TabsList>
             </div>
             <TabsContent value="individualStats" className="space-y-4">
-              <div>
-                <h4 className="text-lg font-bold">打擊</h4>
-                {/* 打擊數據表格可以在這裡添加 */}
+              <div className="flex flex-col space-y-4">
+                <h4 className="text-lg font-bold">打擊成績</h4>
+                <DataTable
+                  columns={battingColumns}
+                  data={[]}
+                />
               </div>
-              <div>
-                <h4 className="text-lg font-bold">投球</h4>
-                {/* 投球數據表格可以在這裡添加 */}
+              <div className="flex flex-col space-y-4">
+                <h4 className="text-lg font-bold">投球成績</h4>
+                <DataTable
+                  columns={pitchingColumns}
+                  data={[]}
+                />
               </div>
-              <div>
-                <h4 className="text-lg font-bold">守備</h4>
-                {/* 守備數據表格可以在這裡添加 */}
+              <div className="flex flex-col space-y-4">
+                <h4 className="text-lg font-bold">守備成績</h4>
+                <DataTable
+                  columns={fieldingColumns}
+                  data={[]}
+                />
               </div>
             </TabsContent>
             <TabsContent value="homerunLogs">
