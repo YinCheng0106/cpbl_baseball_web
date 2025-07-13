@@ -34,7 +34,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-import { ChevronRight, ChevronLeft, PlusIcon, RefreshCcwIcon } from "lucide-react";
+import { ChevronRight, ChevronLeft, PlusIcon } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
