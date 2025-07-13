@@ -43,7 +43,9 @@ export default function RootLayout({
           <div className="flex flex-col">
             <div className="min-h-svh flex flex-col items-center">
               <AppHeader />
-              {children}
+              <main className="pt-20 w-full flex flex-col items-center">
+                {children}
+              </main>
             </div>
             <AppFooter />
           </div>
