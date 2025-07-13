@@ -105,7 +105,7 @@ export const pitchingColumns: ColumnDef<PitchingStats>[] = [
     header: "暴投",
   },
   {
-    accessorKey: "Balks",
+    accessorKey: "balks",
     header: "投手犯規",
   },
   {
