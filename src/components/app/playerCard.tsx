@@ -46,11 +46,11 @@ export function PlayerCard({ id, playerType }: Props) {
         <div>
           <Avatar>
             <AvatarImage src={players.avatar} />
-            <AvatarFallback>{players.name["zh-tw"].charAt(0)}</AvatarFallback>
+            <AvatarFallback>{players.name.charAt(0)}</AvatarFallback>
           </Avatar>
         </div>
         <div className="text-sm">
-          <h2 className="font-bold">{players.name["zh-tw"]}</h2>
+          <h2 className="font-bold">{players.name}</h2>
           <div className="flex flex-row text-xs sm:text-sm gap-1 text-gray-500 items-center justify-between">
             <span className="">{players.stats[year].pitching.wins}-{players.stats[year].pitching.losses}</span>
             <span>|</span>
@@ -70,11 +70,11 @@ export function PlayerCard({ id, playerType }: Props) {
         <div>
           <Avatar>
             <AvatarImage src={players.avatar} />
-            <AvatarFallback>{players.name["zh-tw"].charAt(0)}</AvatarFallback>
+            <AvatarFallback>{players.name.charAt(0)}</AvatarFallback>
           </Avatar>
         </div>
         <div className="text-sm">
-          <h2 className="font-bold">{players.name["zh-tw"]}</h2>
+          <h2 className="font-bold">{players.name}</h2>
           <div className="flex flex-row text-xs sm:text-sm gap-1 text-gray-500 items-center justify-between">
             <span className="">{players.stats[year].pitching.wins}-{players.stats[year].pitching.losses}</span>
             <span>|</span>
@@ -94,11 +94,11 @@ export function PlayerCard({ id, playerType }: Props) {
         <div>
           <Avatar>
             <AvatarImage src={players.avatar} />
-            <AvatarFallback>{players.name["zh-tw"].charAt(0)}</AvatarFallback>
+            <AvatarFallback>{players.name.charAt(0)}</AvatarFallback>
           </Avatar>
         </div>
         <div className="text-sm">
-          <h2 className="font-bold">{players.name["zh-tw"]}</h2>
+          <h2 className="font-bold">{players.name}</h2>
           <div className="flex flex-row text-xs sm:text-sm gap-1 text-gray-500 items-center justify-between">
             <span className="">{players.stats[year].pitching.wins}-{players.stats[year].pitching.losses}</span>
             <span>|</span>
@@ -118,11 +118,11 @@ export function PlayerCard({ id, playerType }: Props) {
         <div>
           <Avatar>
             <AvatarImage src={players.avatar} />
-            <AvatarFallback>{players.name["zh-tw"].charAt(0)}</AvatarFallback>
+            <AvatarFallback>{players.name.charAt(0)}</AvatarFallback>
           </Avatar>
         </div>
         <div className="text-sm">
-          <h2 className="font-bold">{players.name["zh-tw"]}</h2>
+          <h2 className="font-bold">{players.name}</h2>
           <div className="flex flex-row text-xs sm:text-sm gap-1 text-gray-500 items-center justify-between">
             <span className="flex items-center gap-0.5">
               <span>AVG</span>
