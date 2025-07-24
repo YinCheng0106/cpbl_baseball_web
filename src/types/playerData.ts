@@ -85,7 +85,7 @@ export interface PlayerStats {
 }
 
 export interface PlayerData {
-  id: string;
+  id: number;
   slug: string;
   avatar: string;
   banner: string;

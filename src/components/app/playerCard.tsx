@@ -5,7 +5,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { PlayerData } from "@/types/playerData";
 
 type Props = {
-  id: string | null; 
+  id: number | null; 
   playerType: "batter" | "pitcher" | "w/lPitcher" | "savePitcher" | null;
 }
 
@@ -23,7 +23,7 @@ export function PlayerCard({ id, playerType }: Props) {
       });
   });
 
-  const players = player.find(p => p.id === id);
+  const players = player.find(p => p.id == id);
   const year = new Date().getFullYear().toString();
   if (!players) {
     return (
