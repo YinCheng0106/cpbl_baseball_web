@@ -29,21 +29,21 @@ export function MvpCard(props: Props | null) {
             </div>
             <div className="flex justify-between border-b pb-1">
               <span className="text-sm font-medium">打數</span>
-              <span className="text-sm">{mvp.gamestats.hit.hitCnt}</span>
+              <span className="text-sm">{mvp.gameStats.hit.hitCnt}</span>
             </div>
             <div className="flex justify-between border-b pb-1">
               <span className="text-sm font-medium">打點</span>
               <span className="text-sm">
-                {mvp.gamestats.hit.runBattedInCnt}
+                {mvp.gameStats.hit.runBattedInCnt}
               </span>
             </div>
             <div className="flex justify-between border-b pb-1">
               <span className="text-sm font-medium">得分</span>
-              <span className="text-sm">{mvp.gamestats.hit.scoreCnt}</span>
+              <span className="text-sm">{mvp.gameStats.hit.scoreCnt}</span>
             </div>
             <div className="flex justify-between border-b pb-1">
               <span className="text-sm font-medium">全壘打</span>
-              <span className="text-sm">{mvp.gamestats.hit.homeRunCnt}</span>
+              <span className="text-sm">{mvp.gameStats.hit.homeRunCnt}</span>
             </div>
           </div>
         ) : (
@@ -55,18 +55,18 @@ export function MvpCard(props: Props | null) {
             <div className="flex justify-between border-b pb-1">
               <span className="text-sm font-medium">投球局數</span>
               <span className="text-sm">
-                {mvp.gamestats.pitch.inningPitchedCnt}
+                {mvp.gameStats.pitch.inningPitchedCnt}
               </span>
             </div>
             <div className="flex justify-between border-b pb-1">
               <span className="text-sm font-medium">奪三振數</span>
               <span className="text-sm">
-                {mvp.gamestats.pitch.strikeOutCnt}
+                {mvp.gameStats.pitch.strikeOutCnt}
               </span>
             </div>
             <div className="flex justify-between border-b pb-1">
               <span className="text-sm font-medium">失分數</span>
-              <span className="text-sm">{mvp.gamestats.pitch.runCnt}</span>
+              <span className="text-sm">{mvp.gameStats.pitch.runCnt}</span>
             </div>
           </div>
         )}
