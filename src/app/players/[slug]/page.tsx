@@ -57,7 +57,8 @@ export default function PlayerPage({ params }: Props) {
     fetchPlayer();
   }, []);
 
-  console.log("Player Data:", player);
+  console.table(player);
+
   if (loading) {
     return (
       <div className="container mx-auto px-4">
@@ -174,8 +175,8 @@ export default function PlayerPage({ params }: Props) {
               <p className="text-md text-gray-400">初登板</p>
               <div className="flex items-center gap-2">
                 <p className="text-lg font-bold pl-4">{player.debutDate}</p>
-                <Link href={`/players/${player.id}/debut`}>
-                  <SquareArrowOutUpRightIcon className="w-4 h-4 text-blue-500 hover:text-accent" />
+                <Link href={`/players/${player.id}/debut`} className="flex items-center">
+                  <SquareArrowOutUpRightIcon className="w-4 h-4 link" />
                 </Link>
               </div>
             </div>
