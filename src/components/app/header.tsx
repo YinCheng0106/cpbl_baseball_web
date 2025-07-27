@@ -68,6 +68,14 @@ export function AppHeader() {
           >
             <p className="font-medium">球隊</p>
           </Link>
+          <Link
+            href={"/players"}
+            className={`
+            hover:text-accent/100 transition-all ease-in-out
+            `}
+          >
+            <p className="font-medium">球員</p>
+          </Link>
         </div>
         <div className="text-zinc-400 dark:text-zinc-200 font-bold">|</div>
         <div>
