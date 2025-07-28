@@ -81,7 +81,7 @@ export default function PlayerPage({ params }: Props) {
         <div className="relative top-0 z-10">
           <div className="relative overflow-hidden">
             <Image
-              src={player.banner || "/playerImg/000929/banner.png"}
+              src={`/playerImg/${player.id}/banner.png`}
               alt={`Banner for ${player.name}`}
               width={1200}
               height={384}
@@ -97,7 +97,7 @@ export default function PlayerPage({ params }: Props) {
             `}
           >
             <Image
-              src={player.avatar || "/playerImg/000929/avatar.png"}
+              src={`/playerImg/${player.id}/avatar.png`}
               alt={player.name}
               width={140}
               height={150}
