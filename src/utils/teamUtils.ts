@@ -67,3 +67,16 @@ const TeamNameAbbreviation: Record<string | number, string> = {
 export const teamToAbbreviation = (team: string | number) => {
   return TeamNameAbbreviation[team] || team;
 };
+
+const TeamString: Record<string | number, string> = {
+  1: "中信兄弟",
+  2: "統一獅",
+  3: "樂天桃猿",
+  4: "富邦悍將",
+  5: "味全龍",
+  6: "台鋼雄鷹",
+};
+
+export const teamToString = (team: string | number): string => {
+  return TeamString[team] || team.toString();
+};
