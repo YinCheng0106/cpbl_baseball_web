@@ -1,6 +1,4 @@
 "use client";
-
-import type { Metadata, ResolvingMetadata } from "next";
 import { useState, useEffect, use } from "react";
 
 import Image from "next/image";
@@ -11,25 +9,19 @@ import { teamToWord } from "@/utils/teamUtils";
 import { positionToAbbreviation } from "@/utils/playerUtils";
 
 import { Button } from "@/components/ui/button";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger
-} from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DataTable } from "@/app/players/[slug]/data-table";
 import { battingColumns } from "@/app/players/[slug]/battingColumns";
 import { pitchingColumns } from "@/app/players/[slug]/pitchingColumns";
 import { fieldingColumns } from "@/app/players/[slug]/fieldingColumns";
 
-
 import { PlayerData } from "@/types/playerData";
 
 import { SquareArrowOutUpRightIcon } from "lucide-react";
 
-type Props = Readonly<{
+type Props = {
   params: Promise<{ slug: string }>;
-}>;
+};
 
 export default function PlayerPage({ params }: Props) {
   const { slug } = use(params);
@@ -175,7 +167,10 @@ export default function PlayerPage({ params }: Props) {
               <p className="text-md text-gray-400">初登板</p>
               <div className="flex items-center gap-2">
                 <p className="text-lg font-bold pl-4">{player.debutDate}</p>
-                <Link href={`/players/${player.id}/debut`} className="flex items-center">
+                <Link
+                  href={`/players/${player.id}/debut`}
+                  className="flex items-center"
+                >
                   <SquareArrowOutUpRightIcon className="w-4 h-4 link" />
                 </Link>
               </div>
@@ -194,24 +189,15 @@ export default function PlayerPage({ params }: Props) {
             <TabsContent value="individualStats" className="space-y-4">
               <div className="flex flex-col space-y-4">
                 <h4 className="text-lg font-bold">打擊成績</h4>
-                <DataTable
-                  columns={battingColumns}
-                  data={[]}
-                />
+                <DataTable columns={battingColumns} data={[]} />
               </div>
               <div className="flex flex-col space-y-4">
                 <h4 className="text-lg font-bold">投球成績</h4>
-                <DataTable
-                  columns={pitchingColumns}
-                  data={[]}
-                />
+                <DataTable columns={pitchingColumns} data={[]} />
               </div>
               <div className="flex flex-col space-y-4">
                 <h4 className="text-lg font-bold">守備成績</h4>
-                <DataTable
-                  columns={fieldingColumns}
-                  data={[]}
-                />
+                <DataTable columns={fieldingColumns} data={[]} />
               </div>
             </TabsContent>
             <TabsContent value="homerunLogs">
