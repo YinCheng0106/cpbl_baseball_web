@@ -137,7 +137,7 @@ export function Standing({ year, season }: Props) {
               <TableHead className="text-center font-black">排名</TableHead>
               <TableHead className="text-center font-black">球隊</TableHead>
               <TableHead className="text-center font-black">出賽數</TableHead>
-              <TableHead className="text-center font-black">勝-敗-和</TableHead>
+              <TableHead className="text-center font-black">勝-和-敗</TableHead>
               <TableHead className="text-center font-black">勝率</TableHead>
               <TableHead className="text-center font-black">勝差</TableHead>
               <TableHead className="text-center font-black">
@@ -190,7 +190,7 @@ export function Standing({ year, season }: Props) {
               <TableHead className="text-center font-black">排名</TableHead>
               <TableHead className="text-center font-black">球隊</TableHead>
               <TableHead className="text-center font-black">出賽數</TableHead>
-              <TableHead className="text-center font-black">勝-敗-和</TableHead>
+              <TableHead className="text-center font-black">勝-和-敗</TableHead>
               <TableHead className="text-center font-black">勝率</TableHead>
               <TableHead className="text-center font-black">勝差</TableHead>
               <TableHead className="text-center font-black">
@@ -228,7 +228,7 @@ export function Standing({ year, season }: Props) {
                   </TableCell>
                   <TableCell className="text-center">
                     {team.win !== null ? (
-                      `${team.win}-${team.lose}-${team.tie}`
+                      `${team.win}-${team.tie}-${team.lose}`
                     ) : (
                       <Skeleton />
                     )}
