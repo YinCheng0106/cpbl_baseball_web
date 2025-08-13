@@ -50,7 +50,9 @@ import {
 const GameSchema = z.object({
   gameNo: z.string().min(1, "比賽編號不能為空"),
   year: z.number().min(1990, "年份不能早於1990年"),
-  date: z.date().refine((date) => date >= new Date("1990-01-01")),
+  date: z.date().refine((date) => date >= new Date("1990-01-01"),{
+    message: "請輸入有效的比賽日期",
+  }),
   type: z.string().min(1, "比賽類型不能為空"),
   time: z.string().min(1, "比賽時間不能為空"),
   location: z.string().min(1, "比賽地點不能為空"),
@@ -144,7 +146,7 @@ export function GameForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit, (errors) => {
-          console.log("Form validation errors:", errors);
+          console.error("Form validation errors:", errors);
         })}
         className="space-y-4 select-none"
       >
