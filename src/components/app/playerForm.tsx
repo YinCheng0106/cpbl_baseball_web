@@ -36,22 +36,19 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  Command,
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
-} from "@/components/ui/command";
 
 import { teamToWord } from "@/utils/teamUtils";
 
 const PlayerSchema = z.object({
   id: z.string().min(1, "請輸入球員ID"),
+  league: z.enum(["major", "minor"], {
+    errorMap: (issue) => {
+      if (issue.code === "invalid_enum_value") {
+        return { message: "請選擇球員聯盟" };
+      }
+      return { message: "無效的球員聯盟" };
+    },
+  }),
   name: z.string().min(1, "請輸入球員姓名"),
   en_name: z.string().min(1, "請輸入球員英文或原文姓名"),
   nationality: z.string().min(1, "請輸入球員國籍"),
@@ -90,6 +87,7 @@ export function PlayerForm() {
     resolver: zodResolver(PlayerSchema),
     defaultValues: {
       id: undefined,
+      league: "major",
       name: "",
       en_name: "",
       nationality: "",
@@ -120,6 +118,7 @@ export function PlayerForm() {
 
     const insertedData = {
       id: values.id,
+      league: values.league,
       name: values.name,
       en_name: values.en_name,
       slug:
@@ -155,6 +154,7 @@ export function PlayerForm() {
       alert("新增成功！");
       form.reset({
         id: undefined,
+        league: "major",
         name: "",
         en_name: "",
         nationality: "",
@@ -186,20 +186,49 @@ export function PlayerForm() {
         })}
         className="space-y-4 select-none"
       >
-        <FormField
-          control={form.control}
-          name="id"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>球員ID</FormLabel>
-              <FormControl>
-                <Input type="number" placeholder="請輸入球員ID" {...field} />
-              </FormControl>
-              <FormDescription>球員ID必須為正整數</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex items-center justify-between gap-2">
+          <FormField
+            control={form.control}
+            name="id"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>球員ID</FormLabel>
+                <FormControl>
+                  <Input type="number" placeholder="請輸入球員ID" {...field} />
+                </FormControl>
+                <FormDescription>球員ID必須為正整數</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="league"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>球員聯盟</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    className="flex items-center"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="major" id="league_major" />
+                      <Label htmlFor="league_major">一軍</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="minor" id="league_minor" />
+                      <Label htmlFor="league_minor">二軍</Label>
+                    </div>
+                  </RadioGroup>
+                </FormControl>
+                <FormDescription>請選擇球員聯盟</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <div className="flex items-center justify-between gap-2">
           <FormField
             control={form.control}
