@@ -49,7 +49,7 @@ export default function AllPlayerPage() {
               <p className="text-xl font-bold">中信兄弟</p>
             </Link>
           </div>
-          <div className="flex items-start gap-2">
+          <div className="flex flex-wrap items-start gap-2">
             {players
               .filter(
                 (player) => player.team === 1 && player.status !== "retired"
@@ -62,9 +62,9 @@ export default function AllPlayerPage() {
                   key={player.id}
                   href={`/players/${player.id}`}
                   className="flex items-center justify-between p-2 link"
-                >
+                > 
                   <p className="text-lg">
-                    {player.number} {player.name}
+                    {player.name}
                     {player.status === "unsigned" ? "#" : ""}
                     {player.status === "contract" ? "*" : ""}
                     {player.status === "independent" ? "◎" : ""}
@@ -83,7 +83,7 @@ export default function AllPlayerPage() {
               <p className="text-xl font-bold">統一7-ELEVEn獅</p>
             </Link>
           </div>
-          <div className="flex items-start gap-2">
+          <div className="flex flex-wrap items-start gap-2">
             {players
               .filter(
                 (player) => player.team === 2 && player.status !== "retired"
@@ -98,7 +98,7 @@ export default function AllPlayerPage() {
                   className="flex items-center justify-between p-2 link"
                 >
                   <p className="text-lg">
-                    {player.number} {player.name}
+                    {player.name}
                     {player.status === "unsigned" ? "#" : ""}
                     {player.status === "contract" ? "*" : ""}
                     {player.status === "independent" ? "◎" : ""}
@@ -117,7 +117,7 @@ export default function AllPlayerPage() {
               <p className="text-xl font-bold">樂天桃猿</p>
             </Link>
           </div>
-          <div className="flex items-start gap-2">
+          <div className="flex flex-wrap items-start gap-2">
             {players
               .filter(
                 (player) => player.team === 3 && player.status !== "retired"
@@ -132,7 +132,7 @@ export default function AllPlayerPage() {
                   className="flex items-center justify-between p-2 link"
                 >
                   <p className="text-lg">
-                    {player.number} {player.name}
+                    {player.name}
                     {player.status === "unsigned" ? "#" : ""}
                     {player.status === "contract" ? "*" : ""}
                     {player.status === "independent" ? "◎" : ""}
@@ -151,7 +151,7 @@ export default function AllPlayerPage() {
               <p className="text-xl font-bold">富邦悍將</p>
             </Link>
           </div>
-          <div className="flex items-start gap-2">
+          <div className="flex flex-wrap items-start gap-2">
             {players
               .filter(
                 (player) => player.team === 4 && player.status !== "retired"
@@ -166,7 +166,7 @@ export default function AllPlayerPage() {
                   className="flex items-center justify-between p-2 link"
                 >
                   <p className="text-lg">
-                    {player.number} {player.name}
+                    {player.name}
                     {player.status === "unsigned" ? "#" : ""}
                     {player.status === "contract" ? "*" : ""}
                     {player.status === "independent" ? "◎" : ""}
@@ -185,7 +185,7 @@ export default function AllPlayerPage() {
               <p className="text-xl font-bold">味全龍</p>
             </Link>
           </div>
-          <div className="flex items-start gap-2">
+          <div className="flex flex-wrap items-start gap-2">
             {players
               .filter(
                 (player) => player.team === 5 && player.status !== "retired"
@@ -200,7 +200,7 @@ export default function AllPlayerPage() {
                   className="flex items-center justify-between p-2 link"
                 >
                   <p className="text-lg">
-                    {player.number} {player.name}
+                    {player.name}
                     {player.status === "unsigned" ? "#" : ""}
                     {player.status === "contract" ? "*" : ""}
                     {player.status === "independent" ? "◎" : ""}
@@ -219,7 +219,7 @@ export default function AllPlayerPage() {
               <p className="text-xl font-bold">台鋼雄鷹</p>
             </Link>
           </div>
-          <div className="flex items-start gap-2">
+          <div className="flex flex-wrap items-start gap-2">
             {players
               .filter(
                 (player) => player.team === 6 && player.status !== "retired"
@@ -234,7 +234,7 @@ export default function AllPlayerPage() {
                   className="flex items-center justify-between p-2 link"
                 >
                   <p className="text-lg">
-                    {player.number} {player.name}
+                    {player.name}
                     {player.status === "unsigned" ? "#" : ""}
                     {player.status === "contract" ? "*" : ""}
                     {player.status === "independent" ? "◎" : ""}

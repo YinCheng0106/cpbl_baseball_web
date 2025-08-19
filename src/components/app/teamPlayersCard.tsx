@@ -89,7 +89,7 @@ export function TeamPlayersCard({ playerId }: Props) {
           height={125}
           className="mb-2 rounded-lg"
         />
-        <p className="text-gray-500 dark:text-gray-600 border-b mb-1">{player.position}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-600 border-b mb-1">{player.position}</p>
         <Link href={`/players/${player.id}`} className="link">
           <h3 className="flex justify-center text-xl font-bold">{player.number}</h3>
           <h3 className="text-xl font-semibold">{player.name}</h3>

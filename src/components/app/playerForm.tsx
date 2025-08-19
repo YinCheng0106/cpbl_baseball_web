@@ -54,7 +54,7 @@ const PlayerSchema = z.object({
   nationality: z.string().min(1, "請輸入球員國籍"),
   education: z.string().optional(),
   team: z.string().min(1, "請輸入球員所屬球隊"),
-  birthday: z.date().min(new Date("1990-01-01"), "請輸入有效的球員生日"),
+  birthday: z.date().min(new Date("1900-01-01"), "請輸入有效的球員生日"),
   debutDate: z
     .date()
     .refine((date) => date > new Date("1990-01-01"), {
