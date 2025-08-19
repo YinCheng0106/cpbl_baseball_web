@@ -83,7 +83,7 @@ export function TeamPlayersCard({ playerId }: Props) {
         border p-4 rounded-lg shadow-md w-[150px]
       `}>
         <Image
-          src={`/playerAvatar/${player.avatar}`}
+          src={`/playerImg/${Number(player.id)}/avatar.png`}
           alt={player.name}
           width={100}
           height={125}
