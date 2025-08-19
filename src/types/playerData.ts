@@ -104,7 +104,9 @@ export interface PlayerData {
   draftTeam: number;
   draftYear: number;
   draftRound: number;
-  position: "Pitcher" | "Catcher" | "Infielder" | "Outfielder" | "Coach";
+  position: "Pitcher" | "Catcher" | "Infielder" | "Outfielder" | "Coach" |
+            "First-Baseman" | "Second-Baseman" | "Third-Baseman" | "Shortstop" |
+            "Left-Fielder" | "Right-Fielder" | "Center-Field";
   pitchingHabits: "L" | "R";
   battingHabits: "L" | "R";
   followers: number;
