@@ -96,6 +96,7 @@ export interface PlayerData {
   height: number;
   weight: number;
   team: number;
+  league: "major" | "minor";
   debutDate: string;
   birthday: string;
   nationality: string;
