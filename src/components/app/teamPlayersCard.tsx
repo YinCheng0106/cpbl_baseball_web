@@ -16,6 +16,7 @@ type Props = Readonly<{ playerId: string; }>;
 export function TeamPlayersCard({ playerId }: Props) {
   const [loading, setLoading] = useState(true);
   const [player, setPlayer] = useState<PlayerData>({} as PlayerData);
+  const [playerAvatar, setPlayerAvatar] = useState<string>(`/playerImg/${Number(playerId)}/avatar.png`);
 
   useEffect(() => {
     setLoading(true);
@@ -83,11 +84,12 @@ export function TeamPlayersCard({ playerId }: Props) {
         border p-4 rounded-lg shadow-md w-[150px]
       `}>
         <Image
-          src={`/playerImg/${Number(player.id)}/avatar.png`}
+          src={playerAvatar}
           alt={player.name}
           width={100}
           height={125}
           className="mb-2 rounded-lg"
+          onError={() => setPlayerAvatar("/playerImg/player_no_img.jpg")}
         />
         <p className="text-sm text-gray-500 dark:text-gray-600 border-b mb-1">{player.position}</p>
         <Link href={`/players/${player.id}`} className="link">

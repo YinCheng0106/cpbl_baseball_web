@@ -19,26 +19,31 @@ interface PlayerClientProps {
 
 export default function PlayerClient({ player }: PlayerClientProps) {
   const [followed, setFollowed] = useState(false);
+  const [playerAvatar, setPlayerAvatar] = useState(`/playerImg/${player.id}/avatar.png`);
+  const [playerBanner, setPlayerBanner] = useState(`/playerImg/${player.id}/banner.png`);
+
   return (
     <div className="container mx-auto px-4">
       <div className="relative top-0 z-10">
         <div className="relative overflow-hidden">
           <Image
-            src={`/playerImg/${player.id}/banner.png`}
+            src={playerBanner}
             alt={`Banner for ${player.name}`}
             width={1200}
             height={384}
+            onError={() => setPlayerBanner("")}
             className="w-full h-40 sm:h-52 md:h-96 object-cover opacity-80 rounded-t-xl"
           />
           <div className="absolute bottom-0 left-0 w-full h-36 bg-gradient-to-t from-background to-transparent" />
         </div>
         <div className="absolute bottom-0 left-4 sm:left-6 md:left-8 transform translate-y-2 lg:translate-y-1/4 md:translate-y-1/2 flex items-end w-full">
           <Image
-            src={`/playerImg/${player.id}/avatar.png`}
+            src={playerAvatar}
             alt={player.name}
             width={140}
             height={150}
             className="w-16 sm:w-24 md:w-32 rounded-lg border-4 border-white shadow-lg"
+            onError={() => setPlayerAvatar("/playerImg/player_no_img.jpg")}
           />
           <div className="flex items-center justify-between px-4 w-full">
             <div className="flex flex-col gap-1">
