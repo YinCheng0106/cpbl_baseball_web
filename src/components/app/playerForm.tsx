@@ -41,6 +41,7 @@ import { teamToWord } from "@/utils/teamUtils";
 
 const PlayerSchema = z.object({
   id: z.string().min(1, "請輸入球員ID"),
+  domestic: z.boolean().optional(),
   league: z.enum(["major", "minor"], {
     errorMap: (issue) => {
       if (issue.code === "invalid_enum_value") {
@@ -49,25 +50,25 @@ const PlayerSchema = z.object({
       return { message: "無效的球員聯盟" };
     },
     }),
-    name: z.string().min(1, "請輸入球員姓名"),
-    en_name: z.string().min(1, "請輸入球員英文或原文姓名"),
-    nationality: z.string().min(1, "請輸入球員國籍"),
-    education: z.string().nullable().optional(),
-    team: z.string().min(1, "請輸入球員所屬球隊"),
-    birthday: z.date().min(new Date("1900-01-01"), "請輸入有效的球員生日"),
-    debutDate: z
-    .date()
-    .refine((date) => date > new Date("1990-01-01"), {
-      message: "請輸入有效的球員出道日期",
-    })
-    .nullable()
-    .optional(),
-    draftTeam: z.string().nullable().optional(),
-    draftYear: z.string().nullable().optional(),
-    draftRound: z.string().nullable().optional(),
-    number: z.string().min(1, "請輸入球員號碼"),
-    position: z.string().min(1, "請輸入球員的主要守位"),
-    status: z.enum(["active", "retired", "unsigned", "contract", "independent"], {
+  name: z.string().min(1, "請輸入球員姓名"),
+  en_name: z.string().min(1, "請輸入球員英文或原文姓名"),
+  nationality: z.string().min(1, "請輸入球員國籍"),
+  education: z.string().nullable().optional(),
+  team: z.string().min(1, "請輸入球員所屬球隊"),
+  birthday: z.date().min(new Date("1900-01-01"), "請輸入有效的球員生日"),
+  debutDate: z
+  .date()
+  .refine((date) => date > new Date("1990-01-01"), {
+    message: "請輸入有效的球員出道日期",
+  })
+  .nullable()
+  .optional(),
+  draftTeam: z.string().nullable().optional(),
+  draftYear: z.string().nullable().optional(),
+  draftRound: z.string().nullable().optional(),
+  number: z.string().min(1, "請輸入球員號碼"),
+  position: z.string().min(1, "請輸入球員的主要守位"),
+  status: z.enum(["active", "retired", "unsigned", "contract", "independent"], {
     errorMap: (issue) => {
       if (issue.code === "invalid_enum_value") {
         return { message: "請選擇球員狀態" };
@@ -88,6 +89,7 @@ export function PlayerForm() {
     resolver: zodResolver(PlayerSchema),
     defaultValues: {
       id: "",
+      domestic: true,
       league: "major",
       name: "",
       en_name: "",
@@ -119,6 +121,7 @@ export function PlayerForm() {
 
     const insertedData = {
       id: values.id,
+      domestic: values.domestic,
       league: values.league,
       name: values.name,
       en_name: values.en_name,
@@ -155,6 +158,7 @@ export function PlayerForm() {
       alert("新增成功！\n" + `[${insertedData.id}] ${insertedData.name}`);
       form.reset({
         id: "",
+        domestic: true,
         league: "major",
         name: "",
         en_name: "",
@@ -187,7 +191,6 @@ export function PlayerForm() {
         })}
         className="space-y-4 select-none"
       >
-        <div className="flex items-center justify-between gap-2">
           <FormField
             control={form.control}
             name="id"
@@ -198,6 +201,34 @@ export function PlayerForm() {
                   <Input type="number" placeholder="請輸入球員ID" {...field} />
                 </FormControl>
                 <FormDescription>球員ID必須為正整數</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        <div className="flex items-center justify-between gap-2">
+          <FormField
+            control={form.control}
+            name="domestic"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>是否為本土球員</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={(value) => field.onChange(value === "true")}
+                    value={field.value?.toString()}
+                    className="flex items-center"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="true" id="domestic_true" />
+                      <Label htmlFor="domestic_true">是</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="false" id="domestic_false" />
+                      <Label htmlFor="domestic_false">否</Label>
+                    </div>
+                  </RadioGroup>
+                </FormControl>
+                <FormDescription>請選擇是否為本土球員</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -601,71 +632,75 @@ export function PlayerForm() {
             name="draftTeam"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>選秀球隊</FormLabel>
-                <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value || undefined}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="選擇選秀球隊" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="1">
-                        <Image
-                          src={teamToWord("中信兄弟")}
-                          alt="中信兄弟"
-                          width={15}
-                          height={15}
-                        />
-                        中信兄弟
-                      </SelectItem>
-                      <SelectItem value="2">
-                        <Image
-                          src={teamToWord("統一7-ELEVEn獅")}
-                          alt="統一7-ELEVEn獅"
-                          width={15}
-                          height={15}
-                        />
-                        統一7-ELEVEn獅
-                      </SelectItem>
-                      <SelectItem value="3">
-                        <Image
-                          src={teamToWord("樂天桃猿")}
-                          alt="樂天桃猿"
-                          width={15}
-                          height={15}
-                        />
-                        樂天桃猿
-                      </SelectItem>
-                      <SelectItem value="4">
-                        <Image
-                          src={teamToWord("富邦悍將")}
-                          alt="富邦悍將"
-                          width={15}
-                          height={15}
-                        />
-                        富邦悍將
-                      </SelectItem>
-                      <SelectItem value="5">
-                        <Image
-                          src={teamToWord("味全龍")}
-                          alt="味全龍"
-                          width={15}
-                          height={15}
-                        />
-                        味全龍
-                      </SelectItem>
-                      <SelectItem value="6">
-                        <Image
-                          src={teamToWord("台鋼雄鷹")}
-                          alt="台鋼雄鷹"
-                          width={15}
-                          height={15}
-                        />
-                        台鋼雄鷹
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
+          <FormLabel>選秀球隊</FormLabel>
+          <FormControl>
+            <Select 
+              onValueChange={field.onChange} 
+              value={field.value || undefined}
+              disabled={form.watch("domestic") === false}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="選擇選秀球隊" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="1">
+            <Image
+              src={teamToWord("中信兄弟")}
+              alt="中信兄弟"
+              width={15}
+              height={15}
+            />
+            中信兄弟
+                </SelectItem>
+                <SelectItem value="2">
+            <Image
+              src={teamToWord("統一7-ELEVEn獅")}
+              alt="統一7-ELEVEn獅"
+              width={15}
+              height={15}
+            />
+            統一7-ELEVEn獅
+                </SelectItem>
+                <SelectItem value="3">
+            <Image
+              src={teamToWord("樂天桃猿")}
+              alt="樂天桃猿"
+              width={15}
+              height={15}
+            />
+            樂天桃猿
+                </SelectItem>
+                <SelectItem value="4">
+            <Image
+              src={teamToWord("富邦悍將")}
+              alt="富邦悍將"
+              width={15}
+              height={15}
+            />
+            富邦悍將
+                </SelectItem>
+                <SelectItem value="5">
+            <Image
+              src={teamToWord("味全龍")}
+              alt="味全龍"
+              width={15}
+              height={15}
+            />
+            味全龍
+                </SelectItem>
+                <SelectItem value="6">
+            <Image
+              src={teamToWord("台鋼雄鷹")}
+              alt="台鋼雄鷹"
+              width={15}
+              height={15}
+            />
+            台鋼雄鷹
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </FormControl>
+          <FormMessage />
               </FormItem>
             )}
           />
@@ -674,15 +709,16 @@ export function PlayerForm() {
             name="draftYear"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>選秀年份</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    placeholder="選擇選秀年份"
-                    onChange={field.onChange}
-                  />
-                </FormControl>
-                <FormMessage />
+          <FormLabel>選秀年份</FormLabel>
+          <FormControl>
+            <Input
+              type="number"
+              placeholder="選擇選秀年份"
+              onChange={field.onChange}
+              disabled={form.watch("domestic") === false}
+            />
+          </FormControl>
+          <FormMessage />
               </FormItem>
             )}
           />
@@ -691,15 +727,16 @@ export function PlayerForm() {
             name="draftRound"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>選秀輪次</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    placeholder="選擇選秀輪次"
-                    onChange={field.onChange}
-                  />
-                </FormControl>
-                <FormMessage />
+          <FormLabel>選秀輪次</FormLabel>
+          <FormControl>
+            <Input
+              type="number"
+              placeholder="選擇選秀輪次"
+              onChange={field.onChange}
+              disabled={form.watch("domestic") === false}
+            />
+          </FormControl>
+          <FormMessage />
               </FormItem>
             )}
           />

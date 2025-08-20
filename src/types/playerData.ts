@@ -86,6 +86,7 @@ export interface PlayerStats {
 
 export interface PlayerData {
   id: number;
+  domestic: boolean;
   status: "active" | "retired" | "unsigned" | "contract" | "independent";
   slug: string;
   avatar: string;
