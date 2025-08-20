@@ -48,25 +48,26 @@ const PlayerSchema = z.object({
       }
       return { message: "無效的球員聯盟" };
     },
-  }),
-  name: z.string().min(1, "請輸入球員姓名"),
-  en_name: z.string().min(1, "請輸入球員英文或原文姓名"),
-  nationality: z.string().min(1, "請輸入球員國籍"),
-  education: z.string().optional(),
-  team: z.string().min(1, "請輸入球員所屬球隊"),
-  birthday: z.date().min(new Date("1900-01-01"), "請輸入有效的球員生日"),
-  debutDate: z
+    }),
+    name: z.string().min(1, "請輸入球員姓名"),
+    en_name: z.string().min(1, "請輸入球員英文或原文姓名"),
+    nationality: z.string().min(1, "請輸入球員國籍"),
+    education: z.string().nullable().optional(),
+    team: z.string().min(1, "請輸入球員所屬球隊"),
+    birthday: z.date().min(new Date("1900-01-01"), "請輸入有效的球員生日"),
+    debutDate: z
     .date()
     .refine((date) => date > new Date("1990-01-01"), {
       message: "請輸入有效的球員出道日期",
     })
+    .nullable()
     .optional(),
-  draftTeam: z.string().min(1, "請輸入球員選秀球隊").optional(),
-  draftYear: z.string().optional(),
-  draftRound: z.string().min(1, "請輸入有效的選秀輪次").optional(),
-  number: z.string().min(1, "請輸入球員號碼"),
-  position: z.string().min(1, "請輸入球員的主要守位"),
-  status: z.enum(["active", "retired", "unsigned", "contract", "independent"], {
+    draftTeam: z.string().nullable().optional(),
+    draftYear: z.string().nullable().optional(),
+    draftRound: z.string().nullable().optional(),
+    number: z.string().min(1, "請輸入球員號碼"),
+    position: z.string().min(1, "請輸入球員的主要守位"),
+    status: z.enum(["active", "retired", "unsigned", "contract", "independent"], {
     errorMap: (issue) => {
       if (issue.code === "invalid_enum_value") {
         return { message: "請選擇球員狀態" };
@@ -74,8 +75,8 @@ const PlayerSchema = z.object({
       return { message: "無效的球員狀態" };
     },
   }),
-  avatar: z.string().optional(),
-  banner: z.string().optional(),
+  avatar: z.string().nullable().optional(),
+  banner: z.string().nullable().optional(),
   height: z.string().min(1, "請輸入球員身高"),
   weight: z.string().min(1, "請輸入球員體重"),
   pitchingHabits: z.string().min(1, "請選擇球員投球習慣"),
@@ -91,16 +92,16 @@ export function PlayerForm() {
       name: "",
       en_name: "",
       nationality: "",
-      education: "",
+      education: null,
       team: "",
-      draftTeam: "",
-      draftYear: "",
-      draftRound: "",
+      draftTeam: null,
+      draftYear: null,
+      draftRound: null,
       number: "",
       position: "",
       status: "active",
-      avatar: "",
-      banner: "",
+      avatar: null,
+      banner: null,
       height: "",
       weight: "",
       debutDate: new Date(),
@@ -158,16 +159,16 @@ export function PlayerForm() {
         name: "",
         en_name: "",
         nationality: "",
-        education: "",
+        education: null,
         team: "",
-        draftTeam: "",
-        draftYear: "",
-        draftRound: "",
+        draftTeam: null,
+        draftYear: null,
+        draftRound: null,
         number: "",
         position: "",
         status: "active",
-        avatar: "",
-        banner: "",
+        avatar: null,
+        banner: null,
         height: "",
         weight: "",
         debutDate: new Date(),
@@ -414,7 +415,7 @@ export function PlayerForm() {
               <FormItem className="w-full">
                 <FormLabel>球員最高學歷</FormLabel>
                 <FormControl>
-                  <Input placeholder="請輸入球員學歷" {...field} />
+                  <Input placeholder="請輸入球員學歷" {...field} value={field.value || ""} />
                 </FormControl>
                 <FormDescription>球員學歷必須為非空的英文字串</FormDescription>
                 <FormMessage />
@@ -543,7 +544,7 @@ export function PlayerForm() {
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
                         mode="single"
-                        selected={field.value}
+                        selected={field.value || undefined}
                         onSelect={field.onChange}
                         disabled={(date) => date < new Date("1900-01-01")}
                         captionLayout="dropdown"
@@ -581,7 +582,7 @@ export function PlayerForm() {
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
                         mode="single"
-                        selected={field.value}
+                        selected={field.value || undefined}
                         onSelect={field.onChange}
                         disabled={(date) => date < new Date("1900-01-01")}
                         captionLayout="dropdown"
@@ -602,7 +603,7 @@ export function PlayerForm() {
               <FormItem className="w-full">
                 <FormLabel>選秀球隊</FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <Select onValueChange={field.onChange} value={field.value || undefined}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="選擇選秀球隊" />
                     </SelectTrigger>
@@ -678,7 +679,6 @@ export function PlayerForm() {
                   <Input
                     type="number"
                     placeholder="選擇選秀年份"
-                    value={field.value}
                     onChange={field.onChange}
                   />
                 </FormControl>
@@ -696,7 +696,6 @@ export function PlayerForm() {
                   <Input
                     type="number"
                     placeholder="選擇選秀輪次"
-                    value={field.value}
                     onChange={field.onChange}
                   />
                 </FormControl>
