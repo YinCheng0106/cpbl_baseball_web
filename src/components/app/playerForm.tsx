@@ -90,7 +90,6 @@ export function PlayerForm() {
       domestic: true,
       league: "major",
       status: "active",
-      debutDate: new Date(),
       birthday: new Date(),
     },
   });
@@ -756,14 +755,12 @@ export function PlayerForm() {
             <span>新增球員</span>
           </Button>
         </form>
-      {form.getValues().id && (
         <PlayerCreatedCard player={{
-          ...form.getValues(),
-          slug: form.getValues().en_name 
-            ? form.getValues().en_name.trim().toLowerCase().replace(/\s+/g, "-") + "-" + form.getValues().id.toString().padStart(6, "0")
+          ...form.watch(),
+          slug: form.watch().en_name
+            ? form.watch().en_name.trim().toLowerCase().replace(/\s+/g, "-") + "-" + form.watch().id?.toString().padStart(6, "0")
             : "",
         }} />
-      )}
       </Form>
     </div>
   );
