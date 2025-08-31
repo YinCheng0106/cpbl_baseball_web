@@ -87,29 +87,27 @@ export interface PlayerStats {
 export interface PlayerData {
   id: number;
   domestic: boolean;
-  status: "active" | "retired" | "unsigned" | "contract" | "independent";
+  status: string;
   slug: string;
-  avatar: string;
-  banner: string;
+  avatar: string | null;
+  banner: string | null;
   name: string;
   en_name: string;
   number: number;
   height: number;
   weight: number;
-  team: number;
-  league: "major" | "minor";
-  debutDate: string;
-  birthday: string;
+  team: string;
+  league: string;
+  debutDate?: Date | undefined;
+  birthday: Date;
   nationality: string;
-  education: string;
-  draftTeam: number;
-  draftYear: number;
-  draftRound: number;
-  position: "Pitcher" | "Catcher" | "Infielder" | "Outfielder" | "Coach" |
-            "First-Baseman" | "Second-Baseman" | "Third-Baseman" | "Shortstop" |
-            "Left-Fielder" | "Right-Fielder" | "Center-Field";
-  pitchingHabits: "L" | "R";
-  battingHabits: "L" | "R";
-  followers: number;
-  stats: PlayerStats;
+  education?: string | undefined;
+  draftTeam?: string | undefined;
+  draftYear?: number | undefined;
+  draftRound?: number | undefined;
+  position: string;
+  pitchingHabits: string;
+  battingHabits: string;
+  // followers: number;
+  // stats: PlayerStats;
 }
