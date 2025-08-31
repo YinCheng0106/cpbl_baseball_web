@@ -17,10 +17,13 @@ const teamWordMap: Record<string | number, string> = {
 
   "台鋼雄鷹": "/teamWord/word_tsg.png",
   6: "/teamWord/word_tsg.png",
+
+  "": "/teamLogo/logo_cpbl.png",
+  0: "/teamLogo/logo_cpbl.png",
 };
 
 export const teamToWord = (team: string | number): string => {
-  return teamWordMap[team] || "";
+  return teamWordMap[team] || "/teamLogo/logo_cpbl.png";
 };
 
 const teamLogoMap: Record<string, string> = {
@@ -42,10 +45,13 @@ const teamLogoMap: Record<string, string> = {
 
   "台鋼雄鷹": "/teamLogo/logo_tsg.png",
   6: "/teamLogo/logo_tsg.png",
+
+  "": "/teamLogo/logo_cpbl.png",
+  0: "/teamLogo/logo_cpbl.png",
 };
 
 export const teamToLogo = (team: string | number) => {
-  return teamLogoMap[team] || "";
+  return teamLogoMap[team] || "/teamLogo/logo_cpbl.png";
 };
 
 const TeamNameAbbreviation: Record<string | number, string> = {
@@ -62,6 +68,8 @@ const TeamNameAbbreviation: Record<string | number, string> = {
   5: "龍",
   "台鋼雄鷹": "鷹",
   6: "鷹",
+  "": "無",
+  0: "無"
 };
 
 export const teamToAbbreviation = (team: string | number) => {
@@ -75,8 +83,9 @@ const TeamString: Record<string | number, string> = {
   4: "富邦悍將",
   5: "味全龍",
   6: "台鋼雄鷹",
+  0: "其他"
 };
 
 export const teamToString = (team: string | number): string => {
-  return TeamString[team] || team.toString();
+  return TeamString[team] || "其他";
 };
