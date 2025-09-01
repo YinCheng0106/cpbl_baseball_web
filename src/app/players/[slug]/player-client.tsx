@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { Chakra_Petch } from "next/font/google";
 import { positionToAbbreviation } from "@/utils/playerUtils";
 import { teamToWord } from "@/utils/teamUtils";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,12 @@ import { fieldingColumns } from "@/app/players/[slug]/fieldingColumns";
 import type { PlayerData } from "@/types/playerData";
 import { SquareArrowOutUpRightIcon } from "lucide-react";
 import { useState } from "react";
+
+const chakraPetch = Chakra_Petch({
+  weight: "500",
+  style: "normal",
+  subsets: ["latin"],
+});
 
 interface PlayerClientProps {
   player: PlayerData;
@@ -26,14 +33,18 @@ export default function PlayerClient({ player }: PlayerClientProps) {
     <div className="container mx-auto px-4">
       <div className="relative top-0 z-10">
         <div className="relative overflow-hidden">
-          <Image
-            src={playerBanner}
-            alt={`Banner for ${player.name}`}
-            width={1200}
-            height={384}
-            onError={() => setPlayerBanner("")}
-            className="w-full h-40 sm:h-52 md:h-96 object-cover opacity-80 rounded-t-xl"
-          />
+          {
+            playerBanner === "" ? 
+            (<div className="w-full h-40 sm:h-52 md:h-96 bg-gray-200 rounded-t-xl"></div>)  :
+            (<Image
+              src={playerBanner}
+              alt={`Banner for ${player.name}`}
+              width={1200}
+              height={384}
+              onError={() => setPlayerBanner("")}
+              className="w-full h-40 sm:h-52 md:h-96 object-cover opacity-80 rounded-t-xl"
+            />)
+          }
           <div className="absolute bottom-0 left-0 w-full h-36 bg-gradient-to-t from-background to-transparent" />
         </div>
         <div className="absolute bottom-0 left-4 sm:left-6 md:left-8 transform translate-y-2 lg:translate-y-1/4 md:translate-y-1/2 flex items-end w-full">
@@ -47,9 +58,12 @@ export default function PlayerClient({ player }: PlayerClientProps) {
           />
           <div className="flex items-center justify-between px-4 w-full">
             <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2 font-bold">
-                <h2 className="text-2xl">{player.name}</h2>
-                <p className="text-xl">#{player.number}</p>
+              <div className="flex items-center gap-2">
+                <p className={`${chakraPetch.className} text-5xl font-bold`}>{player.number}</p>
+                <div className="flex flex-col">
+                  <h2 className="text-4xl font-bold">{player.name}</h2>
+                  <p className="text-sm text-gray-500">{player.en_name}</p>
+                </div>
               </div>
               <div className="flex items-center justify-between w-full gap-2">
                 <p className="font-bold">
@@ -88,30 +102,33 @@ export default function PlayerClient({ player }: PlayerClientProps) {
             <p className="text-md text-gray-400">國籍</p>
             <p className="text-lg font-bold pl-4">{player.nationality}</p>
           </div>
-          <div className="bg-accent p-4 rounded-lg shadow-sm ">
+          <div className={`bg-accent p-4 rounded-lg shadow-sm ${player.education ? "" : "hidden"}`}>
             <p className="text-md text-gray-400">學歷</p>
             <p className="text-lg font-bold pl-4">{player.education}</p>
           </div>
-          <div className="bg-accent p-4 rounded-lg shadow-sm">
+          <div className={`
+            bg-accent p-4 rounded-lg shadow-sm 
+            ${player.draftTeam && player.draftYear && player.draftRound ? "" : "hidden"}
+          `}>
             <p className="text-md text-gray-400">選秀</p>
             <p className="flex gap-2 text-lg font-bold pl-4">
-              <Image
+              {player.draftTeam && (<Image
                 src={teamToWord(player.draftTeam)}
                 alt={`${player.draftTeam}`}
                 width={30}
                 height={30}
-              />
+              />)}
               {player.draftYear}年 第{player.draftRound}輪
             </p>
           </div>
           <div className="bg-accent p-4 rounded-lg shadow-sm">
             <p className="text-md text-gray-400">生日</p>
-            <p className="text-lg font-bold pl-4">{player.birthday}</p>
+            <p className="text-lg font-bold pl-4">{new Date(player.birthday).toISOString().split("T")[0]}</p>
           </div>
-          <div className="bg-accent p-4 rounded-lg shadow-sm">
+          <div className={`bg-accent p-4 rounded-lg shadow-sm ${player.debutDate ? "" : "hidden"}`}>
             <p className="text-md text-gray-400">初登板</p>
             <div className="flex items-center gap-2">
-              <p className="text-lg font-bold pl-4">{player.debutDate}</p>
+              <p className="text-lg font-bold pl-4">{player.debutDate && new Date(player.debutDate).toISOString().split("T")[0]}</p>
               <Link
                 href={`/players/${player.id}/debut`}
                 className="flex items-center"

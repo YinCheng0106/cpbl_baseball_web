@@ -3,10 +3,11 @@ import { getPlayer } from "./data";
 import PlayerClient from "./player-client";
 import type { Metadata } from "next";
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 export default async function PlayerPage({ params }: Props) {
-  const playerId = parseInt(params.slug.split("-").pop() || "");
+  const { slug } = await params;
+  const playerId = parseInt(slug.split("-").pop() || "");
   const player = await getPlayer(playerId);
   if (!player) {
     return (
@@ -19,9 +20,9 @@ export default async function PlayerPage({ params }: Props) {
   }
   return <PlayerClient player={player} />;
 }
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const playerId = parseInt(params.slug.split("-").pop() || "");
+  const { slug } = await params;
+  const playerId = parseInt(slug.split("-").pop() || "");
   const player = await getPlayer(playerId);
   if (player) {
     return {
