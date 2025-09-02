@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { Chakra_Petch } from "next/font/google";
 import { positionToAbbreviation } from "@/utils/playerUtils";
 import { teamToWord } from "@/utils/teamUtils";
@@ -12,7 +13,6 @@ import { pitchingColumns } from "@/app/players/[slug]/pitchingColumns";
 import { fieldingColumns } from "@/app/players/[slug]/fieldingColumns";
 import type { PlayerData } from "@/types/playerData";
 import { SquareArrowOutUpRightIcon } from "lucide-react";
-import { useState } from "react";
 
 const chakraPetch = Chakra_Petch({
   weight: "500",
@@ -60,13 +60,13 @@ export default function PlayerClient({ player }: PlayerClientProps) {
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-2">
                 <p className={`${chakraPetch.className} text-5xl font-bold`}>{player.number}</p>
-                <div className="flex flex-col">
+                <div className={`flex flex-col ${chakraPetch.className}`}>
                   <h2 className="text-4xl font-bold">{player.name}</h2>
                   <p className="text-sm text-gray-500">{player.en_name}</p>
                 </div>
               </div>
-              <div className="flex items-center justify-between w-full gap-2">
-                <p className="font-bold">
+              <div className={`flex items-center justify-between w-full gap-2 ${chakraPetch.className}`}>
+                <p className={`font-bold`}>
                   {positionToAbbreviation(player.position)}
                 </p>
                 <p>
