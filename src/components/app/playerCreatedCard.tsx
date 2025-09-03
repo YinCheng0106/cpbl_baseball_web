@@ -49,7 +49,7 @@ export function PlayerCreatedCard({ player }: { player: PlayerData }) {
             </div>
             <div>
               <p className="text-sm text-gray-500 font-bold">國籍</p>
-              <p className={`text-xl ml-2`}>{player.nationality ? player.nationality : "未知"}</p>
+              <p className={`text-xl ml-2`}>{player.nationality ? player.nationality : "未知"} ({player.domestic ? "本土" : "外籍"})</p>
             </div>
             <div>
               <p className="text-sm text-gray-500 font-bold">學歷</p>
