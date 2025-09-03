@@ -29,8 +29,8 @@ export function PlayerCreatedCard({ player }: { player: PlayerData }) {
               <div className="flex flex-col">
                 <p className="text-4xl font-bold">{player.name}</p>
                 <p className={`${chakraPetch.className} text-sm text-gray-500`}>{player.en_name}</p>
-                <p></p>
               </div>
+              <p className="flex flex-col text-sm text-gray-500">{player.league == "major" ? "一軍" : "二軍"}</p>
             </div>
             <Image src="/playerImg/player_no_img.jpg" alt={`playerAvatar for ${player.name}`} width={100} height={100} />
           </div>
