@@ -165,7 +165,9 @@ export function PlayerForm() {
                   <FormControl>
                     <Input 
                       type="number" 
-                      placeholder="請輸入球員ID" 
+                      placeholder="請輸入球員ID"
+                      min={1}
+                      max={999999}
                       {...field}
                       value={field.value ?? ""} 
                     />
@@ -350,7 +352,7 @@ export function PlayerForm() {
                         <Label htmlFor="P_L">左投</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="R" id="P_R" />
+                        <RadioGroupItem value="Right" id="P_R" />
                         <Label htmlFor="P_R">右投</Label>
                       </div>
                       <div className="flex items-center space-x-2">
