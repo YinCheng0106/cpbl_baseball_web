@@ -3,9 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Chakra_Petch } from "next/font/google";
-import { positionToAbbreviation } from "@/utils/playerUtils";
+import { positionToAbbreviation, statusToTranslation } from "@/utils/playerUtils";
 import { teamToWord } from "@/utils/teamUtils";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DataTable } from "@/app/players/[slug]/data-table";
 import { battingColumns } from "@/app/players/[slug]/battingColumns";
@@ -80,6 +81,21 @@ export default function PlayerClient({ player }: PlayerClientProps) {
                   {player.weight}
                   <span className="text-sm text-gray-500"> (KG)</span>
                 </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary" className={`
+                    ${player.status === "retired" ? "dark:bg-red-500 bg-red-300" : ""}
+                    ${player.status === "active" ? "dark:bg-green-500 bg-green-300" : ""}
+                    ${player.status === "unsigned" ? "dark:bg-yellow-500 bg-yellow-300" : ""}
+                    ${player.status === "contract" ? "dark:bg-blue-500 bg-blue-300" : ""}
+                    ${player.status === "independent" ? "dark:bg-purple-500 bg-purple-300" : ""}
+                    ${player.status === "other" ? "dark:bg-gray-500 bg-gray-300" : ""}
+                  `}>
+                    {statusToTranslation(player.status)}
+                  </Badge>
+                <Badge variant="outline">
+                  {player.league == "major" ? "一軍" : "二軍"}
+                </Badge>
               </div>
             </div>
             <div className="absolute p-2 right-4 sm:right-8 md:right-12">

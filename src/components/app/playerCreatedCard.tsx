@@ -4,8 +4,10 @@ import { Chakra_Petch } from "next/font/google";
 import Image from "next/image";
 import { format } from "date-fns";
 
+import { Badge } from "@/components/ui/badge";
+
 import { PlayerData } from "@/types/playerData";
-import { positionToAbbreviation } from "@/utils/playerUtils"
+import { positionToAbbreviation, statusToTranslation } from "@/utils/playerUtils"
 import { teamToLogo, teamToString, teamToWord } from "@/utils/teamUtils"
 
 const chakraPetch = Chakra_Petch({
@@ -25,12 +27,27 @@ export function PlayerCreatedCard({ player }: { player: PlayerData }) {
           <div className="flex w-full justify-between items-center">
             <div className="flex items-center gap-2">
               <Image src={teamToLogo(player.team)} alt={`TeamLogo for ${player.team}`} width={100} height={100} />
-              <span className={`${chakraPetch.className} text-5xl font-bold ml-4`}>{player.number}</span>
-              <div className="flex flex-col">
-                <p className="text-4xl font-bold">{player.name}</p>
-                <p className={`${chakraPetch.className} text-sm text-gray-500`}>{player.en_name}</p>
+              <div >
+                <div className="flex items-center gap-2">
+                  <span className={`${chakraPetch.className} text-5xl font-bold`}>{player.number}</span>
+                  <div className="flex flex-col">
+                    <p className="text-4xl font-bold">{player.name}</p>
+                    <p className={`${chakraPetch.className} text-sm text-gray-500`}>{player.en_name}</p>
+                  </div>
+                </div>
+                <div>
+                  <Badge variant="secondary" className={`
+                    ${player.status === "retired" ? "dark:bg-red-500 bg-red-300" : ""}
+                    ${player.status === "active" ? "dark:bg-green-500 bg-green-300" : ""}
+                    ${player.status === "unsigned" ? "dark:bg-yellow-500 bg-yellow-300" : ""}
+                    ${player.status === "contract" ? "dark:bg-blue-500 bg-blue-300" : ""}
+                    ${player.status === "independent" ? "dark:bg-purple-500 bg-purple-300" : ""}
+                    ${player.status === "other" ? "dark:bg-gray-500 bg-gray-300" : ""}
+                  `}>
+                    {statusToTranslation(player.status)}
+                  </Badge>
+                </div>
               </div>
-              <p className="flex flex-col text-sm text-gray-500">{player.league == "major" ? "一軍" : "二軍"}</p>
             </div>
             <Image src="/playerImg/player_no_img.jpg" alt={`playerAvatar for ${player.name}`} width={100} height={100} />
           </div>
