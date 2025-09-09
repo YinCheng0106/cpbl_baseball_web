@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { teamToWord } from "@/utils/teamUtils";
-import { TeamData } from "@/types/teamData";
+import { Team } from "@/types/teamData";
 import { supabase } from "@/utils/supabase";
 
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
@@ -33,7 +33,7 @@ const calculateGamesBehind = (
   return diff === 0 ? "-" : diff.toFixed(1);
 };
 
-const completedRank = (teamsData: TeamData[], season: string, year: string) => {
+const completedRank = (teamsData: Team[], season: string, year: string) => {
   if (teamsData.length === 0) return [];
 
   const teamsWithStats = teamsData.map((team) => {
@@ -105,7 +105,7 @@ type Props = {
 
 export function Standing({ year, season }: Props) {
   const [loading, setLoading] = useState(true);
-  const [teams, setTeams] = useState<TeamData[]>([]);
+  const [teams, setTeams] = useState<Team[]>([]);
 
   useEffect(() => {
     setLoading(true);

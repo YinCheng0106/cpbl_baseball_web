@@ -1,7 +1,9 @@
 "use client";
 
 type BaseBallOutProps = Readonly<{
-  base: [boolean, boolean, boolean];
+  base1: boolean;
+  base2: boolean;
+  base3: boolean;
   strike: number;
   ball: number;
   out: number;
@@ -22,7 +24,7 @@ const outToArray = (out: number) => {
   return out_;
 };
 
-const BaseBallOut = ({ base, strike, ball, out }: BaseBallOutProps) => {
+const BaseBallOut = ({ base1, base2, base3, strike, ball, out }: BaseBallOutProps) => {
   return (
     <div>
       <svg
@@ -34,10 +36,10 @@ const BaseBallOut = ({ base, strike, ball, out }: BaseBallOutProps) => {
         {/* first base */}
         <polygon
           points="70,55 85,40 70,25 55,40"
-          fill={base[0] ? "#FFD700" : "white"}
+          fill={base1 ? "#FFD700" : "white"}
           strokeWidth="2"
           className={
-            base[0]
+            base1
               ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
               : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
           }
@@ -45,10 +47,10 @@ const BaseBallOut = ({ base, strike, ball, out }: BaseBallOutProps) => {
         {/* second base */}
         <polygon
           points="50,35 65,20 50,5 35,20"
-          fill={base[1] ? "#FFD700" : "white"}
+          fill={base2 ? "#FFD700" : "white"}
           strokeWidth="2"
           className={
-            base[1]
+            base2
               ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
               : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
           }
@@ -56,10 +58,10 @@ const BaseBallOut = ({ base, strike, ball, out }: BaseBallOutProps) => {
         {/* third base */}
         <polygon
           points="30,55 45,40 30,25 15,40"
-          fill={base[2] ? "#FFD700" : "white"}
+          fill={base3 ? "#FFD700" : "white"}
           strokeWidth="2"
           className={
-            base[2]
+            base3
               ? "dark:fill-yellow-400 dark:stroke-white stroke-gray-400"
               : "dark:fill-gray-800 dark:stroke-white stroke-gray-400"
           }
