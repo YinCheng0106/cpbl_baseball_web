@@ -70,7 +70,7 @@ export interface MvpData {
   gameStats: GameStats;
 }
 
-export interface GameInfo {
+export interface Game {
   id: number;
   gameId: string;
   type: string;
@@ -82,9 +82,12 @@ export interface GameInfo {
   homeTeamId: number;
   awayStarterId: number | null;
   homeStarterId: number | null;
+  game_live: GameLive | null;
+  game_result: GameResult | null;
 }
 
 export interface GameLive {
+  id: number;
   gameId: number;
   status: number;
   inning: number;
@@ -130,20 +133,4 @@ export interface GameScore {
   inning: number;
   awayScore: number;
   homeScore: number;
-}
-
-export interface GameStruct {
-  gameInfo: GameInfo;
-  gameLive: GameLive;
-  gameEnd: GameResult;
-}
-
-export interface Game {
-  major: GameStruct[];
-  minor: GameStruct[];
-}
-
-export interface GameData {
-  date: string;
-  games: Game;
 }
