@@ -55,7 +55,7 @@ export interface TeamPlayer {
   minor: string[];
 }
 
-export interface TeamData {
+export interface Team {
   id: number;
   logo: string;
   name: TeamName;

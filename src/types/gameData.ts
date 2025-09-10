@@ -22,18 +22,14 @@ export interface Balls {
   pitch: number;
 }
 
-export interface ScoreboardTeam {
-  away: string;
-  home: string;
-}
-
-export interface ScoreboardType {
-  inning: number[];
-  homeScores: number[];
-  awayScores: number[];
-  team: ScoreboardTeam;
-  away: TeamStats;
-  home: TeamStats;
+export interface inningScore {
+  inning: number;
+  homeScore: number;
+  awayScore: number;
+  homeHits: number;
+  awayHits: number;
+  homeErrors: number;
+  awayErrors: number;
 }
 
 export interface PitchStats {
@@ -78,8 +74,8 @@ export interface Game {
   date: string;
   time: string;
   location: string;
-  awayTeamId: number;
-  homeTeamId: number;
+  awayTeamId: string;
+  homeTeamId: string;
   awayStarterId: number | null;
   homeStarterId: number | null;
   game_live: GameLive | null;
@@ -131,6 +127,10 @@ export interface GameResult {
 export interface GameScore {
   gameId: number;
   inning: number;
-  awayScore: number;
-  homeScore: number;
+  awayScore: number | null;
+  homeScore: number | null;
+  awayHits: number;
+  homeHits: number;
+  awayErrors: number;
+  homeErrors: number;
 }
