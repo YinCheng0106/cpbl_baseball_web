@@ -2,11 +2,14 @@
 import { useEffect, useRef } from "react";
 
 import { teamToWord } from "@/utils/teamUtils";
-import { ScoreboardType } from "@/types/gameData";
+import { Game, GameScore } from "@/types/gameData";
 
-type Props = Readonly<{ scoreboard: ScoreboardType; }>;
+type Props = Readonly<{
+  game: Game;
+  scoreboard: GameScore[];
+}>;
 
-export function Scoreboard({ scoreboard } : Props) {
+export function Scoreboard({ game, scoreboard } : Props) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (scrollContainerRef.current) {
@@ -14,6 +17,14 @@ export function Scoreboard({ scoreboard } : Props) {
         scrollContainerRef.current.scrollWidth;
     }
   }, []);
+
+  const sumAwayRuns = scoreboard.reduce((sum, inning) => sum + (inning.awayScore ?? 0), 0);
+  const sumHomeRuns = scoreboard.reduce((sum, inning) => sum + (inning.homeScore ?? 0), 0);
+  const sumAwayHits = scoreboard.reduce((sum, inning) => sum + (inning.awayHits ?? 0), 0);
+  const sumHomeHits = scoreboard.reduce((sum, inning) => sum + (inning.homeHits ?? 0), 0);
+  const sumAwayErrors = scoreboard.reduce((sum, inning) => sum + (inning.awayErrors ?? 0), 0);
+  const sumHomeErrors = scoreboard.reduce((sum, inning) => sum + (inning.homeErrors ?? 0), 0);
+
   return (
     <div className="flex flex-row shadow-md rounded-lg dark:bg-zinc-800 bg-zinc-100 p-2">
       <div className="flex flex-row flex-1">
@@ -31,7 +42,7 @@ export function Scoreboard({ scoreboard } : Props) {
                 <th scope="row">
                   <div className="flex items-center justify-center">
                     <img
-                      src={teamToWord(scoreboard.team.away)}
+                      src={teamToWord(game.awayTeamId)}
                       width={30}
                       height={30}
                       alt="客隊"
@@ -43,7 +54,7 @@ export function Scoreboard({ scoreboard } : Props) {
                 <th scope="row">
                   <div className="flex items-center justify-center">
                     <img
-                      src={teamToWord(scoreboard.team.home)}
+                      src={teamToWord(game.homeTeamId)}
                       width={30}
                       height={30}
                       alt="主隊"
@@ -61,29 +72,29 @@ export function Scoreboard({ scoreboard } : Props) {
           <table className="w-full text-sm text-center">
             <thead className="text-xs">
               <tr className="items-center select-none">
-                {scoreboard.inning.map((inning) => (
-                  <th
-                    scope="col"
-                    key={inning}
-                    className="px-1 py-1 text-center md:min-w-[24px] min-w-[16px]"
-                  >
-                    <div className="md:w-6 w-4">{inning}</div>
-                  </th>
-                ))}
+              {scoreboard.map((item) => (
+                <th
+                scope="col"
+                key={item.inning}
+                className="px-1 py-1 text-center md:min-w-[24px] min-w-[16px]"
+                >
+                <div className="md:w-6 w-4">{item.inning}</div>
+                </th>
+              ))}
               </tr>
             </thead>
             <tbody className="text-gray-500">
               <tr className="items-center">
-                {scoreboard.awayScores.map((runs, index) => (
-                  <td key={index} className="px-1 py-1 text-center">
-                    <div className="md:w-6 w-4">{runs}</div>
+                {scoreboard.map((item) => (
+                  <td key={item.awayScore} className="px-1 py-1 text-center">
+                    <div className="md:w-6 w-4">{item.awayScore ?? 0}</div>
                   </td>
                 ))}
               </tr>
               <tr className="items-center">
-                {scoreboard.homeScores.map((runs, index) => (
-                  <td key={index} className="px-1 py-1 text-center">
-                    <div className="md:w-6 w-4">{runs}</div>
+                {scoreboard.map((item) => (
+                  <td key={item.homeScore} className="px-1 py-1 text-center">
+                    <div className="md:w-6 w-4">{item.homeScore ?? "X"}</div>
                   </td>
                 ))}
               </tr>
@@ -104,24 +115,24 @@ export function Scoreboard({ scoreboard } : Props) {
           <tbody>
             <tr>
               <td className="px-1 py-1">
-                <div className="w-4 font-bold">{scoreboard.away.runs}</div>
+                <div className="w-4 font-bold">{sumAwayRuns}</div>
               </td>
               <td className="px-1 py-1">
-                <div className="w-4">{scoreboard.away.hits}</div>
+                <div className="w-4">{sumAwayHits}</div>
               </td>
               <td className="px-1 py-1">
-                <div className="w-4">{scoreboard.away.errors}</div>
+                <div className="w-4">{sumAwayErrors}</div>
               </td>
             </tr>
             <tr>
               <td className="px-1 py-1">
-                <div className="w-4 font-bold">{scoreboard.home.runs}</div>
+                <div className="w-4 font-bold">{sumHomeRuns}</div>
               </td>
               <td className="px-1 py-1">
-                <div className="w-4">{scoreboard.home.runs}</div>
+                <div className="w-4">{sumHomeHits}</div>
               </td>
               <td className="px-1 py-1">
-                <div className="w-4">{scoreboard.home.runs}</div>
+                <div className="w-4">{sumHomeErrors}</div>
               </td>
             </tr>
           </tbody>
