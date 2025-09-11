@@ -22,16 +22,6 @@ export interface Balls {
   pitch: number;
 }
 
-export interface inningScore {
-  inning: number;
-  homeScore: number;
-  awayScore: number;
-  homeHits: number;
-  awayHits: number;
-  homeErrors: number;
-  awayErrors: number;
-}
-
 export interface PitchStats {
   inningPitchedCnt: number;
   strikeOutCnt: number;
@@ -80,6 +70,10 @@ export interface Game {
   homeStarterId: number | null;
   game_live: GameLive | null;
   game_result: GameResult | null;
+  game_scores: GameScore[];
+  game_pitches: any[] | null;
+  game_atbats: any[] | null;
+  mvpData: MvpData | null;
 }
 
 export interface GameLive {
