@@ -7,7 +7,7 @@ import { supabase } from "@/utils/supabase";
 import { teamToLogo } from "@/utils/teamUtils";
 import { Stadium } from "@/utils/gameUtils";
 
-import { TeamData } from "@/types/teamData";
+import { Team } from "@/types/teamData";
 import { PlayerData } from "@/types/playerData";
 
 import { TeamPlayersCard } from "@/components/app/teamPlayersCard";
@@ -18,7 +18,7 @@ type Props = Readonly<{
 
 export default function Page({ params }: Props) {
   const [loading, setLoading] = useState(true);
-  const [teamData, setTeams] = useState<TeamData[]>([]);
+  const [teamData, setTeams] = useState<Team[]>([]);
   const [teamId, setTeamId] = useState<number | null>(null);
   const [playersLoading, setPlayersLoading] = useState(true);
   const [teamPlayers, setTeamPlayers] = useState<PlayerData[]>([]);
@@ -67,7 +67,7 @@ export default function Page({ params }: Props) {
     return <div>Error loading team data.</div>;
   }
 
-  const data = teamData.find((team) => team.id == teamId) as TeamData;
+  const data = teamData.find((team) => team.id == teamId) as Team;
   if (!data) {
     return <div>Team not found.</div>;
   }
@@ -280,10 +280,12 @@ export default function Page({ params }: Props) {
               >
                 {teamPlayers
                   .filter(
-                    (p) => p.league === "major" && (
-                      p.position === "Shortstop" || p.position === "Third-Baseman" ||
-                      p.position === "First-Baseman" || p.position === "Second-Baseman"
-                    )
+                    (p) =>
+                      p.league === "major" &&
+                      (p.position === "Shortstop" ||
+                        p.position === "Third-Baseman" ||
+                        p.position === "First-Baseman" ||
+                        p.position === "Second-Baseman")
                   )
                   .map((p) => (
                     <TeamPlayersCard key={p.id} playerId={String(p.id)} />
@@ -300,9 +302,11 @@ export default function Page({ params }: Props) {
               >
                 {teamPlayers
                   .filter(
-                    (p) => p.league === "major" && (
-                      p.position === "Left-Fielder" || p.position === "Right-Fielder" || p.position === "Center-Field"
-                    )
+                    (p) =>
+                      p.league === "major" &&
+                      (p.position === "Left-Fielder" ||
+                        p.position === "Right-Fielder" ||
+                        p.position === "Center-Field")
                   )
                   .map((p) => (
                     <TeamPlayersCard key={p.id} playerId={String(p.id)} />

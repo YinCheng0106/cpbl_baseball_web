@@ -62,8 +62,8 @@ export default function PlayerClient({ player }: PlayerClientProps) {
               <div className="flex items-center gap-2">
                 <p className={`${chakraPetch.className} text-5xl font-bold`}>{player.number}</p>
                 <div className={`flex flex-col ${chakraPetch.className}`}>
-                  <h2 className="text-4xl font-bold">{player.name}</h2>
-                  <p className="text-sm text-gray-500">{player.en_name}</p>
+                  <h2 className="text-2xl sm:text-4xl font-bold">{player.name}</h2>
+                  <p className="text-[12px] sm:text-sm dark:text-gray-300 text-gray-500">{player.en_name}</p>
                 </div>
               </div>
               <div className={`flex items-center justify-between w-full gap-2 ${chakraPetch.className}`}>
