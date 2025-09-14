@@ -10,14 +10,16 @@ import { GameCard } from "@/components/app/gameCard";
 import { Standing } from "@/components/app/standing";
 import { NewsCard } from "@/components/app/newsCard";
 
-import { GameStruct, Game, GameData } from "@/types/gameData";
+import { Game } from "@/types/gameData";
+import { Team } from "@/types/teamData";
 import { PlayerData } from "@/types/playerData";
 import { NewsData } from "@/types/newsData";
 
 import { supabase } from "@/utils/supabase";
 
 export default function Home() {
-  const [gamesData, setGameData] = useState<GameData[]>([]);
+  const [games, setGame] = useState<Game[]>([]);
+  const [teams, setTeams] = useState<Team[]>([]);
   const [news, setNews] = useState<NewsData[]>([]);
   const [players, setPlayers] = useState<PlayerData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -25,31 +27,46 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      setLoading(true);
-      
+      // Fetch Games
+      const fetchGames = async () => {
+        const { data, error } = await supabase
+          .from("games")
+          .select(`*, game_live(*), game_result(*), game_scores(*), game_pitches(*), game_atbats(*)`);
+        if (error) {
+          console.error("Error fetching AllGames:", error);
+        } else {
+          console.table("Fetched AllGames:", data);
+          setGame(data as Game[]);
+        }
+      };
+
+      // Fetch Teams
+      const fetchTeams = async () => {
+        const { data, error } = await supabase
+          .from("teams")
+          .select(`*, teams_stats(*)`);
+        if (error) {
+          console.error("Error fetching Teams:", error);
+        } else {
+          console.table("Fetched Teams:", data);
+          setTeams(data as Team[]);
+        }
+      }
+
+      // Fetch News
+
+      // Fetch Players
+
       try {
-        const [gameResponse, playerResponse, newsResponse] = await Promise.all([
-          fetch("/json/game.json"),
-          fetch("/json/player.json"),
-          fetch("/json/news.json")
-        ]);
-
-        const [gameData, playerData, newsData] = await Promise.all([
-          gameResponse.json(),
-          playerResponse.json(),
-          newsResponse.json()
-        ]);
-
-        setGameData(gameData);
-        setPlayers(playerData);
-        setNews(newsData);
+        setLoading(true);
+        fetchGames();
+        fetchTeams();
       } catch (error) {
         console.error("[讀取失敗]", error);
       } finally {
         setLoading(false);
       }
     }
-
     fetchData();
   }, []);
 
@@ -80,10 +97,12 @@ export default function Home() {
     setSelectedDate(nextDay);
   };
 
-  const getGames = (): Game => {
+  const getGames = () => {
     const selectedDateStr = formatDate(selectedDate);
-    const dateData = gamesData.find((data) => data.date === selectedDateStr);
-    return dateData?.games || { major: [], minor: [] };
+    const gamesForDate = games.filter((game) => game.date === selectedDateStr);
+    const majorGames = gamesForDate.filter(g => ["A","B","C","E","G", "H"].includes(g.type));
+    const minorGames = gamesForDate.filter(g => ["D", "F"].includes(g.type));
+    return { major: majorGames, minor: minorGames };
   };
 
   return (
@@ -140,7 +159,7 @@ export default function Home() {
                   <div
                     className={`
                     flex flex-col justify-center 
-                    w-[350px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] 
+                    w-[400px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] 
                     py-6 h-48 mt-4
                   `}
                   >
@@ -148,10 +167,11 @@ export default function Home() {
                   </div>
                 ) : (
                   <div className="flex flex-col justify-center items-center gap-2 mt-4">
-                    { getGames().major.map((gameData: GameStruct) => (
+                    {getGames().major.map((gameData: Game) => (
                       <GameCard
                         gameData={gameData}
-                        key={gameData.gameInfo.id}
+                        teamData={teams}
+                        key={gameData.id}
                       />
                     ))}
                   </div>
@@ -185,11 +205,12 @@ export default function Home() {
                     <p className="text-center text-gray-500">本日無賽事</p>
                   </div>
                 ) : (
-                  <div className="grid gap-3 mt-4">
-                    {getGames().minor.map((gameData: GameStruct) => (
+                  <div className="flex flex-col justify-center items-center gap-2 mt-4">
+                    {getGames().minor.map((gameData: Game) => (
                       <GameCard
                         gameData={gameData}
-                        key={gameData.gameInfo.id}
+                        teamData={teams}
+                        key={gameData.id}
                       />
                     ))}
                   </div>
@@ -206,10 +227,12 @@ export default function Home() {
             className="mt-2 h-80"
           >
             <Tabs defaultValue="firstHalf" className="w-full">
-              <div className={`
+              <div
+                className={`
                 flex flex-row items-start justify-between gap-2 mb-4
                 w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl
-              `}>
+              `}
+              >
                 <h2 className="text-2xl font-bold">球隊成績</h2>
                 <TabsList>
                   <TabsTrigger value="firstHalf">上半季</TabsTrigger>
@@ -217,10 +240,10 @@ export default function Home() {
                 </TabsList>
               </div>
               <TabsContent value="firstHalf">
-                <Standing year={year} season="firstHalf" />
+                <Standing teams={teams} year={year} season="firstHalf" />
               </TabsContent>
               <TabsContent value="secondHalf">
-                <Standing year={year} season="secondHalf" />
+                <Standing teams={teams} year={year} season="secondHalf" />
               </TabsContent>
             </Tabs>
           </motion.div>
