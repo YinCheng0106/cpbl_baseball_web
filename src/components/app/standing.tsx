@@ -180,7 +180,6 @@ export function Standing({ teams, year, season }: Props) {
     );
   } else {
     const rankedTeams = completedRank(teams, year, season);
-    console.table(rankedTeams);
     return (
       <div className="w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl h-70">
         <Table>
