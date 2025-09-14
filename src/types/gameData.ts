@@ -23,15 +23,15 @@ export interface Balls {
 }
 
 export interface PitchStats {
-  inningPitchedCnt: number;
-  strikeOutCnt: number;
-  runCnt: number;
+  inningPitchedCnt: number | null;
+  strikeOutCnt: number | null;
+  runCnt: number | null;
 }
 
 export interface DefenseStats {
-  assistCnt: number;
-  putOutCnt: number;
-  errorCnt: number;
+  assistCnt: number | null;
+  putOutCnt: number | null;
+  errorCnt: number | null;
 }
 
 export interface HitStats {
@@ -45,15 +45,6 @@ export interface GameStats {
   pitch: PitchStats;
   defense: DefenseStats;
   hit: HitStats;
-}
-
-export interface MvpData {
-  id: string;
-  team: string;
-  player: string;
-  playerType: "Pitcher" | "Batter";
-  mvpCnt: number;
-  gameStats: GameStats;
 }
 
 export interface Game {
@@ -73,7 +64,6 @@ export interface Game {
   game_scores: GameScore[];
   game_pitches: any[] | null;
   game_atbats: any[] | null;
-  mvpData: MvpData | null;
 }
 
 export interface GameLive {
@@ -100,10 +90,12 @@ export interface GameLive {
 }
 
 export interface GameResult {
+  gameId: string;
   winPitcherId: number | null;
   losePitcherId: number | null;
   savePitcherId: number | null;
   mvpId: number | null;
+  mvpTeamId: number | null;
   mvpType: "Pitcher" | "Batter" | null;
   mvpCnt: number | null;
   pitchInning: number | null;
