@@ -47,7 +47,18 @@ export interface yearStats {
 }
 
 export interface TeamStats {
-  [year: string]: yearStats;
+  id: number;
+  teamId: number;
+  year: string;
+  season: string;
+  games: number;
+  homeWins: number;
+  homeLosses: number;
+  homeDraws: number;
+  awayWins: number;
+  awayLosses: number;
+  awayDraws: number;
+  streak: number;
 }
 
 export interface TeamPlayer {
@@ -64,7 +75,7 @@ export interface Team {
   stadium: string;
   website: string;
   contact: Contact;
-  stats: TeamStats;
+  teams_stats: TeamStats[];
   coach: TeamPlayer;
   pitcher: TeamPlayer;
   catcher: TeamPlayer;

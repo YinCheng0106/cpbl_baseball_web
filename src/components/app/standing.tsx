@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -11,16 +10,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { teamToWord } from "@/utils/teamUtils";
-import { Team } from "@/types/teamData";
-import { supabase } from "@/utils/supabase";
+import { Team, TeamStats } from "@/types/teamData";
 
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const winRate = (wins: number, loses: number, draws: number = 0) => {
-  const totalGames = wins + loses + draws;
-  if (totalGames === 0) return 0;
-  return parseFloat((wins / (wins + loses + draws)).toFixed(3));
+const winRate = (wins: number, games: number) => {
+  if (games === 0) return 0;
+  return parseFloat((wins / games).toFixed(3));
 };
 
 const calculateGamesBehind = (
@@ -33,22 +30,48 @@ const calculateGamesBehind = (
   return diff === 0 ? "-" : diff.toFixed(1);
 };
 
-const completedRank = (teamsData: Team[], season: string, year: string) => {
-  if (teamsData.length === 0) return [];
+interface RankedTeamRow {
+  teamId: number;
+  teamName: Team["name"];
+  games: number;
+  win: number;
+  lose: number;
+  draw: number;
+  winRate: number;
+  rank: number;
+  gameBehind: string | number;
+  streak: string | number;
+}
 
-  const teamsWithStats = teamsData.map((team) => {
-    const seasonData =
-      team.stats?.[year as keyof typeof team.stats]?.[
-        season as keyof (typeof team.stats)[typeof year]
-      ];
+const completedRank = (
+  teams: Team[],
+  year: string,
+  season: "firstHalf" | "secondHalf"
+): RankedTeamRow[] => {
+  if (!teams || teams.length === 0) return [];
 
-    if (!seasonData) {
+  const yearNum = typeof year === "string" ? parseInt(year, 10) : (year as any);
+
+  const teamsWithStats: RankedTeamRow[] = teams.map((team) => {
+    let stats: TeamStats | undefined;
+
+    if (Array.isArray(team.teams_stats)) {
+      stats = team.teams_stats.find(
+        (s) => s.year === yearNum && s.season === season
+      );
+    } else if (team.teams_stats) {
+      const s = team.teams_stats as unknown as TeamStats;
+      if (s.year === yearNum && s.season === season) stats = s;
+    }
+
+    if (!stats) {
       return {
-        ...team,
+        teamId: team.id,
+        teamName: team.name,
         games: 0,
         win: 0,
         lose: 0,
-        tie: 0,
+        draw: 0,
         winRate: 0,
         rank: 0,
         gameBehind: "-",
@@ -56,22 +79,23 @@ const completedRank = (teamsData: Team[], season: string, year: string) => {
       };
     }
 
-    const totalWins = seasonData.wins.home + seasonData.wins.away;
-    const totalLosses = seasonData.losses.home + seasonData.losses.away;
-    const totalTies = seasonData.draws.home + seasonData.draws.away;
-    const totalGames = seasonData.games;
-    const calculatedWinRate = winRate(totalWins, totalLosses, totalTies);
+    const win = (stats.homeWins ?? 0) + (stats.awayWins ?? 0);
+    const lose = (stats.homeLosses ?? 0) + (stats.awayLosses ?? 0);
+    const draw = (stats.homeDraws ?? 0) + (stats.awayDraws ?? 0);
+    const games = stats.games ?? win + lose + draw;
+    const winRateValue = winRate(win, games);
 
     return {
-      ...team,
-      games: totalGames,
-      win: totalWins,
-      lose: totalLosses,
-      tie: totalTies,
-      winRate: calculatedWinRate,
+      teamId: team.id,
+      teamName: team.name,
+      games,
+      win,
+      lose,
+      draw,
+      winRate: winRateValue,
       rank: 0,
       gameBehind: "-",
-      streak: "-",
+      streak: stats.streak ?? "-",
     };
   });
 
@@ -99,38 +123,15 @@ const completedRank = (teamsData: Team[], season: string, year: string) => {
 };
 
 type Props = {
+  teams: Team[];
   year: string;
-  season: string;
+  season: "firstHalf" | "secondHalf";
 };
 
-export function Standing({ year, season }: Props) {
-  const [loading, setLoading] = useState(true);
-  const [teams, setTeams] = useState<Team[]>([]);
-
-  useEffect(() => {
-    setLoading(true);
-    async function fetchStanding() {
-      const { data: teams, error } = await supabase.from("teams").select();
-      if (error) {
-        console.error("Error fetching teams:", error);
-        setLoading(false);
-        return;
-      }
-      if (teams && teams.length > 0) {
-        setTeams(completedRank(teams, season, year));
-      }
-      setLoading(false);
-    }
-    fetchStanding();
-  }, [year]);
-
-  if (loading) {
+export function Standing({ teams, year, season }: Props) {
+  if (!teams || teams.length === 0) {
     return (
-      <div
-        className={`
-        w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl h-70
-      `}
-      >
+      <div className="w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl h-70">
         <Table>
           <TableHeader>
             <TableRow>
@@ -177,13 +178,11 @@ export function Standing({ year, season }: Props) {
         </Table>
       </div>
     );
-  } else
+  } else {
+    const rankedTeams = completedRank(teams, year, season);
+    console.table(rankedTeams);
     return (
-      <div
-        className={`
-      w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl h-70
-    `}
-      >
+      <div className="w-[360px] sm:-[420px] md:w-[420px] lg:w-[600px] max-w-2xl h-70">
         <Table>
           <TableHeader>
             <TableRow>
@@ -198,21 +197,21 @@ export function Standing({ year, season }: Props) {
               </TableHead>
             </TableRow>
           </TableHeader>
-          <SkeletonTheme baseColor="dark:#202020" highlightColor="#444">
+          <SkeletonTheme baseColor="#202020" highlightColor="#444">
             <TableBody>
-              {teams.map((team: any) => (
-                <TableRow key={team.id}>
+              {rankedTeams.map((team: any) => (
+                <TableRow key={team.teamId}>
                   <TableCell className="text-center font-bold">
-                    {team.rank !== null ? team.rank : <Skeleton />}
+                    {team.rank ?? <Skeleton />}
                   </TableCell>
                   <TableCell className="text-center font-bold">
-                    {team.name !== null ? (
+                    {team.teamName ? (
                       <div className="flex items-center justify-center">
                         <img
-                          alt={team.name["zh-tw"]}
+                          alt={team.teamName["zh-tw"]}
                           height={20}
                           width={20}
-                          src={teamToWord(team.name["zh-tw"])}
+                          src={teamToWord(team.teamName["zh-tw"])}
                         />
                       </div>
                     ) : (
@@ -220,27 +219,27 @@ export function Standing({ year, season }: Props) {
                     )}
                   </TableCell>
                   <TableCell className="text-center">
-                    {team.stats[year][season].games !== null ? (
-                      team.stats[year][season].games
+                    {team.games ?? <Skeleton />}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    {team.win !== undefined ? (
+                      `${team.win}-${team.draw}-${team.lose}`
                     ) : (
                       <Skeleton />
                     )}
                   </TableCell>
                   <TableCell className="text-center">
-                    {team.win !== null ? (
-                      `${team.win}-${team.tie}-${team.lose}`
+                    {team.winRate !== undefined ? team.winRate : <Skeleton />}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    {team.gameBehind !== undefined ? (
+                      team.gameBehind
                     ) : (
                       <Skeleton />
                     )}
                   </TableCell>
                   <TableCell className="text-center">
-                    {team.winRate !== null ? team.winRate : <Skeleton />}
-                  </TableCell>
-                  <TableCell className="text-center">
-                    {team.gameBehind !== null ? team.gameBehind : <Skeleton />}
-                  </TableCell>
-                  <TableCell className="text-center">
-                    {team.streak !== null ? team.streak : <Skeleton />}
+                    {team.streak !== undefined ? team.streak : <Skeleton />}
                   </TableCell>
                 </TableRow>
               ))}
@@ -249,4 +248,5 @@ export function Standing({ year, season }: Props) {
         </Table>
       </div>
     );
+  }
 }
