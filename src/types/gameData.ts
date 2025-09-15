@@ -1,3 +1,5 @@
+import { PlayerData } from "@/types/playerData";
+
 export interface Player {
   id: string | null;
   player: string | null;
@@ -55,8 +57,8 @@ export interface Game {
   date: string;
   time: string;
   location: string;
-  awayTeamId: string;
-  homeTeamId: string;
+  awayTeamId: number;
+  homeTeamId: number;
   awayStarterId: number | null;
   homeStarterId: number | null;
   game_live: GameLive | null;
@@ -94,7 +96,7 @@ export interface GameResult {
   winPitcherId: number | null;
   losePitcherId: number | null;
   savePitcherId: number | null;
-  mvpId: number | null;
+  mvpId: PlayerData | null;
   mvpTeamId: number | null;
   mvpType: "Pitcher" | "Batter" | null;
   mvpCnt: number | null;

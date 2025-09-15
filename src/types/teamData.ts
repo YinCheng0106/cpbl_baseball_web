@@ -17,18 +17,6 @@ export interface Manager {
   name: PersonName;
 }
 
-export interface Address {
-  "zh-tw": string;
-  en: string;
-}
-
-export interface Contact {
-  email: string;
-  telephone: string;
-  fax: string;
-  address: Address;
-}
-
 export interface homeAwayWLD {
   home: number;
   away: number;
@@ -74,7 +62,11 @@ export interface Team {
   manager: Manager;
   stadium: string;
   website: string;
-  contact: Contact;
+  fax: string;
+  email: string;
+  address: string;
+  addressEN: string;
+  telephone: string;
   teams_stats: TeamStats[];
   coach: TeamPlayer;
   pitcher: TeamPlayer;

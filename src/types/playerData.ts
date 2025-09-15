@@ -108,6 +108,6 @@ export interface PlayerData {
   position: string;
   pitchingHabits: string;
   battingHabits: string;
-  // followers: number;
+  followers: number;
   // stats: PlayerStats;
 }
