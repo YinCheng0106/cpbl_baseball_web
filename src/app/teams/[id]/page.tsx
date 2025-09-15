@@ -32,7 +32,9 @@ export default function Page({ params }: Props) {
   useEffect(() => {
     setLoading(true);
     async function fetchTeams() {
-      const { data: teams } = await supabase.from("teams").select();
+      const { data: teams } = await supabase
+        .from("teams")
+        .select(`*, team_stats(*)`);
       if (teams && teams.length > 0) {
         setTeams(teams);
       }
@@ -141,16 +143,16 @@ export default function Page({ params }: Props) {
             聯絡地址
           </span>
           <p className="text-lg mb-2 ml-2">
-            {data.contact.address ? (
+            {data.address ? (
               <Link
                 className="link"
                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                  data.contact.address["zh-tw"]
+                  data.address
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {data.contact.address["zh-tw"]}
+                {data.address}
               </Link>
             ) : (
               "無"
@@ -162,14 +164,14 @@ export default function Page({ params }: Props) {
             聯絡電話
           </span>
           <p className="text-lg mb-2 ml-2">
-            {data.contact.telephone ? (
+            {data.telephone ? (
               <Link
                 className="link"
-                href={`tel:${data.contact.telephone}`}
+                href={`tel:${data.telephone}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {data.contact.telephone}
+                {data.telephone}
               </Link>
             ) : (
               "無"
@@ -181,14 +183,14 @@ export default function Page({ params }: Props) {
             傳真
           </span>
           <p className="text-lg mb-2 ml-2">
-            {data.contact.fax ? (
+            {data.fax ? (
               <Link
                 className="link"
-                href={`tel:${data.contact.fax}`}
+                href={`tel:${data.fax}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {data.contact.fax}
+                {data.fax}
               </Link>
             ) : (
               "無"
@@ -200,14 +202,14 @@ export default function Page({ params }: Props) {
             電子郵件
           </span>
           <p className="text-lg mb-2 ml-2">
-            {data.contact.email ? (
+            {data.email ? (
               <Link
                 className="link"
-                href={`mailto:${data.contact.email}`}
+                href={`mailto:${data.email}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {data.contact.email}
+                {data.email}
               </Link>
             ) : (
               "無"
