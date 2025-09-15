@@ -2,75 +2,91 @@
 
 import { teamToWord } from "@/utils/teamUtils";
 
-import { MvpData } from "@/types/gameData";
+import { GameResult } from "@/types/gameData";
 
-type Props = Readonly<{ mvp: MvpData }>;
+type Props = Readonly<{ game: GameResult }>;
 
-export function MvpCard(props: Props | null) {
+export function MvpCard(props: Props) {
   if (!props) return null;
-  const { mvp } = props;
+  const { game } = props;
 
-  return (
-    <div
-      className={`
-      flex flex-col gap-2
-      w-full h-full p-4 rounded-lg shadow-md dark:bg-zinc-800 bg-zinc-100`}
-    >
-      <div className="flex items-center justify-center gap-2">
-        <img src={teamToWord(mvp.team)} width={30} height={30} />
-        <h2>{mvp.player}</h2>
+  if(!game.mvpId || !game.mvpTeamId || !game.mvpType || !game.mvpCnt || !game) {
+    return (
+      <div
+        className={`
+        flex flex-col gap-2
+        w-full h-full p-4 rounded-lg shadow-md dark:bg-zinc-800 bg-zinc-100`}
+      >
+        <div className="flex items-center justify-center gap-2">
+          <img src={teamToWord(0)} width={30} height={30} />
+          <h2>尚未公布</h2>
+        </div>
       </div>
-      <div>
-        {mvp.playerType === "Batter" ? (
-          <div className="flex flex-col gap-1">
-            <div className="flex justify-between border-b pb-1">
-              <span className="text-sm font-medium">當年度獲選MVP次數</span>
-              <span className="text-sm">{mvp.mvpCnt}</span>
+    );
+  } else {
+    return (
+      <div
+        className={`
+        flex flex-col gap-2
+        w-full h-full p-4 rounded-lg shadow-md dark:bg-zinc-800 bg-zinc-100`}
+      >
+        <div className="flex items-center justify-center gap-2">
+          <img src={teamToWord(game.mvpTeamId)} width={30} height={30} />
+          <h2>{game.mvpId.name}</h2>
+        </div>
+        <div>
+          {game.mvpType === "Batter" ? (
+            <div className="flex flex-col gap-1">
+              <div className="flex justify-between border-b pb-1">
+                <span className="text-sm font-medium">當年度獲選MVP次數</span>
+                <span className="text-sm">{game.mvpCnt}</span>
+              </div>
+              <div className="flex justify-between border-b pb-1">
+                <span className="text-sm font-medium">打數</span>
+                <span className="text-sm">{game.hitCnt}</span>
+              </div>
+              <div className="flex justify-between border-b pb-1">
+                <span className="text-sm font-medium">打點</span>
+                <span className="text-sm">
+                  {game.hitRbi}
+                </span>
+              </div>
+              <div className="flex justify-between border-b pb-1">
+                <span className="text-sm font-medium">得分</span>
+                <span className="text-sm">{game.hitScore}</span>
+              </div>
+              <div className="flex justify-between border-b pb-1">
+                <span className="text-sm font-medium">全壘打</span>
+                <span className="text-sm">{game.hitHomerun}</span>
+              </div>
             </div>
-            <div className="flex justify-between border-b pb-1">
-              <span className="text-sm font-medium">打數</span>
-              <span className="text-sm">{mvp.gameStats.hit.hitCnt}</span>
+          ) : (
+            <div className="flex flex-col gap-1">
+              <div className="flex justify-between border-b pb-1">
+                <span className="text-sm font-medium">當年度獲選MVP次數</span>
+                <span className="text-sm">{game.mvpCnt}</span>
+              </div>
+              <div className="flex justify-between border-b pb-1">
+                <span className="text-sm font-medium">投球局數</span>
+                <span className="text-sm">
+                  {game.pitchInning}
+                </span>
+              </div>
+              <div className="flex justify-between border-b pb-1">
+                <span className="text-sm font-medium">奪三振數</span>
+                <span className="text-sm">
+                  {game.pitchStrikeout}
+                </span>
+              </div>
+              <div className="flex justify-between border-b pb-1">
+                <span className="text-sm font-medium">失分數</span>
+                <span className="text-sm">{game.pitchRuns}</span>
+              </div>
             </div>
-            <div className="flex justify-between border-b pb-1">
-              <span className="text-sm font-medium">打點</span>
-              <span className="text-sm">
-                {mvp.gameStats.hit.runBattedInCnt}
-              </span>
-            </div>
-            <div className="flex justify-between border-b pb-1">
-              <span className="text-sm font-medium">得分</span>
-              <span className="text-sm">{mvp.gameStats.hit.scoreCnt}</span>
-            </div>
-            <div className="flex justify-between border-b pb-1">
-              <span className="text-sm font-medium">全壘打</span>
-              <span className="text-sm">{mvp.gameStats.hit.homeRunCnt}</span>
-            </div>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-1">
-            <div className="flex justify-between border-b pb-1">
-              <span className="text-sm font-medium">當年度獲選MVP次數</span>
-              <span className="text-sm">{mvp.mvpCnt}</span>
-            </div>
-            <div className="flex justify-between border-b pb-1">
-              <span className="text-sm font-medium">投球局數</span>
-              <span className="text-sm">
-                {mvp.gameStats.pitch.inningPitchedCnt}
-              </span>
-            </div>
-            <div className="flex justify-between border-b pb-1">
-              <span className="text-sm font-medium">奪三振數</span>
-              <span className="text-sm">
-                {mvp.gameStats.pitch.strikeOutCnt}
-              </span>
-            </div>
-            <div className="flex justify-between border-b pb-1">
-              <span className="text-sm font-medium">失分數</span>
-              <span className="text-sm">{mvp.gameStats.pitch.runCnt}</span>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
 }
