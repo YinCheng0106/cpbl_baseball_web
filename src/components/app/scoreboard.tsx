@@ -42,7 +42,7 @@ export function Scoreboard({ game, scoreboard } : Props) {
                 <th scope="row">
                   <div className="flex items-center justify-center">
                     <img
-                      src={teamToWord(game.awayTeamId)}
+                      src={teamToWord(game.awayTeam === null ? 0 : game.awayTeam.id)}
                       width={30}
                       height={30}
                       alt="客隊"
@@ -54,7 +54,7 @@ export function Scoreboard({ game, scoreboard } : Props) {
                 <th scope="row">
                   <div className="flex items-center justify-center">
                     <img
-                      src={teamToWord(game.homeTeamId)}
+                      src={teamToWord(game.homeTeam === null ? 0 : game.homeTeam.id)}
                       width={30}
                       height={30}
                       alt="主隊"

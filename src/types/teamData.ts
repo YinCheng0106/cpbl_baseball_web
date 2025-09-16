@@ -14,7 +14,7 @@ export interface GeneralManager {
 
 export interface Manager {
   id: string;
-  name: PersonName;
+  name: string;
 }
 
 export interface homeAwayWLD {
@@ -57,9 +57,12 @@ export interface TeamPlayer {
 export interface Team {
   id: number;
   logo: string;
-  name: TeamName;
+  name: string;
+  shortName: string;
+  fullName: string;
+  foundingYear: string;
   generalManager: GeneralManager;
-  manager: Manager;
+  manager: string;
   stadium: string;
   website: string;
   fax: string;
@@ -67,7 +70,7 @@ export interface Team {
   address: string;
   addressEN: string;
   telephone: string;
-  teams_stats: TeamStats[];
+  team_stats: TeamStats[];
   coach: TeamPlayer;
   pitcher: TeamPlayer;
   catcher: TeamPlayer;

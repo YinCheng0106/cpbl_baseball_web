@@ -78,12 +78,12 @@ export default function Page({ params }: Props) {
     <div className="container mx-auto p-8">
       <div className="inline-flex items-center gap-4 mb-4">
         <Image
-          src={teamToLogo(data.name["zh-tw"])}
-          alt={`${data.name["zh-tw"]} logo`}
+          src={teamToLogo(data.name)}
+          alt={`${data.name} logo`}
           width={100}
           height={100}
         />
-        <h2 className="text-4xl font-bold">{data.name["zh-tw"]}</h2>
+        <h2 className="text-4xl font-bold">{data.name}</h2>
       </div>
       <div
         className={`
@@ -106,8 +106,8 @@ export default function Page({ params }: Props) {
             總教練
           </span>
           <p className="text-lg mb-2 ml-2">
-            {data.manager.name["zh-tw"]
-              ? `${data.manager.name["zh-tw"]}`
+            {data.manager
+              ? `${data.manager}`
               : "：無"}
           </p>
         </div>

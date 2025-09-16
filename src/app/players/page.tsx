@@ -29,7 +29,6 @@ export default function AllPlayerPage() {
     return <div>Loading...</div>;
   }
 
-  console.table(players);
   return (
     <div className="container mx-auto px-12">
       <div>

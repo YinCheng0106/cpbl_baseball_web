@@ -55,12 +55,12 @@ const completedRank = (
   const teamsWithStats: RankedTeamRow[] = teams.map((team) => {
     let stats: TeamStats | undefined;
 
-    if (Array.isArray(team.teams_stats)) {
-      stats = team.teams_stats.find(
+    if (Array.isArray(team.team_stats)) {
+      stats = team.team_stats.find(
         (s) => s.year === yearNum && s.season === season
       );
-    } else if (team.teams_stats) {
-      const s = team.teams_stats as unknown as TeamStats;
+    } else if (team.team_stats) {
+      const s = team.team_stats as unknown as TeamStats;
       if (s.year === yearNum && s.season === season) stats = s;
     }
 
@@ -207,10 +207,10 @@ export function Standing({ teams, year, season }: Props) {
                     {team.teamName ? (
                       <div className="flex items-center justify-center">
                         <img
-                          alt={team.teamName["zh-tw"]}
+                          alt={team.teamName}
                           height={20}
                           width={20}
-                          src={teamToWord(team.teamName["zh-tw"])}
+                          src={teamToWord(team.teamName)}
                         />
                       </div>
                     ) : (

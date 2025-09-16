@@ -1,4 +1,7 @@
 export interface PitchingStats {
+  year: number;
+  season: "firstHalf" | "secondHalf" | "fullSeason";
+  teamId: number;
   games: number;
   gamesStarted: number;
   gamesRelieved: number;
@@ -31,6 +34,9 @@ export interface PitchingStats {
 }
 
 export interface BattingStats {
+  year: number;
+  season: "firstHalf" | "secondHalf" | "fullSeason";
+  teamId: number;
   games: number | null;
   plateAppearances: number | null;
   atBats: number | null;
@@ -62,6 +68,9 @@ export interface BattingStats {
 }
 
 export interface FieldingStats {
+  year: number;
+  season: "firstHalf" | "secondHalf" | "fullSeason";
+  teamId: number;
   position: string;
   games: number;
   totalChances: number;
@@ -96,7 +105,7 @@ export interface PlayerData {
   number: number;
   height: number;
   weight: number;
-  team: string;
+  team: number;
   league: string;
   debutDate?: Date | undefined;
   birthday: Date;
@@ -109,5 +118,7 @@ export interface PlayerData {
   pitchingHabits: string;
   battingHabits: string;
   followers: number;
-  // stats: PlayerStats;
+  player_pitching: PitchingStats[] | null;
+  player_batting: BattingStats[] | null;
+  player_fielding: FieldingStats[] | null;
 }

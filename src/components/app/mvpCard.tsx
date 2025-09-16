@@ -10,7 +10,7 @@ export function MvpCard(props: Props) {
   if (!props) return null;
   const { game } = props;
 
-  if(!game.mvpId || !game.mvpTeamId || !game.mvpType || !game.mvpCnt || !game) {
+  if(!game.mvp || !game.mvpTeam || !game.mvpType || !game.mvpCnt || !game) {
     return (
       <div
         className={`
@@ -31,8 +31,8 @@ export function MvpCard(props: Props) {
         w-full h-full p-4 rounded-lg shadow-md dark:bg-zinc-800 bg-zinc-100`}
       >
         <div className="flex items-center justify-center gap-2">
-          <img src={teamToWord(game.mvpTeamId)} width={30} height={30} />
-          <h2>{game.mvpId.name}</h2>
+          <img src={teamToWord(game.mvp.team)} width={30} height={30} />
+          <h2>{game.mvp.name}</h2>
         </div>
         <div>
           {game.mvpType === "Batter" ? (

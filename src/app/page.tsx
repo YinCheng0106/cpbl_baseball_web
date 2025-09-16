@@ -31,7 +31,17 @@ export default function Home() {
       const fetchGames = async () => {
         const { data, error } = await supabase
           .from("games")
-          .select(`*, game_live(*), game_result(*), game_scores(*), game_pitches(*), game_atbats(*)`);
+          .select(`*,
+            game_live(*, nowBatter(*), nowPitcher(*)),
+            game_result(*, mvp(*), losePitcher(*), winPitcher(*), savePitcher(*)),
+            game_scores(*),
+            game_pitches(*),
+            game_atbats(*),
+            homeStarter(*),
+            awayStarter(*),
+            homeTeam(*),
+            awayTeam(*)
+          `);
         if (error) {
           console.error("Error fetching AllGames:", error);
         } else {
@@ -44,7 +54,7 @@ export default function Home() {
       const fetchTeams = async () => {
         const { data, error } = await supabase
           .from("teams")
-          .select(`*, teams_stats(*)`);
+          .select(`*, team_stats(*)`);
         if (error) {
           console.error("Error fetching Teams:", error);
         } else {
@@ -56,11 +66,27 @@ export default function Home() {
       // Fetch News
 
       // Fetch Players
+      const fetchPlayers = async () => {
+        const { data, error } = await supabase
+          .from("players")
+          .select(`*,
+            player_batting(*, teams(*)),
+            player_pitching(*, teams(*)),
+            player_fielding(*, teams(*))
+          `);
+        if (error) {
+          console.error("Error fetching Players:", error);
+        } else {
+          console.table("Fetched Players:", data);
+          setPlayers(data as PlayerData[]);
+        }
+      }
 
       try {
         setLoading(true);
         fetchGames();
         fetchTeams();
+        fetchPlayers();
       } catch (error) {
         console.error("[讀取失敗]", error);
       } finally {
@@ -171,6 +197,7 @@ export default function Home() {
                       <GameCard
                         gameData={gameData}
                         teamData={teams}
+                        playerData={players}
                         key={gameData.id}
                       />
                     ))}
@@ -210,6 +237,7 @@ export default function Home() {
                       <GameCard
                         gameData={gameData}
                         teamData={teams}
+                        playerData={players}
                         key={gameData.id}
                       />
                     ))}

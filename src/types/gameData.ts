@@ -1,4 +1,5 @@
 import { PlayerData } from "@/types/playerData";
+import { Team } from "@/types/teamData";
 
 export interface Player {
   id: string | null;
@@ -52,17 +53,18 @@ export interface GameStats {
 export interface Game {
   id: number;
   gameId: string;
+  gameNo: number;
   type: string;
   year: string;
   date: string;
   time: string;
   location: string;
-  awayTeamId: number;
-  homeTeamId: number;
-  awayStarterId: number | null;
-  homeStarterId: number | null;
-  game_live: GameLive | null;
-  game_result: GameResult | null;
+  awayTeam: Team | null;
+  homeTeam: Team | null;
+  awayStarter: PlayerData | null; // need change
+  homeStarter: PlayerData | null; // need change
+  game_live: GameLive[] | null;
+  game_result: GameResult[] | null;
   game_scores: GameScore[];
   game_pitches: any[] | null;
   game_atbats: any[] | null;
@@ -81,8 +83,8 @@ export interface GameLive {
   base1: boolean;
   base2: boolean;
   base3: boolean;
-  nowPitcherId: number | null;
-  nowBatterId: number | null;
+  nowPitcher: PlayerData | null;
+  nowBatter: PlayerData | null;
   homeRuns: number;
   homeHits: number;
   homeErrors: number;
@@ -93,11 +95,11 @@ export interface GameLive {
 
 export interface GameResult {
   gameId: string;
-  winPitcherId: number | null;
-  losePitcherId: number | null;
-  savePitcherId: number | null;
-  mvpId: PlayerData | null;
-  mvpTeamId: number | null;
+  winPitcher: PlayerData | null;
+  losePitcher: PlayerData | null;
+  savePitcher: PlayerData | null;
+  mvp: PlayerData | null;
+  mvpTeam: Team | null;
   mvpType: "Pitcher" | "Batter" | null;
   mvpCnt: number | null;
   pitchInning: number | null;

@@ -8,7 +8,10 @@ import { Button } from "@/components/ui/button";
 import { TeamHoverCard } from "@/components/app/teamHoverCard";
 import { BaseBallOut } from "@/components/app/baseBallOut";
 import { readyPlay, inPlaying, gameSet } from "@/components/app/gameDetail";
-import { GameStruct } from "@/types/gameData";
+import { Game } from "@/types/gameData";
+import { Team } from "@/types/teamData";
+import { PlayerData } from "@/types/playerData";
+
 import {
   GameType,
   GameStatus,
@@ -19,10 +22,12 @@ import {
 } from "@/utils/gameUtils";
 
 type Props = Readonly<{
-  gameData: GameStruct;
+  gameData: Game;
+  teamData: Team[];
+  playerData: PlayerData[];
 }>;
 
-export function GameCard({ gameData }: Props) {
+export function GameCard({ gameData, teamData, playerData }: Props) {
   if (!gameData) {
     return (
       <Card className="w-[400px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] py-6">
@@ -32,11 +37,27 @@ export function GameCard({ gameData }: Props) {
       </Card>
     );
   }
-
-  const { gameInfo, gameLive, gameEnd } = gameData;
   const [isOpen, setIsOpen] = useState(false);
+  const gameLive = gameData.game_live ? gameData.game_live[0] : null;
 
-  if (!gameInfo || !gameLive) {
+  const TeamWLDRow = ({ teamId, season }: { teamId: number, season: string }) => {
+    const t: any = teamData.find((team) => team.id === teamId)?.team_stats?.find((stats) => stats.year === gameData.year && stats.season === season) || ({});
+    return (
+      <tr className="flex flex-row gap-2 items-center dark:text-gray-400 text-gray-500">
+        <td className="w-5 text-lg text-center font-medium">
+          {t?.wins ?? "-"}
+        </td>
+        <td className="w-5 text-lg text-center font-medium">
+          {t?.losses ?? "-"}
+        </td>
+        <td className="w-5 text-lg text-center font-medium">
+          {t?.draws ?? "-"}
+        </td>
+      </tr>
+    );
+  };
+
+  if (!gameData.gameId || !gameLive) {
     return (
       <Card className="w-[400px] sm:w-[550px] md:w-[600px] lg:w-[700px] xl:w-[850px] 2xl:w-[900px] py-6">
         <CardHeader>
@@ -58,46 +79,54 @@ export function GameCard({ gameData }: Props) {
           <p
             className={`
             border rounded-sm w-[64px] py-1 font-bold shadow-sm
-            ${GameColor(gameLive.status)} text-center
+            ${GameColor(gameLive.status || 1)} text-center
             `}
           >
-            {gameInfo.id !== null ? gameInfo.id : "TBD"}
+            {gameData.id !== null ? gameData.gameNo : "TBD"}
           </p>
           <p className="font-bold">
-            {GameStatus(gameLive.status) !== "比賽中"
-              ? GameStatus(gameLive.status)
+            {GameStatus(gameLive.status || 1) !== "比賽中"
+              ? GameStatus(gameLive.status || 1)
               : gameLive.inning +
                 " " +
-                (gameLive.inningHalf === 1 ? "上" : "下")}
+                (gameLive.inningHalf === 0 ? "上" : "下")}
           </p>
-          <p>{GameType(gameInfo.type)}</p>
+          <p>{GameType(gameData.type)}</p>
         </div>
         <CardTitle className="flex flex-row text-2xl justify-between select-none">
           <div className="flex flex-col w-full h-[88px] justify-end">
             <div className="flex items-center">
               <span
                 className={`
-                ${TeamColor(gameInfo.away)} font-bold
+                ${TeamColor(gameData.awayTeam === null ? 0 : gameData.awayTeam.id)} font-bold
                 hover:scale-105 transition-transform duration-400 ease-in-out
               `}
               >
-                {gameInfo.away ? <TeamHoverCard team={gameInfo.away} /> : "TBD"}
+                {gameData.awayTeam ? (
+                  <TeamHoverCard team={teamData} id={gameData.awayTeam.id} />
+                ) : (
+                  "TBD"
+                )}
               </span>
             </div>
             <div className="flex items-center">
               <span
                 className={`
-                ${TeamColor(gameInfo.home)} font-bold
+                ${TeamColor(gameData.homeTeam === null ? 0 : gameData.homeTeam.id)} font-bold
                 hover:scale-105 transition-transform duration-400 ease-in-out
               `}
               >
-                {gameInfo.home ? <TeamHoverCard team={gameInfo.home} /> : "TBD"}
+                {gameData.homeTeam ? (
+                  <TeamHoverCard team={teamData} id={gameData.homeTeam.id} />
+                ) : (
+                  "TBD"
+                )}
               </span>
             </div>
           </div>
           <div className="flex flex-col w-full items-end justify-center">
             <span>
-              {gameLive.status !== 1 ? (
+              {gameLive?.status !== 1 ? (
                 <div>
                   <table>
                     <thead>
@@ -116,24 +145,24 @@ export function GameCard({ gameData }: Props) {
                     <tbody className="flex flex-col gap-1">
                       <tr className="flex flex-row gap-1 items-center">
                         <td className="w-5 text-lg text-center font-black">
-                          {gameLive.away.runs}
+                          {gameLive.awayRuns}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
-                          {gameLive.away.hits}
+                          {gameLive.awayHits}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
-                          {gameLive.away.errors}
+                          {gameLive.awayErrors}
                         </td>
                       </tr>
                       <tr className="flex flex-row gap-1 items-center">
                         <td className="w-5 text-lg text-center font-black">
-                          {gameLive.home.runs}
+                          {gameLive.homeRuns}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
-                          {gameLive.home.hits}
+                          {gameLive.homeHits}
                         </td>
                         <td className="w-5 text-lg text-center font-medium">
-                          {gameLive.home.errors}
+                          {gameLive.homeErrors}
                         </td>
                       </tr>
                     </tbody>
@@ -156,28 +185,14 @@ export function GameCard({ gameData }: Props) {
                       </tr>
                     </thead>
                     <tbody className="flex flex-col gap-1">
-                      <tr className="flex flex-row gap-2 items-center dark:text-gray-400 text-gray-500">
-                        <td className="w-5 text-lg text-center font-medium">
-                          {gameInfo.awayWLD.wins}
-                        </td>
-                        <td className="w-5 text-lg text-center font-medium">
-                          {gameInfo.awayWLD.losses}
-                        </td>
-                        <td className="w-5 text-lg text-center font-medium">
-                          {gameInfo.awayWLD.draws}
-                        </td>
-                      </tr>
-                      <tr className="flex flex-row gap-2 items-center dark:text-gray-400 text-gray-500">
-                        <td className="w-5 text-lg text-center font-medium">
-                          {gameInfo.homeWLD.wins}
-                        </td>
-                        <td className="w-5 text-lg text-center font-medium">
-                          {gameInfo.homeWLD.losses}
-                        </td>
-                        <td className="w-5 text-lg text-center font-medium">
-                          {gameInfo.homeWLD.draws}
-                        </td>
-                      </tr>
+                      {[gameData.awayTeam?.id, gameData.homeTeam?.id]
+                        .map((id) =>
+                          typeof id === "string" ? parseInt(id, 10) : id
+                        )
+                        .filter((id): id is number => Number.isFinite(id))
+                        .map((id) => (
+                          <TeamWLDRow key={id} teamId={id} season={gameData.gameNo > 60 ? "secondHalf" : "firstHalf"} />
+                        ))}
                     </tbody>
                   </table>
                 </div>
@@ -186,14 +201,16 @@ export function GameCard({ gameData }: Props) {
           </div>
           <div
             className={`${
-              GameStatus(gameLive.status) !== "比賽中" ? "hidden" : ""
+              GameStatus(gameLive.status || 0) !== "比賽中" ? "hidden" : ""
             } border-l pl-2 ml-4`}
           >
             <BaseBallOut
-              base={gameLive.base}
-              strike={gameLive.balls.strike}
-              ball={gameLive.balls.ball}
-              out={gameLive.balls.out}
+              base1={gameLive.base1}
+              base2={gameLive.base2}
+              base3={gameLive.base3}
+              strike={gameLive.strike}
+              ball={gameLive.ball}
+              out={gameLive.out}
             />
           </div>
         </CardTitle>
@@ -201,23 +218,25 @@ export function GameCard({ gameData }: Props) {
       <CardFooter className="flex justify-between mt-4">
         <p className="flex flex-row gap-2">
           <MapPin />
-          {gameInfo.location ? Stadium(gameInfo.location).shortName["zh-tw"] : "TBD"}
+          {gameData.location
+            ? Stadium(gameData.location).shortName["zh-tw"]
+            : "TBD"}
           <span
             className={`
-            ${gameLive.status == 2 ? "hidden" : ""} 
+            ${gameLive.status == 2 ? "hidden" : ""}
             ${gameLive.status == 3 ? "hidden" : ""}
             ${gameLive.status == 8 ? "hidden" : ""}
             font-medium border-l px-2
           `}
           >
-            {gameInfo.time ? TimeDecoder(gameInfo.time) : "TBD"}
+            {gameData.time ? TimeDecoder(`${gameData.date} ${gameData.time}`) : "TBD"}
           </span>
         </p>
         <Button
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center gap-1 bg-gray-800 dark:bg-gray-200"
           aria-expanded={isOpen}
-          data-card-id={gameInfo.id}
+          data-card-id={gameData.id}
         >
           {isOpen ? "收起" : "更多"}
           <svg
@@ -242,13 +261,15 @@ export function GameCard({ gameData }: Props) {
           overflow-x-auto transition-all duration-350 ease-in-out no-scrollbar
           ${isOpen ? "max-h-[512px] opacity-100 mt-2" : "max-h-0 opacity-0"}
         `}
-        id={`expanded-content-${gameInfo.id}`}
+        id={`expanded-content-${gameData.id}`}
       >
         <div className="px-6 pt-6 rounded-b-lg border-t">
-          {gameLive.status === 1 ? readyPlay(gameInfo) : null}
-          {gameLive.status === 4 ? readyPlay(gameInfo) : null}
-          {gameLive.status === 2 ? inPlaying(gameLive) : null}
-          {gameLive.status === 3 ? gameSet(gameLive.scoreboard, gameEnd) : null}
+          {gameLive.status === 1 ? readyPlay(gameData, playerData) : null}
+          {gameLive.status === 4 ? readyPlay(gameData, playerData) : null}
+          {gameLive.status === 2 ? inPlaying(gameData, playerData) : null}
+          {gameLive.status === 3 || gameData.game_result === null
+            ? gameSet(gameData, playerData)
+            : null}
         </div>
       </div>
     </Card>

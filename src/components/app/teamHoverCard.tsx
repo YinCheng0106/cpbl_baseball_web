@@ -10,94 +10,29 @@ import { teamToWord } from "@/utils/teamUtils";
 import Link from "next/link";
 
 import { Globe } from "lucide-react";
+import { Team } from "@/types/teamData";
 
-const teams = [
-  {
-    name: "中信兄弟",
-    fullName: "中信兄弟",
-    word: "B",
-    description: "",
-    founded: "兄弟象(1990-2013)-中信兄弟(2014-至今)",
-    logo: teamToWord("中信兄弟"),
-    website: "https://www.brothers.tw/",
-    mainStadium: "台中洲際棒球場",
-    manager: "平野惠一",
-  },
-  {
-    name: "統一獅",
-    fullName: "統一7-ELEVEn獅",
-    word: "L",
-    description: "",
-    founded: "統一獅(1990-2007)-統一7-ELEVEn獅(2008-至今)",
-    logo: teamToWord("統一獅"),
-    website: "https://www.uni-lions.com.tw/",
-    mainStadium: "台南棒球場",
-    manager: "林岳平",
-  },
-  {
-    name: "樂天桃猿",
-    fullName: "樂天桃猿",
-    word: "R",
-    description: "",
-    founded:
-      "第一金剛(2003)-La new熊(2004-2010)-Lamigo 桃猿(2011-2019)-樂天桃猿(2020-至今)",
-    logo: teamToWord("樂天桃猿"),
-    website: "https://monkeys.rakuten.com.tw/",
-    mainStadium: "桃園國際棒球場",
-    manager: "古久保健二",
-  },
-  {
-    name: "富邦悍將",
-    fullName: "富邦悍將",
-    word: "G",
-    description: teamToWord("富邦悍將"),
-    founded:
-      "俊國熊(1993-1995)-興農熊(1996上半季)-興農牛(1996下半季-2012)-義大犀牛(2013-2016)-富邦悍將(2017-至今)",
-    logo: teamToWord("富邦悍將"),
-    website: "https://www.fubonguardians.com/",
-    mainStadium: "新莊棒球場",
-    manager: "陳金鋒",
-  },
-  {
-    name: "味全龍",
-    fullName: "味全龍",
-    word: "W",
-    description: "",
-    founded: "味全龍(1990-1999, 2019-至今)",
-    logo: teamToWord("味全龍"),
-    website: "https://www.wdragons.com",
-    mainStadium: "天母棒球場",
-    manager: "葉君璋",
-  },
-  {
-    name: "台鋼雄鷹",
-    fullName: "台鋼雄鷹",
-    word: "T",
-    description: "",
-    founded: "台鋼雄鷹(2023-至今)",
-    logo: teamToWord("台鋼雄鷹"),
-    website: "https://www.tsghawks.com/",
-    mainStadium: "高雄市立澄清湖棒球場",
-    manager: "洪一中",
-  },
-];
+type Props = Readonly<{
+  team: Team[],
+  id: number | string,
+}>;
 
-export function TeamHoverCard({ team }: { team: string }) {
-  const teamData = teams.find((t) => t.name === team) || {
-    name: team,
-    fullName: team,
-    word: "",
-    description: "",
-    founded: "",
+export function TeamHoverCard({ team, id }: Props) {
+  const teamData = team.find((t) => t.id === parseInt(id as string)) || {
+    id: 0,
+    name: team.toString(),
+    fullName: team.toString(),
+    shortName: "",
+    foundingYear: "",
     logo: "",
     website: "",
-    mainStadium: "",
+    stadium: "",
     manager: "",
   };
   return (
     <HoverCard>
       <HoverCardTrigger>
-        <span>{team}</span>
+        <span>{teamData.shortName}</span>
       </HoverCardTrigger>
       <HoverCardContent>
         <div className="p-2">
@@ -107,7 +42,7 @@ export function TeamHoverCard({ team }: { team: string }) {
                 alt={teamData.name}
                 height={20}
                 width={20}
-                src={teamData.logo}
+                src={teamData.name ? teamToWord(teamData.name) : ""}
               />
               <h3
                 className={`text-xl font-bold ${TeamColor(teamData.fullName)}`}
@@ -133,7 +68,7 @@ export function TeamHoverCard({ team }: { team: string }) {
             </div>
             <div className="flex items-center justify-between text-sm">
               <span className="">主球場</span>
-              <span className="">{teamData.mainStadium}</span>
+              <span className="">{teamData.stadium}</span>
             </div>
           </div>
         </div>

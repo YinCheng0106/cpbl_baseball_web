@@ -292,25 +292,24 @@ export const Stadium = (location: string) => {
   }
 };
 
-export const TeamColor = (name: string) => {
-  switch (name) {
-    case "樂天桃猿":
-      return "text-[#671a32]";
-    case "富邦悍將":
-      return "text-[#004f98]";
-    case "中信兄弟":
-      return "text-[#f9cc01]";
-    case "統一獅":
-      return "text-[#ec6c00]";
-    case "統一7-ELEVEn獅":
-      return "text-[#ec6c00]";
-    case "台鋼雄鷹":
-      return "text-[#064738]";
-    case "味全龍":
-      return "text-[#cf152d]";
-    default:
-      return "text-[#fff]";
-  }
+const teamColor: Record<string | number, string> = {
+  1: "text-[#f9cc01]",
+  "中信兄弟": "text-[#f9cc01]",
+  2: "text-[#ec6c00]",
+  "統一獅": "text-[#ec6c00]",
+  "統一7-ELEVEn獅": "text-[#ec6c00]",
+  3: "text-[#671a32]",
+  "樂天桃猿": "text-[#671a32]",
+  4: "text-[#004f98]",
+  "富邦悍將": "text-[#004f98]",
+  5: "text-[#cf152d]",
+  "味全龍": "text-[#cf152d]",
+  6: "text-[#064738]",
+  "台鋼雄鷹": "text-[#064738]",
+};
+
+export const TeamColor = (name: string | number) => {
+  return teamColor[name] || "text-gray-800";
 };
 
 export const TimeDecoder = (time: string) => {
