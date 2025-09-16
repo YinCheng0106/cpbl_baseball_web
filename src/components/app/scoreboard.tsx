@@ -18,6 +18,13 @@ export function Scoreboard({ game, scoreboard } : Props) {
     }
   }, []);
 
+  const innings = Math.max(9, Math.max(...scoreboard.map(s => s.inning)));
+  const displayBoard = Array.from({ length: innings }, (_, i) => {
+    const inning = i + 1;
+    return scoreboard.find(s => s.inning === inning) ?? { inning, awayScore: null, homeScore: null };
+  });
+
+
   const sumAwayRuns = scoreboard.reduce((sum, inning) => sum + (inning.awayScore ?? 0), 0);
   const sumHomeRuns = scoreboard.reduce((sum, inning) => sum + (inning.homeScore ?? 0), 0);
   const sumAwayHits = scoreboard.reduce((sum, inning) => sum + (inning.awayHits ?? 0), 0);
@@ -72,10 +79,10 @@ export function Scoreboard({ game, scoreboard } : Props) {
           <table className="w-full text-sm text-center">
             <thead className="text-xs">
               <tr className="items-center select-none">
-              {scoreboard.map((item) => (
+              {displayBoard.map((item) => (
                 <th
                 scope="col"
-                key={item.inning}
+                key={`inning-${item.inning}`}
                 className="px-1 py-1 text-center md:min-w-[24px] min-w-[16px]"
                 >
                 <div className="md:w-6 w-4">{item.inning}</div>
@@ -85,16 +92,18 @@ export function Scoreboard({ game, scoreboard } : Props) {
             </thead>
             <tbody className="text-gray-500">
               <tr className="items-center">
-                {scoreboard.map((item) => (
-                  <td key={item.awayScore} className="px-1 py-1 text-center">
-                    <div className="md:w-6 w-4">{item.awayScore ?? 0}</div>
+                {displayBoard.map((item) => (
+                  <td key={`away-${item.inning}`} className="px-1 py-1 text-center">
+                    <div className="md:w-6 w-4">{item.awayScore ?? ""}</div>
                   </td>
                 ))}
               </tr>
               <tr className="items-center">
-                {scoreboard.map((item) => (
-                  <td key={item.homeScore} className="px-1 py-1 text-center">
-                    <div className="md:w-6 w-4">{item.homeScore ?? "X"}</div>
+                {displayBoard.map((item, idx) => (
+                  <td key={`home-${item.inning}`} className="px-1 py-1 text-center">
+                    <div className="md:w-6 w-4">
+                      {item.homeScore !== null ? item.homeScore : (idx === displayBoard.length ? "X" : "")}
+                    </div>
                   </td>
                 ))}
               </tr>
